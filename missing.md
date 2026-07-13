@@ -13,7 +13,7 @@ Update this file whenever you add a missing file or fill a placeholder. Mark eac
 
 ## Timeline
 
-- [] Add the ornithopter looping video asset for the timeline section. Place it in [public/videos](public/videos) and wire it into [Timeline.astro](src/components/Timeline.astro#L15-L17).
+- [x] Add the ornithopter looping video asset for the timeline section. Place it in [public/videos](public/videos) and wire it into [Timeline.astro](src/components/Timeline.astro#L15-L17).
 
 ## About
 
@@ -53,7 +53,7 @@ Update this file whenever you add a missing file or fill a placeholder. Mark eac
 ## Files and Assets to Add
 
 - [] Add the resume PDF to [public/documents](public/documents) and update the resume link in [Hero.astro](src/components/Hero.astro#L18-L24).
-- [] Add the ornithopter video assets to [public/videos](public/videos) and wire them into [Hero.astro](src/components/Hero.astro#L24-L26) and [Timeline.astro](src/components/Timeline.astro#L15-L17).
+- [x] Add the ornithopter video assets to [public/videos](public/videos) and wire them into [Hero.astro](src/components/Hero.astro#L24-L26) and [Timeline.astro](src/components/Timeline.astro#L15-L17).
 - [] Add final project images to [public/images](public/images).
 - [] Add any icon files you decide to use later to [public/icons](public/icons).
 
