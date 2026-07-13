@@ -15,6 +15,8 @@ If you want to create a similar site, then follow these instructions:
 
 >Take a look at [Portfolio website plan](/admissions-portfolio/Portfolio%20website%20plan.md) for reference
 
+
+5. Setup Astro and make an empty template, setup git.
 Use the following prompts in order in prefferably an inline code assistant like copilot rather than fully autonomous vibe coding assitant like claude code just so you have overall project context.---
 
 
@@ -56,6 +58,7 @@ Requirements:
 Prompt:
 
 ```text
+
 Create the project architecture.
 
 Do NOT build the website yet.
@@ -76,6 +79,8 @@ Create a global stylesheet.
 
 Create empty data files.
 
+Make a file named missing.md containing all missing data/assets I have to fill. Put a checkbox like [] infront of each task , along with instructions and link to the exact section i need to edit. update it regularly. I'll put a [x] when I add data/file
+
 Do not add any styling besides a basic CSS reset.
 ```
 
@@ -95,6 +100,9 @@ Initial architecture
 ```
 
 ---
+
+> a good idea to run /create-instructions with a prompt like analyse plan
+
 
 # 2. Navbar
 

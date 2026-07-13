@@ -1,0 +1,88 @@
+---
+interface ProjectLink {
+	label: string;
+	href: string;
+}
+
+interface Props {
+	image?: string;
+	title: string;
+	category: string;
+	description: string;
+	links: ProjectLink[];
+	status: string;
+	tags: string[];
+}
+
+const { image, title, category, description, links, status, tags } = Astro.props as Props;
+---
+
+<article class="project-card">
+	{image && <img class="project-card__image" src={image} alt={title} />}
+
+	<div class="project-card__content">
+		<p class="project-card__category">{category}</p>
+		<h3 class="project-card__title">{title}</h3>
+		<p class="project-card__description">{description}</p>
+
+		{tags.length > 0 && (
+			<ul class="project-card__tags" aria-label={`${title} tags`}>
+				{tags.map((tag) => (
+					<li>{tag}</li>
+				))}
+			</ul>
+		)}
+
+		<p class="project-card__status">{status}</p>
+
+		{links.length > 0 && (
+			<div class="project-card__links" aria-label={`${title} buttons`}>
+				{links.map((link) => (
+					<a href={link.href}>{link.label}</a>
+				))}
+			</div>
+		)}
+	</div>
+</article>
+
+<style>
+	.project-card {
+		display: flex;
+		flex-direction: column;
+		min-width: 0;
+		width: 100%;
+	}
+
+	.project-card__image {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	.project-card__content {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		min-width: 0;
+	}
+
+	.project-card__category,
+	.project-card__title,
+	.project-card__description,
+	.project-card__status,
+	.project-card__tags {
+		margin: 0;
+	}
+
+	.project-card__tags {
+		padding-left: 1.25rem;
+		display: grid;
+		gap: 0.5rem;
+	}
+
+	.project-card__links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+</style>

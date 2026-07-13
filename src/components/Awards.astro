@@ -1,0 +1,48 @@
+---
+import { awardItems } from '../data/awards';
+import AwardCard from './AwardCard.astro';
+---
+
+<section class="awards" aria-labelledby="awards-title" id="awards">
+	<div class="awards__inner">
+		<h2 id="awards-title">Awards</h2>
+
+		<div class="awards__grid">
+			{awardItems.map((award) => (
+				<AwardCard title={award.title} category={award.category} description={award.description} />
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.awards {
+		padding: clamp(3rem, 6vw, 6rem) clamp(1rem, 5vw, 4rem);
+	}
+
+	.awards__inner {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: clamp(1.5rem, 3vw, 3rem);
+	}
+
+	.awards__grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: clamp(1rem, 2vw, 1.5rem);
+	}
+
+	.awards h2 {
+		margin: 0;
+		font-size: clamp(1.75rem, 2.5vw, 3rem);
+		line-height: 1.1;
+	}
+
+	@media (min-width: 768px) {
+		.awards__grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+</style>

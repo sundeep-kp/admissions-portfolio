@@ -1,0 +1,47 @@
+---
+interface Props {
+	title: string;
+	category: string;
+	description: string;
+}
+
+const { title, category, description } = Astro.props as Props;
+---
+
+<article class="award-card">
+	<p class="award-card__category">{category}</p>
+	<h3 class="award-card__title">{title}</h3>
+	<p class="award-card__description">{description}</p>
+</article>
+
+<style>
+	.award-card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		min-width: 0;
+		width: 100%;
+		padding: clamp(1.25rem, 2.5vw, 2rem);
+	}
+
+	.award-card__category,
+	.award-card__title,
+	.award-card__description {
+		margin: 0;
+	}
+
+	.award-card__category {
+		font-size: clamp(0.875rem, 1vw, 1rem);
+		line-height: 1.4;
+	}
+
+	.award-card__title {
+		font-size: clamp(1.125rem, 1.4vw, 1.5rem);
+		line-height: 1.25;
+	}
+
+	.award-card__description {
+		font-size: clamp(1rem, 1.05vw, 1.1rem);
+		line-height: 1.6;
+	}
+</style>
