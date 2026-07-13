@@ -19,6 +19,11 @@ export const leadershipItems: LeadershipItem[] = [
 		],
 	},
 	{
+		title: 'reddit moderator of r/iiitnayaraipur',
+		description: '[description missing, add about 50 words here]',
+		links: [{ label: '[link missing]', href: '#' }],
+	},
+	{
 		title: 'ATL Lab Lead',
 		description: 'taught junior classes, eventually my fingerprint became my teacher’s phone password, made lots of mini projects like a posture detection chair, robotic hand [9th and 10th grade]',
 		links: [{ label: '[link missing]', href: '#' }],

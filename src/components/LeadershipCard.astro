@@ -1,14 +1,15 @@
 ---
 interface Props {
+	class?: string;
 	title: string;
 	description: string;
 	links: Array<{ label: string; href: string }>;
 }
 
-const { title, description, links } = Astro.props as Props;
+const { title, description, links, class: className } = Astro.props as Props;
 ---
 
-<article class="leadership-card">
+<article class:list={['leadership-card', className]}>
 	<h3>{title}</h3>
 	<p>{description}</p>
 
@@ -31,6 +32,10 @@ const { title, description, links } = Astro.props as Props;
 		gap: clamp(0.75rem, 1.5vw, 1rem);
 		padding: clamp(1.25rem, 2.5vw, 2rem);
 		width: 100%;
+	}
+
+	.leadership-card--feature {
+		padding: clamp(1.5rem, 3vw, 2.5rem);
 	}
 
 	.leadership-card h3,

@@ -5,11 +5,16 @@ import LeadershipCard from './LeadershipCard.astro';
 
 <section class="leadership" aria-labelledby="leadership-title" id="leadership">
 	<div class="leadership__inner">
-		<h2 id="leadership-title">Leadership</h2>
+		<h2 id="leadership-title">Leadership and Community</h2>
 
 		<div class="leadership__grid">
 			{leadershipItems.map((item) => (
-				<LeadershipCard title={item.title} description={item.description} links={item.links} />
+				<LeadershipCard
+					class:list={{ 'leadership-card--feature': item.title === 'HalfwiredTV' }}
+					title={item.title}
+					description={item.description}
+					links={item.links}
+				/>
 			))}
 		</div>
 	</div>
@@ -33,6 +38,10 @@ import LeadershipCard from './LeadershipCard.astro';
 		grid-template-columns: repeat(auto-fit, minmax(min(100%, 34ch), 1fr));
 		gap: clamp(1rem, 2vw, 1.5rem);
 		width: 100%;
+	}
+
+	.leadership__grid :global(.leadership-card--feature) {
+		grid-column: 1 / -1;
 	}
 
 	.leadership h2 {

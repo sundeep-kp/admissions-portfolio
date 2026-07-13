@@ -19,22 +19,18 @@ Update this file whenever you add a missing file or fill a placeholder. Mark eac
 
 - [] Replace the personal introduction placeholder in [About.astro](src/components/About.astro#L5). Add the missing short introduction.
 - [x] Replace the remaining About text in [About.astro](src/components/About.astro#L7-L23) with cards using the plan wording.
+- [x] Add the Research Interests card in [About.astro](src/components/About.astro#L20-L29).
 
 ## Timeline
 
 - [x] Keep the rendered timeline concise in [Timeline.astro](src/components/Timeline.astro#L1-L40) by showing only the title and the date/grade.
 
-## Research
-
-- [x] Fill in the research interests card in [Research.astro](src/components/Research.astro#L10-L12).
-- [] Fill in the currently reading card in [Research.astro](src/components/Research.astro#L14-L16).
-- [] Fill in the research directions card in [Research.astro](src/components/Research.astro#L18-L20).
-- [] Fill in the future topics card in [Research.astro](src/components/Research.astro#L20-L22).
-
-## Leadership
+## Leadership and Community
 
 - [x] Replace the leadership titles and descriptions in [data/leadership.ts](src/data/leadership.ts#L1-L32) with the plan text.
+- [x] Add the reddit moderator of r/iiitnayaraipur card in [data/leadership.ts](src/data/leadership.ts#L1-L32).
 - [] Replace the leadership link placeholders in [data/leadership.ts](src/data/leadership.ts#L1-L32) with the final URLs where available.
+- [x] Make the HalfwiredTV card wide in [Leadership.astro](src/components/Leadership.astro#L1-L40) as the featured showcase card.
 
 ## Featured Projects
 
