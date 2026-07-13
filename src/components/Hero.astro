@@ -32,7 +32,7 @@
 <style>
 	.hero {
 		min-height: 100vh;
-		padding-inline: 5vw;
+		padding-inline: clamp(1rem, 5vw, 4rem);
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -43,7 +43,7 @@
 		max-width: 1200px;
 		display: flex;
 		flex-direction: column;
-		gap: 2rem;
+		gap: clamp(1.5rem, 3vw, 5rem);
 	}
 
 	.hero__content,
@@ -55,13 +55,13 @@
 	.hero__content {
 		display: flex;
 		flex-direction: column;
-		gap: 1rem;
+		gap: clamp(0.75rem, 1.5vw, 1.25rem);
 	}
 
 	.hero__buttons {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 1rem;
+		gap: clamp(0.75rem, 1.5vw, 1.25rem);
 	}
 
 	.hero__visual {
@@ -74,12 +74,25 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		padding: clamp(1rem, 2vw, 1.5rem);
 	}
 
 	.hero p,
 	.hero h1,
 	.hero ul {
 		margin: 0;
+	}
+
+	.hero h1 {
+		font-size: clamp(2.25rem, 5vw, 5rem);
+		line-height: 0.95;
+	}
+
+	.hero p,
+	.hero li,
+	.hero a {
+		font-size: clamp(1rem, 1.1vw, 1.125rem);
+		line-height: 1.6;
 	}
 
 	.hero ul {
@@ -89,15 +102,17 @@
 	@media (min-width: 768px) {
 		.hero__inner {
 			flex-direction: row;
-			gap: 5rem;
+			gap: clamp(2.5rem, 5vw, 5rem);
 		}
 
 		.hero__content {
 			flex: 0 0 55%;
+			max-width: 55%;
 		}
 
 		.hero__visual {
 			flex: 0 0 45%;
+			max-width: 45%;
 		}
 
 		.hero__buttons {
