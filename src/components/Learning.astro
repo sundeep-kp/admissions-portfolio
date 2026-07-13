@@ -1,0 +1,94 @@
+<section class="learning" aria-labelledby="learning-title" id="learning">
+	<div class="learning__inner">
+		<h2 id="learning-title">Currently Learning</h2>
+
+		<div class="learning__grid">
+			<article class="learning-card">
+				<h3>Books</h3>
+				<ul>
+					<li>[Book title missing]</li>
+					<li>[Book title missing]</li>
+				</ul>
+			</article>
+
+			<article class="learning-card">
+				<h3>Research papers</h3>
+				<ul>
+					<li>[Research paper missing]</li>
+					<li>[Research paper missing]</li>
+				</ul>
+			</article>
+
+			<article class="learning-card">
+				<h3>Lectures</h3>
+				<ul>
+					<li>[Lecture title missing]</li>
+					<li>[Lecture title missing]</li>
+				</ul>
+			</article>
+		</div>
+	</div>
+</section>
+
+<style>
+	.learning {
+		padding: clamp(3rem, 6vw, 6rem) clamp(1rem, 5vw, 4rem);
+	}
+
+	.learning__inner {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: clamp(1.5rem, 3vw, 3rem);
+	}
+
+	.learning__grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: clamp(1rem, 2vw, 1.5rem);
+	}
+
+	.learning-card {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		min-width: 0;
+		width: 100%;
+		padding: clamp(1.25rem, 2.5vw, 2rem);
+	}
+
+	.learning h2,
+	.learning h3,
+	.learning ul,
+	.learning li {
+		margin: 0;
+	}
+
+	.learning h2 {
+		font-size: clamp(1.75rem, 2.5vw, 3rem);
+		line-height: 1.1;
+	}
+
+	.learning h3 {
+		font-size: clamp(1.125rem, 1.4vw, 1.5rem);
+		line-height: 1.25;
+	}
+
+	.learning ul {
+		padding-left: 1.25rem;
+		display: grid;
+		gap: 0.75rem;
+	}
+
+	.learning li {
+		font-size: clamp(1rem, 1.05vw, 1.1rem);
+		line-height: 1.6;
+	}
+
+	@media (min-width: 768px) {
+		.learning__grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+</style>

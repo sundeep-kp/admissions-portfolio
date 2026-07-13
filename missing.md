@@ -42,6 +42,12 @@ Update this file whenever you add a missing file or fill a placeholder. Mark eac
 
 - [] Replace the award placeholders in [data/awards.ts](src/data/awards.ts#L1-L17) with the real award titles, categories, and descriptions.
 
+## Currently Learning
+
+- [] Replace the book placeholders in [Learning.astro](src/components/Learning.astro#L8-L14) with the actual books you are currently reading.
+- [] Replace the research-paper placeholders in [Learning.astro](src/components/Learning.astro#L16-L22) with the actual papers you are currently reading.
+- [] Replace the lecture placeholders in [Learning.astro](src/components/Learning.astro#L24-L30) with the actual lectures you are currently watching.
+
 ## Files and Assets to Add
 
 - [] Add the resume PDF to [public/documents](public/documents) and update the resume link in [Hero.astro](src/components/Hero.astro#L18-L22).
