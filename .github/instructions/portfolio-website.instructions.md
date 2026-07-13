@@ -5,6 +5,10 @@ applyTo: "src/**, public/**"
 
 # Portfolio Website Instructions
 
+- This project is a university transfer admissions portfolio for transfer admissions officers, not recruiters.
+- Build a static Astro site with one scrollable page, mobile-first responsive layouts, semantic HTML, reusable Astro components, minimal JavaScript, and no Tailwind or Bootstrap.
+- Use flexbox/grid plus rem, %, and clamp() for responsive sizing.
+- Never modify components unrelated to the current task.
 - Keep the site as one long scrollable Astro page with sticky top navigation that jumps to sections.
 - Preserve the user’s wording and voice. Do not rewrite content to sound polished or generic.
 - When details, links, images, video, or documents are missing, leave clear placeholders such as `[description missing, add about 50 words here]`, `[project links missing]`, or `[Image missing]`.
