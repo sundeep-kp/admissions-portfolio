@@ -4,23 +4,42 @@
 
 		<p>[Short personal introduction missing]</p>
 
-		<h3>Why engineering?</h3>
-		<p>There are two type of joy: creation(lasts longer), consumption(lasts shorter). Engineering provides me with creation joy.</p>
+		<div class="about__cards">
+			<article class="about-card">
+				<h3>Why engineering?</h3>
+				<p>There are two type of joy: creation(lasts longer), consumption(lasts shorter). Engineering provides me with creation joy.</p>
+			</article>
 
-		<h3>Why robotics?</h3>
-		<p>Most multidisciplinary field that allows me to create next to anything.</p>
+			<article class="about-card">
+				<h3>Why robotics?</h3>
+				<p>Most multidisciplinary field that allows me to create next to anything.</p>
+			</article>
 
-		<h3>Current academic focus</h3>
-		<p>pursuing Major in ece bcz I needed hands-on experience to understand it at a deeper level. Minor in robotics [books here?-- design of machinery by rl norton, intro to robotics by saeed b niku, modern robotics by lynch and park]</p>
+			<article class="about-card">
+				<h3>Current academic focus</h3>
+				<p>pursuing Major in ece bcz I needed hands-on experience to understand it at a deeper level. Minor in robotics [books here?-- design of machinery by rl norton, intro to robotics by saeed b niku, modern robotics by lynch and park]</p>
+			</article>
 
-		<h3>Long-term goals</h3>
-		<p>PHD in bio-inspired robotics, research scientist in labs/ companies in the bionic learning network (e.g festo)</p>
+			<article class="about-card">
+				<h3>Long-term goals</h3>
+				<p>PHD in bio-inspired robotics, research scientist in labs/ companies in the bionic learning network (e.g festo)</p>
+			</article>
 
-		<h3>Why you&apos;re transferring</h3>
-		<p>Need more robotics supplies to get hands-on robotics experience . Need mentors and peers with robotics interests . Not many robotics aligned people at current university.</p>
+			<article class="about-card">
+				<h3>Why you&apos;re transferring</h3>
+				<p>Need more robotics supplies to get hands-on robotics experience . Need mentors and peers with robotics interests . Not many robotics aligned people at current university.</p>
+			</article>
 
-		<h3>What I hope to contribute to campus</h3>
-		<p>Undergraduate robotics research, open-source robotics software, student mentorship and other lead positions, robotics workshops, and cross-disciplinary collaborative engineering projects.</p>
+			<article class="about-card">
+				<h3>What I hope to contribute to campus</h3>
+				<p>Undergraduate robotics research, open-source robotics software, student mentorship and other lead positions, robotics workshops, and cross-disciplinary collaborative engineering projects.</p>
+			</article>
+
+			<article class="about-card">
+				<h3>Leadership &amp; Community</h3>
+				<p>Founded HalfwiredTV, a community where robotics enthusiasts learn, build, and collaborate on projects together. Provide members a platform to present their voice in livestreams regardless of skill level to build proof of work and showcase their interests. Recent streams include a member’s 3d scanning workflow using retroreflective trackers, live study sessions, CAD speedruns including my ornithopter. Ongoing projects include a RL based pick and place robotic arm with collaboration of 6 members (2 of them pursuing masters, one of them is a PHD candidate). Future streams include research paper discussions and CAD mechanism tournaments. Currently sitting at 140+ members across 15+ countries as of july.</p>
+			</article>
+		</div>
 	</div>
 </section>
 
@@ -30,7 +49,7 @@
 	}
 
 	.about__inner {
-		max-width: 68ch;
+		max-width: 100%;
 		margin: 0 auto;
 		display: flex;
 		flex-direction: column;
@@ -44,7 +63,21 @@
 	}
 
 	.about__inner > * {
-		max-width: 68ch;
+		max-width: 100%;
+	}
+
+	.about__cards {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: clamp(1rem, 2vw, 1.5rem);
+		width: 100%;
+	}
+
+	.about-card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		padding: clamp(1.25rem, 2.5vw, 2rem);
 	}
 
 	.about h2 {
@@ -60,5 +93,11 @@
 	.about p {
 		font-size: clamp(1rem, 1.05vw, 1.1rem);
 		line-height: 1.7;
+	}
+
+	@media (min-width: 768px) {
+		.about__cards {
+			grid-template-columns: repeat(auto-fit, minmax(min(100%, 34ch), 1fr));
+		}
 	}
 </style>

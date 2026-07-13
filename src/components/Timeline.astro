@@ -6,13 +6,11 @@ import { timelineItems } from '../data/timeline';
 	<div class="timeline__inner">
 		<div class="timeline__list">
 			<h2 id="timeline-title">Timeline</h2>
-			<p>Detailed information below! [keep this line]</p>
 			<ul>
 				{timelineItems.map((item) => (
 					<li>
 						<p>{item.year}</p>
 						<h3>{item.title}</h3>
-						<p>{item.description}</p>
 					</li>
 				))}
 			</ul>
@@ -49,7 +47,7 @@ import { timelineItems } from '../data/timeline';
 		padding: 0;
 		list-style: none;
 		display: grid;
-		gap: clamp(0.875rem, 1.4vw, 1.5rem);
+		gap: clamp(0.75rem, 1.2vw, 1.1rem);
 	}
 
 	.timeline__list h2,
@@ -84,6 +82,11 @@ import { timelineItems } from '../data/timeline';
 	.timeline p {
 		font-size: clamp(1rem, 1.05vw, 1.1rem);
 		line-height: 1.6;
+	}
+
+	.timeline li {
+		display: grid;
+		gap: 0.15rem;
 	}
 
 	@media (min-width: 768px) {

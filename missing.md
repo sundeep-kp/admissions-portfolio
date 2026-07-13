@@ -18,7 +18,11 @@ Update this file whenever you add a missing file or fill a placeholder. Mark eac
 ## About
 
 - [] Replace the personal introduction placeholder in [About.astro](src/components/About.astro#L5). Add the missing short introduction.
-- [] Review the remaining About text in [About.astro](src/components/About.astro#L7-L23) and replace any rough draft wording you want to finalize.
+- [x] Replace the remaining About text in [About.astro](src/components/About.astro#L7-L23) with cards using the plan wording.
+
+## Timeline
+
+- [x] Keep the rendered timeline concise in [Timeline.astro](src/components/Timeline.astro#L1-L40) by showing only the title and the date/grade.
 
 ## Research
 
