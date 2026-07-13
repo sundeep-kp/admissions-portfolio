@@ -15,7 +15,10 @@ const toId = (value: string) =>
 
 		<div class="projects__groups">
 			{projectGroups.map((group) => (
-				<section class="projects__group" aria-labelledby={toId(group.title)}>
+				<section
+					class:list={['projects__group', { 'projects__group--compact': group.title === 'Machine Learning' }]}
+					aria-labelledby={toId(group.title)}
+				>
 					<h3 id={toId(group.title)}>{group.title}</h3>
 					<div class="projects__grid">
 						{group.projects.map((project) => (
@@ -60,10 +63,18 @@ const toId = (value: string) =>
 		gap: clamp(1rem, 2vw, 1.5rem);
 	}
 
+	.projects__group--compact {
+		max-width: 34rem;
+	}
+
 	.projects__grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
 		gap: clamp(1rem, 2vw, 1.5rem);
+	}
+
+	.projects__group--compact .projects__grid {
+		grid-template-columns: minmax(0, 1fr);
 	}
 
 	.projects h2,

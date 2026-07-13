@@ -1,0 +1,85 @@
+---
+const hobbies = [
+	{ title: 'Music', detail: 'Guitar, tabla, singing, a bit of bass, drums, and flute.' },
+	{ title: 'Film', detail: 'Photography, film production, storytelling, and stop-motion animation.' },
+	{ title: 'Painting', detail: 'Digital art and painting.' },
+	{ title: 'Psychology', detail: 'Behavioural psychology.' },
+];
+---
+
+<section class="hobbies" aria-labelledby="hobbies-title" id="hobbies">
+	<div class="hobbies__inner">
+		<h2 id="hobbies-title">Hobbies</h2>
+
+		<div class="hobbies__grid">
+			{hobbies.map((hobby) => (
+				<article class="hobbies-card">
+					<h3>{hobby.title}</h3>
+					<p>{hobby.detail}</p>
+				</article>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.hobbies {
+		padding: clamp(3rem, 6vw, 6rem) clamp(1rem, 5vw, 4rem);
+	}
+
+	.hobbies__inner {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: clamp(1.5rem, 3vw, 3rem);
+	}
+
+	.hobbies__grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: clamp(1rem, 2vw, 1.5rem);
+	}
+
+	.hobbies-card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		min-width: 0;
+		width: 100%;
+		padding: clamp(1.25rem, 2.5vw, 2rem);
+	}
+
+	.hobbies h2,
+	.hobbies h3,
+	.hobbies p {
+		margin: 0;
+	}
+
+	.hobbies h2 {
+		font-size: clamp(1.75rem, 2.5vw, 3rem);
+		line-height: 1.1;
+	}
+
+	.hobbies h3 {
+		font-size: clamp(1.125rem, 1.4vw, 1.5rem);
+		line-height: 1.25;
+	}
+
+	.hobbies p {
+		font-size: clamp(1rem, 1.05vw, 1.1rem);
+		line-height: 1.6;
+	}
+
+	@media (min-width: 768px) {
+		.hobbies__grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (min-width: 1100px) {
+		.hobbies__grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+</style>
