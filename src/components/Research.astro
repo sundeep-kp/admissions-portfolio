@@ -1,0 +1,49 @@
+---
+import ResearchCard from './ResearchCard.astro';
+---
+
+<section class="research" aria-labelledby="research-title" id="research">
+	<div class="research__inner">
+		<h2 id="research-title">Research</h2>
+
+		<div class="research__grid">
+			<ResearchCard title="Research interests">
+				<p>[Research interests missing]</p>
+			</ResearchCard>
+
+			<ResearchCard title="Currently reading">
+				<p>[Currently reading missing]</p>
+			</ResearchCard>
+
+			<ResearchCard title="Future research directions">
+				<p>[Future research directions missing]</p>
+			</ResearchCard>
+		</div>
+	</div>
+</section>
+
+<style>
+	.research {
+		padding: clamp(3rem, 6vw, 6rem) clamp(1rem, 5vw, 4rem);
+	}
+
+	.research__inner {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: clamp(1.5rem, 3vw, 3rem);
+	}
+
+	.research__grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+		gap: clamp(1rem, 2vw, 1.5rem);
+	}
+
+	.research h2 {
+		margin: 0;
+		font-size: clamp(1.75rem, 2.5vw, 3rem);
+		line-height: 1.1;
+	}
+</style>
