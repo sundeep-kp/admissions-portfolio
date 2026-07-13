@@ -1,0 +1,55 @@
+---
+interface Props {
+	title: string;
+	chips: string[];
+}
+
+const { title, chips } = Astro.props as Props;
+---
+
+<article class="skill-card">
+	<h3>{title}</h3>
+	<ul class="skill-card__chips" aria-label={title}>
+		{chips.map((chip) => (
+			<li>{chip}</li>
+		))}
+	</ul>
+</article>
+
+<style>
+	.skill-card {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(0.75rem, 1.5vw, 1rem);
+		min-width: 0;
+		width: 100%;
+		padding: clamp(1.25rem, 2.5vw, 2rem);
+	}
+
+	.skill-card h3,
+	.skill-card__chips {
+		margin: 0;
+	}
+
+	.skill-card h3 {
+		font-size: clamp(1.125rem, 1.4vw, 1.5rem);
+		line-height: 1.25;
+	}
+
+	.skill-card__chips {
+		padding: 0;
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+
+	.skill-card__chips li {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.5rem 0.85rem;
+		line-height: 1.2;
+		white-space: nowrap;
+	}
+</style>

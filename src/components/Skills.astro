@@ -1,0 +1,54 @@
+---
+import { skillGroups } from '../data/skills';
+import SkillCard from './SkillCard.astro';
+---
+
+<section class="skills" aria-labelledby="skills-title" id="skills">
+	<div class="skills__inner">
+		<h2 id="skills-title">Skills</h2>
+
+		<div class="skills__grid">
+			{skillGroups.map((group) => (
+				<SkillCard title={group.title} chips={group.chips} />
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.skills {
+		padding: clamp(3rem, 6vw, 6rem) clamp(1rem, 5vw, 4rem);
+	}
+
+	.skills__inner {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: clamp(1.5rem, 3vw, 3rem);
+	}
+
+	.skills__grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: clamp(1rem, 2vw, 1.5rem);
+	}
+
+	.skills h2 {
+		margin: 0;
+		font-size: clamp(1.75rem, 2.5vw, 3rem);
+		line-height: 1.1;
+	}
+
+	@media (min-width: 768px) {
+		.skills__grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (min-width: 1100px) {
+		.skills__grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+</style>
