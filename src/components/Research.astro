@@ -1,23 +1,31 @@
 ---
 import ResearchCard from './ResearchCard.astro';
+
+const researchTopics = ['Bio inspired robotics', 'for Planetary exploration', 'Non-Invasive Wildlife Observation'];
+
+const researchSections = [
+	{ title: 'Currently Reading' },
+	{ title: 'Research Directions' },
+	{ title: 'Future Topics' },
+];
 ---
 
 <section class="research" aria-labelledby="research-title" id="research">
 	<div class="research__inner">
-		<h2 id="research-title">Research</h2>
+		<h2 id="research-title">Research Interests</h2>
 
-		<div class="research__grid">
-			<ResearchCard title="Research interests">
-				<p>[Research interests missing]</p>
-			</ResearchCard>
+		<div class="research__grid research__grid--topics">
+			{researchTopics.map((topic) => (
+				<ResearchCard title={topic} />
+			))}
+		</div>
 
-			<ResearchCard title="Currently reading">
-				<p>[Currently reading missing]</p>
-			</ResearchCard>
-
-			<ResearchCard title="Future research directions">
-				<p>[Future research directions missing]</p>
-			</ResearchCard>
+		<div class="research__grid research__grid--sections">
+			{researchSections.map((section) => (
+				<ResearchCard title={section.title}>
+					<p>[description missing, add about 50 words here]</p>
+				</ResearchCard>
+			))}
 		</div>
 	</div>
 </section>
@@ -39,6 +47,10 @@ import ResearchCard from './ResearchCard.astro';
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
 		gap: clamp(1rem, 2vw, 1.5rem);
+	}
+
+	.research__grid--topics {
+		margin-bottom: clamp(1rem, 2vw, 1.5rem);
 	}
 
 	.research h2 {

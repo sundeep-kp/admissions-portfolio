@@ -6,7 +6,7 @@ export interface SkillGroup {
 export const skillGroups: SkillGroup[] = [
 	{
 		title: 'Programming',
-		chips: ['Python', 'C', 'C++', 'Colcon / CMake', 'XML', 'HTML', 'CSS', 'JavaScript'],
+		chips: ['Python', 'C, C++, Colcon(CMake)', 'Xml', 'Html, css, js'],
 	},
 	{
 		title: 'Robotics',
@@ -26,6 +26,6 @@ export const skillGroups: SkillGroup[] = [
 	},
 	{
 		title: 'Development',
-		chips: ['Git', 'Docker', 'React', 'Cloudflare Workers', 'Telegram bots', 'Web basics', 'Tauri', 'FastAPI', 'SQLite', 'Supabase', 'VirtualBox'],
+		chips: ['Git', 'Docker', 'Web basics (worked with cloudflare agents, telegram bots, React)', 'Tauri', 'FastAPI', 'SQLite', 'Supabase', 'VirtualBox'],
 	},
 ];

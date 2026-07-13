@@ -22,35 +22,38 @@ Update this file whenever you add a missing file or fill a placeholder. Mark eac
 
 ## Research
 
-- [] Fill in the research interests card in [Research.astro](src/components/Research.astro#L10-L12).
+- [x] Fill in the research interests card in [Research.astro](src/components/Research.astro#L10-L12).
 - [] Fill in the currently reading card in [Research.astro](src/components/Research.astro#L14-L16).
-- [] Fill in the future research directions card in [Research.astro](src/components/Research.astro#L18-L20).
+- [] Fill in the research directions card in [Research.astro](src/components/Research.astro#L18-L20).
+- [] Fill in the future topics card in [Research.astro](src/components/Research.astro#L20-L22).
 
 ## Leadership
 
-- [] Replace the leadership placeholders in [data/leadership.ts](src/data/leadership.ts#L1-L32) with the real titles, descriptions, and links.
-- [] If you want real link targets, add the final URLs for each leadership item in [data/leadership.ts](src/data/leadership.ts#L1-L32).
+- [x] Replace the leadership titles and descriptions in [data/leadership.ts](src/data/leadership.ts#L1-L32) with the plan text.
+- [] Replace the leadership link placeholders in [data/leadership.ts](src/data/leadership.ts#L1-L32) with the final URLs where available.
 
 ## Featured Projects
 
-- [] Replace the placeholder link in the new RL-based arm project inside [data/projects.ts](src/data/projects.ts#L62-L69) with the final project URL.
-- [] Replace the placeholder link in the Security Assessment project inside [data/projects.ts](src/data/projects.ts#L87-L93) with the final project URL if you want it publicly linked.
-- [] Replace the placeholder link in the other project entries in [data/projects.ts](src/data/projects.ts#L32-L152) wherever `#` is still used.
+- [x] Replace the project descriptions and titles in [data/projects.ts](src/data/projects.ts#L32-L152) with the plan text.
+- [] Replace the placeholder links in [data/projects.ts](src/data/projects.ts#L32-L152) wherever `#` is still used.
 - [] Add real project images for the entries in [data/projects.ts](src/data/projects.ts#L32-L152). Put the files in [public/images](public/images) and replace the `placeholderImage` values.
 
 ## Awards
 
-- [] Replace the award placeholders in [data/awards.ts](src/data/awards.ts#L1-L17) with the real award titles, categories, and descriptions.
+- [x] Replace the scholarship, competition, and academic achievement entries in [data/awards.ts](src/data/awards.ts#L1-L17) with the plan text.
+- [] Replace the certificate placeholder in [data/awards.ts](src/data/awards.ts#L1-L17) with the final certificate list.
 
 ## Currently Learning
 
-- [] Replace the book placeholders in [Learning.astro](src/components/Learning.astro#L8-L14) with the actual books you are currently reading.
-- [] Replace the research-paper placeholders in [Learning.astro](src/components/Learning.astro#L16-L22) with the actual papers you are currently reading.
-- [] Replace the lecture placeholders in [Learning.astro](src/components/Learning.astro#L24-L30) with the actual lectures you are currently watching.
+- [x] Replace the book placeholders in [Learning.astro](src/components/Learning.astro#L8-L16) with the books from the plan.
+- [x] Replace the current project card in [Learning.astro](src/components/Learning.astro#L18-L24) with the project from the plan.
+- [x] Replace the research-paper card in [Learning.astro](src/components/Learning.astro#L26-L32) with the paper from the plan.
+- [] Replace the next goal placeholder in [Learning.astro](src/components/Learning.astro#L34-L40) with the final text.
 
 ## Files and Assets to Add
 
-- [] Add the resume PDF to [public/documents](public/documents) and update the resume link in [Hero.astro](src/components/Hero.astro#L18-L22).
+- [] Add the resume PDF to [public/documents](public/documents) and update the resume link in [Hero.astro](src/components/Hero.astro#L18-L24).
+- [] Add the ornithopter video assets to [public/videos](public/videos) and wire them into [Hero.astro](src/components/Hero.astro#L24-L26) and [Timeline.astro](src/components/Timeline.astro#L15-L17).
 - [] Add final project images to [public/images](public/images).
 - [] Add any icon files you decide to use later to [public/icons](public/icons).
 
