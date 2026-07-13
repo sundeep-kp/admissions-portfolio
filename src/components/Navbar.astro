@@ -1,0 +1,79 @@
+---
+const links = [
+	{ label: 'About', href: '#about' },
+	{ label: 'Research', href: '#research' },
+	{ label: 'Leadership', href: '#leadership' },
+	{ label: 'Projects', href: '#projects' },
+	{ label: 'Awards', href: '#awards' },
+	{ label: 'Skills', href: '#skills' },
+	{ label: 'Contact', href: '#contact' },
+];
+---
+
+<nav class="navbar" aria-label="Primary">
+	<div class="navbar__inner">
+		<a class="navbar__brand" href="#top">Sundeep</a>
+		<ul class="navbar__links">
+			{links.map((link) => (
+				<li class="navbar__item">
+					<a class="navbar__link" href={link.href}>{link.label}</a>
+				</li>
+			))}
+		</ul>
+	</div>
+</nav>
+
+<style>
+	.navbar {
+		position: sticky;
+		top: 0;
+		z-index: 10;
+		width: 100%;
+	}
+
+	.navbar__inner {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1.5rem;
+		padding: 0.875rem 1rem;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		white-space: nowrap;
+	}
+
+	.navbar__brand {
+		flex: 0 0 auto;
+	}
+
+	.navbar__links {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.navbar__item {
+		flex: 0 0 auto;
+	}
+
+	.navbar__link {
+		display: inline-flex;
+		align-items: center;
+		text-decoration: none;
+	}
+
+	@media (max-width: 767px) {
+		.navbar__inner {
+			justify-content: flex-start;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.navbar__inner {
+			justify-content: center;
+		}
+	}
+</style>
