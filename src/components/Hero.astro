@@ -1,0 +1,107 @@
+<section class="hero" aria-labelledby="hero-title">
+	<div class="hero__inner">
+		<div class="hero__content">
+			<p>Name</p>
+			<h1 id="hero-title">[Name Missing]</h1>
+
+			<p>[Introduction Missing]</p>
+
+			<p>[University Missing]</p>
+
+			<p>Research Interests</p>
+			<ul>
+				<li>[Research interest missing]</li>
+				<li>[Research interest missing]</li>
+				<li>[Research interest missing]</li>
+			</ul>
+
+			<div class="hero__buttons" aria-label="Buttons">
+				<a href="[resume link missing]">Resume</a>
+				<a href="[github link missing]">GitHub</a>
+				<a href="[linkedin link missing]">LinkedIn</a>
+				<a href="mailto:[email missing]">Email</a>
+			</div>
+		</div>
+
+		<div class="hero__visual" aria-label="Ornithopter video placeholder">
+			<div class="hero__video-placeholder">[Ornithopter video placeholder]</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.hero {
+		min-height: 100vh;
+		padding-inline: 5vw;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.hero__inner {
+		width: 100%;
+		max-width: 1200px;
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	.hero__content,
+	.hero__visual,
+	.hero__video-placeholder {
+		min-width: 0;
+	}
+
+	.hero__content {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.hero__buttons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+
+	.hero__visual {
+		width: 100%;
+	}
+
+	.hero__video-placeholder {
+		aspect-ratio: 16 / 9;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.hero p,
+	.hero h1,
+	.hero ul {
+		margin: 0;
+	}
+
+	.hero ul {
+		padding-left: 1.25rem;
+	}
+
+	@media (min-width: 768px) {
+		.hero__inner {
+			flex-direction: row;
+			gap: 5rem;
+		}
+
+		.hero__content {
+			flex: 0 0 55%;
+		}
+
+		.hero__visual {
+			flex: 0 0 45%;
+		}
+
+		.hero__buttons {
+			justify-content: flex-start;
+		}
+	}
+</style>

@@ -1,0 +1,87 @@
+---
+import { timelineItems } from '../data/timeline';
+---
+
+<section class="timeline" aria-labelledby="timeline-title" id="timeline">
+	<div class="timeline__inner">
+		<div class="timeline__list">
+			<h2 id="timeline-title">Timeline</h2>
+			<ul>
+				{timelineItems.map((item) => (
+					<li>
+						<p>{item.year}</p>
+						<h3>{item.title}</h3>
+						<p>{item.description}</p>
+					</li>
+				))}
+			</ul>
+		</div>
+
+		<div class="timeline__visual" aria-label="Ornithopter video placeholder">
+			<div class="timeline__video-placeholder">[Ornithopter video placeholder]</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.timeline {
+		padding-inline: 5vw;
+	}
+
+	.timeline__inner {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		width: 100%;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.timeline__list,
+	.timeline__visual,
+	.timeline__video-placeholder {
+		min-width: 0;
+	}
+
+	.timeline__list ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: grid;
+		gap: 1rem;
+	}
+
+	.timeline__list h2,
+	.timeline__list h3,
+	.timeline__list p {
+		margin: 0;
+	}
+
+	.timeline__visual {
+		width: 100%;
+	}
+
+	.timeline__video-placeholder {
+		aspect-ratio: 16 / 9;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	@media (min-width: 768px) {
+		.timeline__inner {
+			flex-direction: row;
+			align-items: flex-start;
+			gap: 2rem;
+		}
+
+		.timeline__list {
+			flex: 0 0 35%;
+		}
+
+		.timeline__visual {
+			flex: 0 0 65%;
+		}
+	}
+</style>

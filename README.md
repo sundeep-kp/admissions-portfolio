@@ -19,6 +19,7 @@ Use the following prompts in order in prefferably an inline code assistant like 
 
 
 # 0. Initial Context (once)
+> The website will look shitty till the basic structure is done and all content is in place. That's when you start adding in assets , applying themes etc.
 
 Paste this into Copilot Chat.
 
@@ -175,6 +176,7 @@ Looks good.
 Commit.
 
 ---
+> Unfornately this is when i realised that Copilot just crushed their student plan. They removed the ability to use haiku and other models. Leaving only shitty models behind.
 
 # 4. Timeline + Video
 
