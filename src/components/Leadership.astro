@@ -1,0 +1,42 @@
+---
+import { leadershipItems } from '../data/leadership';
+import LeadershipCard from './LeadershipCard.astro';
+---
+
+<section class="leadership" aria-labelledby="leadership-title" id="leadership">
+	<div class="leadership__inner">
+		<h2 id="leadership-title">Leadership</h2>
+
+		<div class="leadership__grid">
+			{leadershipItems.map((item) => (
+				<LeadershipCard title={item.title} description={item.description} links={item.links} />
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.leadership {
+		padding: clamp(3rem, 6vw, 6rem) clamp(1rem, 5vw, 4rem);
+	}
+
+	.leadership__inner {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: clamp(1.5rem, 3vw, 3rem);
+	}
+
+	.leadership__grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+		gap: clamp(1rem, 2vw, 1.5rem);
+	}
+
+	.leadership h2 {
+		margin: 0;
+		font-size: clamp(1.75rem, 2.5vw, 3rem);
+		line-height: 1.1;
+	}
+</style>
