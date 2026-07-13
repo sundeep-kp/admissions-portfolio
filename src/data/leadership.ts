@@ -12,7 +12,7 @@ export interface LeadershipItem {
 export const leadershipItems: LeadershipItem[] = [
 	{
 		title: 'HalfwiredTV',
-		description: 'a community where robotics enthusiasts learn, build, and collaborate on projects together. Provide members a platform to present their voice in livestreams regardless of skill level to build proof of work and showcase their interests. Recent streams include a member’s 3d scanning workflow using retroreflective trackers, live study sessions, CAD speedruns including my ornithopter Ongoing projects include a RL based pick and place robotic arm with collaboration of 6 members (2 of them pursuing masters, one of them is a PHD candidate) Future streams include research paper discussions and CAD mechanism tournaments Currently sitting at 140+ members across 15+ countries as of july',
+		description: 'I founded and maintain HalfwiredTV, a community of 140+ robotics enthusiasts (as of july) across 15+ countries including US, canda, Italy, Greece and more, who learn, build, and collaborate on projects together live.\n- It provides members a platform to present their voice in livestreams regardless of their skill level to build proof of work and showcase their interests.\n- Recent streams include a member’s 3d scanning workflow using retroreflective trackers, live study sessions, CAD speedruns including my ornithopter project.\n- Ongoing projects include a RL based pick and place robotic arm with collaboration of 6 members (2 of them pursuing masters, one of them is a PHD candidate)\n- Future streams include research paper discussions and CAD mechanism tournaments',
 		links: [
 			{ label: 'https://discord.gg/FcTucKSjC', href: 'https://discord.gg/FcTucKSjC' },
 			{ label: '[youtube]', href: '#' },
