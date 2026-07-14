@@ -14,7 +14,7 @@
 
 <style>
 	.contact {
-		padding: clamp(3rem, 6vw, 6rem) clamp(1rem, 5vw, 4rem);
+		padding: clamp(4.5rem, 9vw, 9rem) clamp(1.5rem, 7.5vw, 6rem);
 	}
 
 	.contact__inner {
@@ -23,7 +23,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center
-		gap: clamp(1.5rem, 3vw, 3rem);
+		gap: clamp(2.25rem, 4.5vw, 4.5rem);
 		text-align: center;
 	}
 
@@ -31,12 +31,12 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center
-		gap: 1rem;
+		gap: 1.5rem;
 	}
 
 	.contact h2 {
 		margin: 0;
-		font-size: clamp(1.75rem, 2.5vw, 3rem);
+		font-size: clamp(2.625rem, 3.75vw, 4.5rem);
 		line-height: 1.1;
 	}
 
@@ -44,16 +44,19 @@
 		display: inline-flex;
 		align-items: center;
 		justify-content: center
-		padding: 0.75rem 1rem;
+		padding: 1.125rem 1.5rem;
 		text-decoration: none;
 		color: var(--text-on-dark);
 		background: var(--contact-link-bg);
-		border-radius: 8px;
+		border-radius: 12px;
 		border: 1px solid var(--contact-link-border);
 		transition: background 0.2s;
+		font-size: clamp(1.275rem, 1.425vw, 1.425rem);
+		font-weight: 500;
 	}
 
 	.contact a:hover {
 		background: var(--contact-link-hover);
+		transform: translateY(-1.5px);
 	}
 </style>
