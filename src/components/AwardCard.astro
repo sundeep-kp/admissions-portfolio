@@ -3,12 +3,14 @@ interface Props {
 	title: string;
 	category: string;
 	description: string;
+	class?: string;
 }
 
-const { title, category, description } = Astro.props as Props;
+const { title, category, description, class: className } = Astro.props as Props;
 
 const descriptionLines = description.split('\n').filter(Boolean);
 const isMultiLine = descriptionLines.length > 1;
+const isHorizontal = className?.includes('award-card--horizontal');
 ---
 
 <!-- 
@@ -17,9 +19,10 @@ const isMultiLine = descriptionLines.length > 1;
   This card design is finalized for the admissions portfolio.
   Uses .card--light from global.css card system.
   Auto-detects multi-line descriptions and renders as bullet list.
+  Horizontal variant for Scholarships/Certificates.
 -->
 
-<article class="card card--light award-card">
+<article class:list={['card card--light award-card', isHorizontal && 'award-card--horizontal', className]}>
 	<p class="award-card__category">{category}</p>
 	<h3 class="award-card__title">{title}</h3>
 	{isMultiLine ? (
@@ -53,6 +56,47 @@ const isMultiLine = descriptionLines.length > 1;
 			0 12px 36px rgba(0, 0, 0, 0.09),
 			inset 0 1.5px 0 rgba(255, 255, 255, 0.75);
 		transform: translateY(-3px);
+	}
+
+	/* Horizontal variant — entirely horizontal, single line */
+	.award-card--horizontal {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		gap: clamp(1.5rem, 3vw, 2rem);
+		padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(2rem, 4vw, 3rem);
+	}
+
+	.award-card--horizontal .award-card__category {
+		white-space: nowrap;
+		min-width: max-content;
+		margin-right: clamp(1.5rem, 2vw, 2rem);
+		flex-shrink: 0;
+	}
+
+	.award-card--horizontal .award-card__title {
+		flex: 1;
+		min-width: 0;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		margin: 0 clamp(1rem, 2vw, 1.5rem) 0 0;
+	}
+
+	.award-card--horizontal .award-card__description {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		flex: 1;
+		min-width: 0;
+		text-align: right;
+	}
+
+	/* Hide category label on very small screens for horizontal cards */
+	@media (max-width: 600px) {
+		.award-card--horizontal .award-card__category {
+			display: none;
+		}
 	}
 
 	.award-card__category,

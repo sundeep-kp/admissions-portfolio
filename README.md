@@ -691,3 +691,6 @@ then i asked this--
 ```
 Now feather's the edges of the cards with a significantly big radius , add in dotted noise in the feather
 ```
+
+
+After getting a decent site, start defluffing, reduce the amount of scrolling required. use dropdowns, remove any redundant things I added even when I didn't know too much about it.

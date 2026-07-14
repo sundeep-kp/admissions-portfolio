@@ -8,8 +8,13 @@ import AwardCard from './AwardCard.astro';
 		<h2 id="awards-title">Awards</h2>
 
 		<div class="awards__grid">
-			{awardItems.map((award) => (
-				<AwardCard title={award.title} category={award.category} description={award.description} />
+			{awardItems.map((award, index) => (
+				<AwardCard
+					class:list={{ 'award-card--horizontal': award.title === 'Academic Achievements' }}
+					title={award.title}
+					category={award.category}
+					description={award.description}
+				/>
 			))}
 		</div>
 	</div>
@@ -43,6 +48,10 @@ import AwardCard from './AwardCard.astro';
 	@media (min-width: 768px) {
 		.awards__grid {
 			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		.award-card--horizontal {
+			grid-column: 1 / -1;
 		}
 	}
 </style>

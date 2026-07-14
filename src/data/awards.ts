@@ -6,11 +6,6 @@ export interface AwardItem {
 
 export const awardItems: AwardItem[] = [
 	{
-		title: 'Scholarships',
-		category: 'Scholarships',
-		description: 'Reliance Foundation Undergraduate Scholar 2025, FIITJEE scholarship 2023',
-	},
-	{
 		title: 'Competitions and Exhibitions',
 		category: 'Competitions and Exhibitions',
 		description: [
@@ -22,11 +17,6 @@ export const awardItems: AwardItem[] = [
 		].join('\n'),
 	},
 	{
-		title: 'Certificates',
-		category: 'Certificates',
-		description: '[Matlab, Python, EFSET C1 Advanced, IEEE English — attach]',
-	},
-	{
 		title: 'Academic Achievements',
 		category: 'Academic Achievements',
 		description: [
@@ -35,5 +25,15 @@ export const awardItems: AwardItem[] = [
 			'JEE Mains 97.9 percentile',
 			'CGPA: Sem 1: 9.47, Sem 2: 9.03',
 		].join('\n'),
+	},
+	{
+		title: 'Scholarships',
+		category: 'Scholarships',
+		description: 'Reliance Foundation Undergraduate Scholar 2025, FIITJEE 2023',
+	},
+	{
+		title: 'Certificates',
+		category: 'Certificates',
+		description: 'Matlab, Python, EFSET C1 Advanced, IEEE English',
 	},
 ];
