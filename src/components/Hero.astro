@@ -75,11 +75,12 @@ import asciiArt from '/images/ascii-art.txt?raw';
 	}
 
 .hero__ascii-container {
-  		width: 100%;
+  		width: fit-content;
+      margin: 0 auto;
   	}
 
   .hero__ascii {
-		width: 100%;
+		width: max-content;
 		margin: 0;
 		padding: 1rem;
 		border: 1px solid rgba(0, 0, 0, 0.1);
@@ -87,9 +88,19 @@ import asciiArt from '/images/ascii-art.txt?raw';
 		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 		font-size: clamp(0.75rem, 1vw, 1rem);
 		line-height: 1.1;
-		overflow: auto;
+		overflow: hidden;
 		white-space: pre;
 		background: rgba(255, 255, 255, 0.7);
+    zoom: 0.14;
+    clip-path: inset(28% 0 20% 0); /* top 28% / bottom 20% — DO NOT CHANGE without design review */
+	}
+
+	@supports not (zoom: 0.14) {
+	  .hero__ascii {
+	    zoom: 1;
+	    font-size: clamp(0.1rem, 0.15vw, 0.15rem);
+	    line-height: 1.0;
+	  }
 	}
 
 	.hero p,
@@ -119,6 +130,7 @@ import asciiArt from '/images/ascii-art.txt?raw';
 		.hero__inner {
 			flex-direction: row;
 			gap: clamp(2.5rem, 5vw, 5rem);
+			align-items: center;
 		}
 
 		.hero__content {
@@ -127,8 +139,10 @@ import asciiArt from '/images/ascii-art.txt?raw';
 		}
 
 		.hero__visual {
-			flex: 0 0 45%;
-			max-width: 45%;
+			flex: 1 1 auto;
+			max-width: 100%;
+			display: flex;
+			justify-content: center;
 		}
 
 		.hero__buttons {
