@@ -1,5 +1,6 @@
 ---
 import asciiArt from '/images/ascii-art.txt?raw';
+import asciiArtMobile from '/images/ascii-art-mobile.txt?raw';
 ---
 
 <section class="hero section-fade" aria-labelledby="hero-title" style="background: #ffffff; color: #1a1a1a;">
@@ -30,7 +31,8 @@ import asciiArt from '/images/ascii-art.txt?raw';
 
 <div class="hero__visual" aria-label="Ornithopter ASCII art">
 <div class="hero__ascii-container" role="img" aria-label="Ornithopter ASCII art">
-  			<pre class="hero__ascii" aria-hidden="true">{asciiArt}</pre>
+  			<pre class="hero__ascii hero__ascii--desktop" aria-hidden="true">{asciiArt}</pre>
+        <pre class="hero__ascii hero__ascii--mobile" aria-hidden="true">{asciiArtMobile}</pre>
   		</div>
   		</div>
 	</div>
@@ -95,12 +97,30 @@ import asciiArt from '/images/ascii-art.txt?raw';
     clip-path: inset(28% 0 20% 12%); /* top 28% / right 0 / bottom 20% / left 12% — DO NOT CHANGE without design review */
 	}
 
+	.hero__ascii--desktop {
+		display: none;
+	}
+
+	.hero__ascii--mobile {
+		display: block;
+	}
+
 	@supports not (zoom: 0.185) {
 	  .hero__ascii {
 	    zoom: 1;
 	    font-size: clamp(0.13rem, 0.2vw, 0.2rem);
 	    line-height: 1.0;
 	  }
+	}
+
+	@media (min-width: 768px) {
+		.hero__ascii--desktop {
+			display: block;
+		}
+
+		.hero__ascii--mobile {
+			display: none;
+		}
 	}
 
 	.hero p,
@@ -144,7 +164,6 @@ import asciiArt from '/images/ascii-art.txt?raw';
 			display: flex;
 			justify-content: center;
 			margin-left: -20%;
-		}
 		}
 
 		.hero__buttons {
