@@ -9,6 +9,24 @@ body {
 	margin: 0;
 }
 
+body {
+	background-color: #ffffff;
+	position: relative;
+}
+
+body::before {
+	content: '';
+	position: fixed;
+	inset: 0;
+	background-image: url('/images/asfalt-light.png');
+	background-repeat: repeat;
+	background-size: auto;
+	background-attachment: scroll;
+	opacity: 0.15;
+	pointer-events: none;
+	z-index: -1;
+}
+
 html {
 	scroll-behavior: smooth;
 }
@@ -27,4 +45,34 @@ button,
 textarea,
 select {
 	font: inherit;
+}
+
+/* Section transition fade overlay */
+.section-fade::before,
+.section-fade::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 120px;
+	background-image: url('/images/asfalt-light.png');
+	background-repeat: repeat;
+	background-size: auto;
+	opacity: 0.3;
+	pointer-events: none;
+	z-index: 0;
+}
+
+.section-fade::before {
+	top: -120px;
+	background-position: center top;
+	mask-image: linear-gradient(180deg, black 0%, transparent 100%);
+	-webkit-mask-image: linear-gradient(180deg, black 0%, transparent 100%);
+}
+
+.section-fade::after {
+	bottom: -120px;
+	background-position: center bottom;
+	mask-image: linear-gradient(0deg, black 0%, transparent 100%);
+	-webkit-mask-image: linear-gradient(0deg, black 0%, transparent 100%);
 }

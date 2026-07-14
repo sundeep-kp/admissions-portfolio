@@ -32,14 +32,15 @@ const { title, description, links, class: className } = Astro.props as Props;
 		gap: clamp(0.75rem, 1.5vw, 1rem);
 		padding: clamp(1.25rem, 2.5vw, 2rem);
 		width: 100%;
-		background: rgba(250, 227, 246, 0.35);
+		background: rgba(10, 10, 10, 0.5);
 		backdrop-filter: blur(8px);
 		-webkit-backdrop-filter: blur(8px);
 		border-radius: 16px;
-		border: 1px solid rgba(255, 255, 255, 0.5);
+		border: 1px solid rgba(255, 255, 255, 0.15);
 		box-shadow:
-			0 4px 16px rgba(0, 0, 0, 0.04),
-			inset 0 1px 0 rgba(255, 255, 255, 0.6);
+			0 4px 16px rgba(0, 0, 0, 0.2),
+			inset 0 1px 0 rgba(255, 255, 255, 0.1);
+		color: white;
 	}
 
 	.leadership-card--feature {

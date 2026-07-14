@@ -1,4 +1,4 @@
-<section class="contact" aria-labelledby="contact-title" id="contact">
+<section class="contact section-fade" aria-labelledby="contact-title" id="contact" style="background: #324b4c; color: white;">
 	<div class="contact__inner">
 		<h2 id="contact-title">Contact</h2>
 
@@ -22,7 +22,7 @@
 		margin: 0 auto;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		align-items: center
 		gap: clamp(1.5rem, 3vw, 3rem);
 		text-align: center;
 	}
@@ -30,7 +30,7 @@
 	.contact__links {
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: center;
+		justify-content: center
 		gap: 1rem;
 	}
 
@@ -43,8 +43,17 @@
 	.contact a {
 		display: inline-flex;
 		align-items: center;
-		justify-content: center;
+		justify-content: center
 		padding: 0.75rem 1rem;
 		text-decoration: none;
+		color: white;
+		background: rgba(255, 255, 255, 0.1);
+		border-radius: 8px;
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		transition: background 0.2s;
+	}
+
+	.contact a:hover {
+		background: rgba(255, 255, 255, 0.2);
 	}
 </style>

@@ -50,7 +50,7 @@ Requirements:
 - Keep code clean and maintainable.
 - Never modify components unrelated to the current task.
 ```
-
+## Skeleton
 ---
 
 # 1. Project Structure
@@ -533,172 +533,153 @@ Maintain aspect ratio.
 Commit.
 
 ---
+## Visuals
 
-# 17. Images
+### Glassmorphism:
+Apply a subtle glass effect consistently.
 
-Prompt
+Cards only.
 
-```text
-Replace image placeholders with the available images.
+Requirements:
 
-Maintain consistent card sizes.
+Readable text.
 
-Never crop important content.
+Very light blur.
 
-Images should lazy load.
+Rounded corners.
 
-Keep responsive.
-```
+Subtle borders.
 
----
+Do not reduce readability.
 
-# 18. Final Polish
+Avoid heavy glow.
 
-Prompt
+Use the same styling everywhere.
 
-```text
-Review the website.
+Do not apply glass to the full page.
 
-Improve only:
+Do not redesign layouts.
 
-spacing
+### textures
+https://www.transparenttextures.com/ , pick one you like
 
-alignment
+then ask your llm to apply the imagge as texture for your site background.
 
-typography
+### Colors
+>use https://mycolor.space/ to generate a color palette and replace the below values.
 
-responsive layout
+Refine the website using large horizontal color bands.
 
-accessibility
+Do not redesign the layout.
+Do not change spacing, typography, or component structure.
 
-consistency
+BACKGROUND CONCEPT
 
-Do not redesign.
+The website should consist of large full-width horizontal sections.
 
-Do not move sections.
+Each major section occupies a solid background color.
 
-Do not rewrite text.
+The transitions between sections should be smooth and intentional.
 
-Do not add animations.
-```
+Keep the existing texture overlay above the backgrounds but below all content.
 
----
+COLOR PALETTE
 
-# 19. Mobile Audit
+Light Gray (Engineering)
+#D5D5D5
 
-Prompt
+Bright Cyan
+#00C6CF
 
-```text
-Perform a mobile-first audit.
+Deep Teal
+#068488
 
-Target widths:
+Dark Slate
+#324B4C
 
-320
+White
+#FFFFFF
 
-375
+SECTION COLORS
 
-390
+Navigation
+White
 
-430
+Hero
+White
 
-768
+About
+White
 
-1024
+Timeline + Ornithopter
+#D5D5D5
 
-List every responsive issue.
+Research
+#00C6CF
 
-Fix only layout issues.
+Leadership
+#068488
 
-Do not change styling.
-```
+Projects
+White
 
----
+Awards
+#D5D5D5
 
-# 20. Accessibility Audit
+Technical Skills
+#324B4C
 
-Prompt
+Currently Learning
+White
 
-```text
-Review accessibility.
+Hobbies
+#00C6CF
 
-Check:
+Contact
+#324B4C
 
-Heading hierarchy
+TEXT
 
-Alt text
+For white, gray, and cyan sections:
+Use dark text.
 
-Button labels
+For teal and dark slate sections:
+Use white text.
 
-Keyboard navigation
+CARDS
 
-Color contrast
+Cards should remain visually lighter than their section background.
 
-ARIA where needed
+On white/light sections:
+Use frosted white cards.
 
-Fix only accessibility issues.
-```
+On dark sections:
+Use slightly translucent dark glass cards with excellent readability.
 
----
+BACKGROUND TEXTURE
 
-# 21. Performance Audit
+The texture image should cover the entire website.
 
-Prompt
+Render order:
 
-```text
-Optimize performance.
+1. Section background color
+2. Texture overlay
+3. Content
 
-Reduce unnecessary CSS.
+The texture should be equally visible on every section.
 
-Remove unused JavaScript.
+SECTION TRANSITIONS
 
-Lazy load images.
+Avoid hard cuts.
 
-Preload only critical assets.
+Use subtle vertical texture fades (noise/ brushstrokes) of approximately 80–150px where colors change.
 
-Do not change appearance.
-```
+Do not use dramatic gradients.
 
----
+Maintain a premium engineering portfolio aesthetic.
 
-# 22. Final Code Review
+Do not modify the ornithopter layout.
+Do not redesign any components.
 
-This is the prompt I'd always end with before deployment:
+Use complementary colors for the cards relative to the background
 
-```text
-Act as a senior frontend engineer reviewing this project before production.
-
-Review:
-
-Folder structure
-
-Astro best practices
-
-Responsive layout
-
-Accessibility
-
-Performance
-
-Maintainability
-
-Code duplication
-
-Semantic HTML
-
-List every issue in priority order.
-
-Fix only high-priority issues.
-
-Do not redesign anything.
-```
-
-## Throughout the process
-
-Every time Copilot completes a step:
-
-1. **Run the app** (`npm run dev`) and visually inspect the new section.
-2. **Check the browser console** for errors or warnings.
-3. **Resize** to at least one phone width (around 390 px) and one desktop width to catch responsive issues early.
-4. **Commit** only after you're satisfied with that section.
-
-By the time you reach deployment, you'll have a sequence of small, reversible commits instead of one huge change that's difficult to debug.

@@ -24,14 +24,14 @@ const { title, chips } = Astro.props as Props;
 		min-width: 0;
 		width: 100%;
 		padding: clamp(1.25rem, 2.5vw, 2rem);
-		background: rgba(250, 227, 246, 0.35);
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
+		background: rgba(255, 255, 255, 0.08);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
 		border-radius: 16px;
-		border: 1px solid rgba(255, 255, 255, 0.5);
+		border: 1px solid rgba(255, 255, 255, 0.15);
 		box-shadow:
-			0 4px 16px rgba(0, 0, 0, 0.04),
-			inset 0 1px 0 rgba(255, 255, 255, 0.6);
+			0 4px 24px rgba(0, 0, 0, 0.3),
+			inset 0 1px 0 rgba(255, 255, 255, 0.1);
 	}
 
 	.skill-card h3,
@@ -42,6 +42,7 @@ const { title, chips } = Astro.props as Props;
 	.skill-card h3 {
 		font-size: clamp(1.125rem, 1.4vw, 1.5rem);
 		line-height: 1.25;
+		color: white;
 	}
 
 	.skill-card__chips {
@@ -58,6 +59,10 @@ const { title, chips } = Astro.props as Props;
 		justify-content: center;
 		padding: 0.5rem 0.85rem;
 		line-height: 1.2;
-		white-space: nowrap;
+		overflow-wrap: anywhere;
+		background: rgba(255, 255, 255, 0.12);
+		border-radius: 8px;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		color: white;
 	}
 </style>
