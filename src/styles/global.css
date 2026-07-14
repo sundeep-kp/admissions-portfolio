@@ -55,8 +55,7 @@ body::before {
 	background-attachment: fixed;
 	opacity: 0.6;
 	pointer-events: none;
-	z-index: 9999;
-	mix-blend-mode: normal;
+	z-index: 0;
 }
 
 html {
@@ -111,7 +110,7 @@ select {
 	left: 0;
 	right: 0;
 	height: 180px;
-	background-image: url('/images/texture.png');
+	background-image: url('/portfolio-website/images/texture.png');
 	background-repeat: repeat;
 	background-size: 50%;
 	opacity: 0.25;
