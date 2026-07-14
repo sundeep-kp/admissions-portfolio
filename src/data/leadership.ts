@@ -25,7 +25,12 @@ export const leadershipItems: LeadershipItem[] = [
 	},
 	{
 		title: 'ATL Lab Lead',
-		description: 'taught junior classes, eventually my fingerprint became my teacher’s phone password, made lots of mini projects like a posture detection chair, robotic hand [9th and 10th grade]',
+		description: [
+			'Served as ATL Lab Lead in 10th grade',
+			'Mentored 30+ 9th-grade juniors in electronics & prototyping',
+			'Built mini projects: posture-detection chair, robotic hand, sensor-based circuits',
+			'Earned teacher\'s trust — "my fingerprint became the teacher\'s phone password"',
+		].join('\n'),
 		links: [{ label: '[link missing]', href: '#' }],
 	},
 	{
