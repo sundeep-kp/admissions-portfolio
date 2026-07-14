@@ -32,8 +32,11 @@ export const projectGroups: ProjectGroup[] = [
 				image: placeholderImage,
 				title: 'Robotic prosthetic hand',
 				category: 'Robotics',
-				description:
-					'10th standard, made using arduino + servos+pvc and springs for fingers, flex sensors and EMG for muscle actuation sensing, worked by using rarely used muscles for actuation to replace amputated limb',
+				description: [
+					'10th standard project — Arduino + servos + PVC, springs for fingers',
+					'Flex sensors & EMG for muscle actuation sensing',
+					'Uses rarely-used muscles to replace amputated limb function',
+				].join('\n'),
 				links: [{ label: '[project report attach]', href: '#' }],
 				status: 'Completed',
 				tags: ['Arduino', 'Servos', 'EMG', 'Flex sensors'],
@@ -42,8 +45,10 @@ export const projectGroups: ProjectGroup[] = [
 				image: placeholderImage,
 				title: 'Ornithopter based bird flying simulation',
 				category: 'Robotics',
-				description:
-					'fascinated by flying bird by festo, studied the main mechanism and then added on to it',
+				description: [
+					'Inspired by Festo\'s flying bird',
+					'Studied main mechanism, extended with custom additions',
+				].join('\n'),
 				links: [
 					{ label: '[project overview attach]', href: '#' },
 					{ label: '[simulation video, linkedin post attach]', href: '#' },
@@ -55,8 +60,10 @@ export const projectGroups: ProjectGroup[] = [
 				image: placeholderImage,
 				title: 'OpenManipulatorX based industrial pick and place robotic arm',
 				category: 'Robotics',
-				description:
-					'prerequisite to larger future project- spider robots with specialised manipulators for planetary exploration',
+				description: [
+					'Prerequisite for future spider robots with specialised manipulators',
+					'Target: planetary exploration applications',
+				].join('\n'),
 				links: [{ label: '[project links missing]', href: '#' }],
 				status: 'Completed',
 				tags: ['OpenManipulatorX', 'Industrial arm', 'Planning'],
@@ -65,8 +72,13 @@ export const projectGroups: ProjectGroup[] = [
 				image: placeholderImage,
 				title: 'RL based pick and place robotic arm',
 				category: 'Robotics',
-				description:
-					'Ongoing project that serves as a prerequisite platform for future research in legged, spider-type robots, with the front limbs used as end effectors and designed for coordinated swarm deployment in planetary exploration. Planning is complete and CAD work has started. The current task is to detect objects and perform pick-and-place operations into bins with matching colours, starting from a base bin.',
+				description: [
+					'Platform for future legged/spider robot research',
+					'Front limbs as end effectors, coordinated swarm deployment',
+					'Planetary exploration focus',
+					'Planning complete, CAD started',
+					'Current: object detection + colour-matched bin pick-and-place',
+				].join('\n'),
 				links: [{ label: '[project links missing]', href: '#' }],
 				status: 'Ongoing',
 				tags: ['RL', 'Pick and place', 'CAD', 'Planetary exploration'],
@@ -75,8 +87,12 @@ export const projectGroups: ProjectGroup[] = [
 				image: placeholderImage,
 				title: 'ROS2-roadmap-ultralab',
 				category: 'Robotics',
-				description:
-					'an opensource learning repository which started as a walkthrough for husarion docs with added prerequisite concepts of os fundamentals, advanced c++ and OOP fundamentals, robot kinematics etc, recognised by Rafał Górecki (co-founder of husarion docs) . Expanded into project walkthroughs, other robot fundamentals using intro to robotics by saeed b. Niku and modern robotics by lynch and park',
+				description: [
+					'Open-source learning repo — started as Husarion docs walkthrough',
+					'Added: OS fundamentals, advanced C++, OOP, robot kinematics',
+					'Recognised by Rafał Górecki (Husarion co-founder)',
+					'Expanded: project walkthroughs, robot fundamentals (Niku, Lynch & Park)',
+				].join('\n'),
 				links: [{ label: '[project links missing]', href: '#' }],
 				status: 'Ongoing',
 				tags: ['ROS2', 'C++', 'Kinematics', 'Open source'],
@@ -88,10 +104,13 @@ export const projectGroups: ProjectGroup[] = [
 		projects: [
 			{
 				image: placeholderImage,
-				title: '3d reconstruction of teeth based on intra-oral images',
+				title: '3D reconstruction of teeth from intra-oral images',
 				category: 'Machine Learning',
-				description:
-					'optimisation of work by [ShanghaiTech-IMPACT/TeethDreamer](https://github.com/ShanghaiTech-IMPACT/TeethDreamer) research paper and project to be able to run locally on commercial computers. Motivation: worked with my sister who is a dentist\n[attach project report, github, reconstruction image]',
+				description: [
+					'Optimised TeethDreamer (ShanghaiTech-IMPACT) for local commercial hardware',
+					'Motivation: sister is a dentist — real clinical need',
+					'[attach project report, GitHub, reconstruction image]',
+				].join('\n'),
 				links: [{ label: '[attach project report, github, reconstruction image]', href: '#' }],
 				status: 'Completed',
 				tags: ['3D reconstruction', 'Healthcare', 'Research'],
@@ -105,8 +124,14 @@ export const projectGroups: ProjectGroup[] = [
 				image: placeholderImage,
 				title: 'Tldraw-search Plugin',
 				category: 'Software',
-				description:
-					'an infinite canvas plugin for obsidian for detectives and researchers. Motivation: Had to organise over 300 videos and articles on a topic. Ability to search across handwritten text in the canvas, interconnect multiple canvas and reference specific sections using wiki links, add webpages and youtube playlists natively inside the canvas as canvas entities, and other standard features like pressure based pencil[attach github link]',
+				description: [
+					'Infinite canvas plugin for Obsidian — for detectives & researchers',
+					'Search across handwritten text in canvas',
+					'Interconnect multiple canvases, reference sections via wiki links',
+					'Embed webpages & YouTube playlists as native canvas entities',
+					'Pressure-sensitive pencil, standard canvas features',
+					'[attach GitHub link]',
+				].join('\n'),
 				links: [{ label: '[attach github link]', href: '#' }],
 				status: 'Ongoing',
 				tags: ['Obsidian', 'Plugin', 'Search', 'Canvas'],
@@ -115,18 +140,26 @@ export const projectGroups: ProjectGroup[] = [
 				image: placeholderImage,
 				title: 'Security Assessment of College Payment Portal',
 				category: 'Software',
-				description:
-					'Found a vulnerability that let me see others bill payments. Got recognised by dean(academics) and 4 other staff members. Can’t share images here for student privacy reasons[mention this on site]',
+				description: [
+					'Found vulnerability exposing other students\' bill payments',
+					'Recognised by Dean (Academics) & 4 staff members',
+					'Images withheld for student privacy',
+				].join('\n'),
 				links: [{ label: '[mention this on site]', href: '#' }],
 				status: 'Completed',
 				tags: ['Security', 'Web', 'Assessment'],
 			},
 			{
 				image: placeholderImage,
-				title: 'Neuro-link (hackathon at iiitnr)',
+				title: 'Neuro-link (hackathon at IIITNR)',
 				category: 'Software',
-				description:
-					'a web-app for people with dementia, controlled by a central stt-tts chatbot\n* calms them down ,shares stories , creates tasks and reminders(bubbles) dynamically when relevant(using RAG)\n* Integrated face recognition to identify family members and provide contextual relationship information.\n* geotracking to prevent wandering\n[attach linkedin post]',
+				description: [
+					'Web app for dementia care — central STT/TTS chatbot',
+					'Calms users, shares stories, creates dynamic tasks/reminders via RAG',
+					'Face recognition for family member identification & context',
+					'Geotracking to prevent wandering',
+					'[attach LinkedIn post]',
+				].join('\n'),
 				links: [{ label: '[attach linkedin post]', href: '#' }],
 				status: 'Hackathon project',
 				tags: ['STT/TTS', 'RAG', 'Face recognition', 'Geotracking'],
@@ -135,8 +168,11 @@ export const projectGroups: ProjectGroup[] = [
 				image: placeholderImage,
 				title: 'Invisible-Insight',
 				category: 'Software',
-				description:
-					'A maze game that is equally difficult for the visually impaired and sighted individuals, works on sounds and vibrations. [attach github + apk]',
+				description: [
+					'Maze game equally difficult for visually impaired & sighted',
+					'Navigates via sound & vibration only',
+					'[attach GitHub + APK]',
+				].join('\n'),
 				links: [{ label: '[attach github + apk]', href: '#' }],
 				status: 'Completed',
 				tags: ['Accessibility', 'Game', 'Audio'],
@@ -145,8 +181,11 @@ export const projectGroups: ProjectGroup[] = [
 				image: placeholderImage,
 				title: 'Autologin-framework',
 				category: 'Software',
-				description:
-					'a client for my college wifi portal that automatically logs in as soon as session times out. Motivation: had to use my old pc remotely for days on vacation when I wasn’t able to afford a laptop, lots of people used it especially seniors) [link– older one with stars]',
+				description: [
+					'Client for college WiFi portal — auto-logs in on session timeout',
+					'Motivation: remote work on old PC during vacation, widely used by seniors',
+					'[link — older version with stars]',
+				].join('\n'),
 				links: [{ label: '[link– older one with stars]', href: '#' }],
 				status: 'Completed',
 				tags: ['Automation', 'Networking', 'Client'],
@@ -155,8 +194,12 @@ export const projectGroups: ProjectGroup[] = [
 				image: placeholderImage,
 				title: 'Coswatch',
 				category: 'Software',
-				description:
-					'Hackathon, IIT bbsr. a webapp to visualise asteroids in 3d from an API by nasa and rank them by threat. Includes a telegram companion bot that messages me about the highest threat asteroids everyday [linkedin post attach]',
+				description: [
+					'Hackathon (IIT Bhubaneswar) — 3D asteroid visualisation from NASA API',
+					'Rank asteroids by threat level',
+					'Telegram companion bot: daily highest-threat asteroid alerts',
+					'[attach LinkedIn post]',
+				].join('\n'),
 				links: [{ label: '[linkedin post attach]', href: '#' }],
 				status: 'Hackathon project',
 				tags: ['NASA API', '3D', 'Telegram bot'],

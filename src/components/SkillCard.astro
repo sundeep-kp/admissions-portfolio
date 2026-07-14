@@ -7,7 +7,7 @@ interface Props {
 const { title, chips } = Astro.props as Props;
 ---
 
-<article class="skill-card">
+<article class="card card--dark skill-card">
 	<h3>{title}</h3>
 	<ul class="skill-card__chips" aria-label={title}>
 		{chips.map((chip) => (
@@ -18,20 +18,25 @@ const { title, chips } = Astro.props as Props;
 
 <style>
 	.skill-card {
+		min-width: 0;
+		width: 100%;
 		display: flex;
 		flex-direction: column;
 		gap: clamp(0.75rem, 1.5vw, 1rem);
-		min-width: 0;
-		width: 100%;
-		padding: clamp(1.25rem, 2.5vw, 2rem);
-		background: #0a0a0a;
-		backdrop-filter: blur(12px);
-		-webkit-backdrop-filter: blur(12px);
+		padding: clamp(1.5rem, 3vw, 2rem);
 		border-radius: 16px;
-		border: 1px solid rgba(255, 255, 255, 0.15);
+		border: 1px solid var(--card-border-dark);
+		box-shadow: var(--card-shadow-dark);
+		background: var(--card-bg-dark);
+		color: var(--text-on-dark);
+		transition: box-shadow 0.2s ease, transform 0.2s ease;
+	}
+
+	.skill-card:hover {
 		box-shadow:
-			0 4px 24px rgba(0, 0, 0, 0.3),
+			0 12px 32px rgba(0, 0, 0, 0.35),
 			inset 0 1px 0 rgba(255, 255, 255, 0.1);
+		transform: translateY(-2px);
 	}
 
 	.skill-card h3,
@@ -50,19 +55,21 @@ const { title, chips } = Astro.props as Props;
 		list-style: none;
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.75rem;
+		gap: 0.5rem;
 	}
 
 	.skill-card__chips li {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		padding: 0.5rem 0.85rem;
+		padding: 0.4rem 0.75rem;
 		line-height: 1.2;
 		overflow-wrap: anywhere;
 		background: var(--chip-bg);
-		border-radius: 8px;
+		border-radius: 6px;
 		border: 1px solid var(--chip-border);
 		color: var(--text-on-dark);
+		font-size: clamp(0.8rem, 0.9vw, 0.9rem);
+		font-weight: 500;
 	}
 </style>

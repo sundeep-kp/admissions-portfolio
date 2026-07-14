@@ -4,9 +4,31 @@ import ResearchCard from './ResearchCard.astro';
 const researchTopics = ['Bio inspired robotics', 'for Planetary exploration', 'Non-Invasive Wildlife Observation'];
 
 const researchSections = [
-	{ title: 'Currently Reading' },
-	{ title: 'Research Directions' },
-	{ title: 'Future Topics' },
+	{ 
+		title: 'Currently Reading',
+		items: [
+			'Design of Machinery by R.L. Norton',
+			'Introduction to Robotics by S.B. Niku',
+			'Modern Robotics by Lynch & Park',
+		]
+	},
+	{ 
+		title: 'Research Directions',
+		items: [
+			'Gait optimization for legged robots',
+			'Bio-inspired multi-legged locomotion (spider/hexapod)',
+			'Terrain adaptation for planetary exploration',
+			'Non-invasive wildlife monitoring via robotic platforms',
+		]
+	},
+	{ 
+		title: 'Future Topics',
+		items: [
+			'Soft robotics for delicate sample collection',
+			'Swarm coordination for distributed sensing',
+			'Energy-autonomous systems for long-duration missions',
+		]
+	},
 ];
 ---
 
@@ -23,7 +45,9 @@ const researchSections = [
 		<div class="research__grid research__grid--sections">
 			{researchSections.map((section) => (
 				<ResearchCard title={section.title}>
-					<p>[description missing, add about 50 words here]</p>
+					<ul>
+						{section.items.map((item) => <li>{item}</li>)}
+					</ul>
 				</ResearchCard>
 			))}
 		</div>

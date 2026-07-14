@@ -13,16 +13,27 @@ export const awardItems: AwardItem[] = [
 	{
 		title: 'Competitions and Exhibitions',
 		category: 'Competitions and Exhibitions',
-		description: '2nd prize at robotics hackathon IIIT bbsr D3 fest (save the survivor) ,appeared nationals for MathsExpress in 3rd grade, Silver(hydrogen fuel using sea water and solar panels live demonstration–6th standard), Gold(science behind ram setu, the mythological land mass connecting india and srilanka–7th standard), Gold(robotic prosthetic arm for amputees– 10th standard)',
+		description: [
+			'2nd prize at Robotics Hackathon, IIIT Bhubaneswar D3 Fest (Save the Survivor)',
+			'National qualifier — MathsExpress (3rd grade)',
+			'Silver — Hydrogen fuel from seawater & solar panels live demo (6th grade)',
+			'Gold — Science behind Ram Setu, mythological landmass connecting India & Sri Lanka (7th grade)',
+			'Gold — Robotic prosthetic arm for amputees (10th grade)',
+		].join('\n'),
 	},
 	{
 		title: 'Certificates',
 		category: 'Certificates',
-		description: '[Matlab, python, EFSET C1 advanced and IEEE english attach]',
+		description: '[Matlab, Python, EFSET C1 Advanced, IEEE English — attach]',
 	},
 	{
-		title: 'Academic achievements',
-		category: 'Academic achievements',
-		description: '2nd highest score in 10th standard(92.6), appeared on top scorers display 12th standard (95.3), JEE mains (97.9), cgpa (sem1: 9.47, sem2: 9.03) ,',
+		title: 'Academic Achievements',
+		category: 'Academic Achievements',
+		description: [
+			'2nd highest score in 10th standard (92.6%)',
+			'Top scorers display — 12th standard (95.3%)',
+			'JEE Mains 97.9 percentile',
+			'CGPA: Sem 1: 9.47, Sem 2: 9.03',
+		].join('\n'),
 	},
 ];

@@ -683,3 +683,11 @@ Do not redesign any components.
 
 Use complementary colors for the cards relative to the background
 
+
+> Further I fixed the layout, structure, scaling ratios and color according to me, added ascii art of my face and fixed bugs, converted paragraphs into pointers
+
+then i asked this--
+
+```
+Now feather's the edges of the cards with a significantly big radius , add in dotted noise in the feather
+```

@@ -9,7 +9,7 @@ interface Props {
 const { title, description, links, class: className } = Astro.props as Props;
 ---
 
-<article class:list={['leadership-card', className]}>
+<article class:list={['card card--dark leadership-card', className]}>
 	<h3>{title}</h3>
 	<p>{description}</p>
 
@@ -30,21 +30,25 @@ const { title, description, links, class: className } = Astro.props as Props;
 		display: flex;
 		flex-direction: column;
 		gap: clamp(0.75rem, 1.5vw, 1rem);
-		padding: clamp(1.25rem, 2.5vw, 2rem);
+		padding: clamp(1.5rem, 3vw, 2rem);
 		width: 100%;
-		background: var(--card-bg-dark);
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
 		border-radius: 16px;
 		border: 1px solid var(--card-border-dark);
-		box-shadow:
-			0 4px 16px rgba(0, 0, 0, 0.2),
-			inset 0 1px 0 rgba(255, 255, 255, 0.1);
+		box-shadow: var(--card-shadow-dark);
 		color: var(--text-on-dark);
+		background: var(--card-bg-dark);
+		transition: box-shadow 0.2s ease, transform 0.2s ease;
+	}
+
+	.leadership-card:hover {
+		box-shadow:
+			0 12px 32px rgba(0, 0, 0, 0.35),
+			inset 0 1px 0 rgba(255, 255, 255, 0.1);
+		transform: translateY(-2px);
 	}
 
 	.leadership-card--feature {
-		padding: clamp(1.5rem, 3vw, 2.5rem);
+		padding: clamp(2rem, 4vw, 3rem);
 	}
 
 	.leadership-card h3,
@@ -56,15 +60,14 @@ const { title, description, links, class: className } = Astro.props as Props;
 	.leadership-card h3 {
 		font-size: clamp(1.125rem, 1.4vw, 1.5rem);
 		line-height: 1.25;
-	}
-
-	.leadership-card p,
-	.leadership-card__links {
-		font-size: clamp(1rem, 1.05vw, 1.1rem);
-		line-height: 1.6;
+		color: var(--text-on-dark);
 	}
 
 	.leadership-card p {
+		font-size: clamp(0.95rem, 1vw, 1.05rem);
+		line-height: 1.7;
+		color: var(--text-on-dark);
+		opacity: 0.9;
 		white-space: pre-line;
 	}
 
@@ -72,5 +75,16 @@ const { title, description, links, class: className } = Astro.props as Props;
 		padding-left: 1.25rem;
 		display: grid;
 		gap: 0.5rem;
+	}
+
+	.leadership-card__links a {
+		color: var(--accent);
+		text-decoration: none;
+		font-weight: 500;
+		transition: opacity 0.2s ease;
+	}
+
+	.leadership-card__links a:hover {
+		opacity: 0.8;
 	}
 </style>

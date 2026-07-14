@@ -12,17 +12,24 @@
 	--bg-neutral: #d5d5d5;
 	--text-primary: #1a1a1a;
 	--text-on-dark: #ffffff;
-	--card-bg: rgba(255, 255, 255, 0.9);
-	--card-bg-dark: rgba(10, 10, 10, 0.5);
-	--card-border: rgba(0, 0, 0, 0.1);
-	--card-border-dark: rgba(255, 255, 255, 0.15);
+	--card-bg: var(--bg-white);
+	--card-bg-dark: #0a0a0a;
+	--card-border: rgba(0, 0, 0, 0.08);
+	--card-border-dark: rgba(255, 255, 255, 0.12);
 	--navbar-bg: rgba(255, 255, 255, 0.95);
 	--chip-bg: rgba(255, 255, 255, 0.12);
 	--chip-border: rgba(255, 255, 255, 0.1);
-	--contact-bg: #ffb3a7;
+	--contact-bg: var(--accent);
 	--contact-link-bg: rgba(255, 255, 255, 0.1);
 	--contact-link-border: rgba(255, 255, 255, 0.2);
 	--contact-link-hover: rgba(255, 255, 255, 0.2);
+
+	/* Card system */
+	--card-radius: 16px;
+	--card-padding: clamp(1.25rem, 2.5vw, 2rem);
+	--card-gap: clamp(0.75rem, 1.5vw, 1rem);
+	--card-shadow: 0 4px 16px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+	--card-shadow-dark: 0 4px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 html,
@@ -42,8 +49,8 @@ body::before {
 	background-image: url('/images/texture.png');
 	background-repeat: repeat;
 	background-size: 50%;
-	background-attachment: scroll;
-	opacity: 0.15;
+	background-attachment: fixed;
+	opacity: 0.6;
 	pointer-events: none;
 	z-index: 0;
 }
@@ -66,6 +73,30 @@ button,
 textarea,
 select {
 	font: inherit;
+}
+
+/* Card base styles */
+.card {
+	display: flex;
+	flex-direction: column;
+	gap: var(--card-gap);
+	min-width: 0;
+	width: 100%;
+	padding: var(--card-padding);
+	border-radius: var(--card-radius);
+}
+
+.card--light {
+	background: var(--card-bg);
+	border: 1px solid var(--card-border);
+	box-shadow: var(--card-shadow);
+}
+
+.card--dark {
+	background: var(--card-bg-dark);
+	border: 1px solid var(--card-border-dark);
+	box-shadow: var(--card-shadow-dark);
+	color: var(--text-on-dark);
 }
 
 /* Section transition fade overlay */

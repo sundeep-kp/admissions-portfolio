@@ -2,7 +2,7 @@
 const hobbies = [
 	{ title: 'Music', detail: 'Guitar, tabla, singing, a bit of bass, drums, and flute.' },
 	{ title: 'Film', detail: 'Photography, film production, storytelling, and stop-motion animation.' },
-	{ title: 'Painting', detail: 'Digital art and painting.' },
+	{ title: 'Art', detail: 'Digital art and painting, origami, recreating outfits.' },
 	{ title: 'Behavioural Psychology', detail: 'Behavioural psychology.' },
 ];
 ---
@@ -13,7 +13,7 @@ const hobbies = [
 
 		<div class="hobbies__grid">
 			{hobbies.map((hobby) => (
-				<article class="hobbies-card">
+				<article class="card card--light hobbies-card">
 					<h3>{hobby.title}</h3>
 					<p>{hobby.detail}</p>
 				</article>
@@ -48,15 +48,20 @@ const hobbies = [
 		gap: 0.75rem;
 		min-width: 0;
 		width: 100%;
-		padding: clamp(1.25rem, 2.5vw, 2rem);
-		background: var(--card-bg);
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
-		border-radius: 16px;
+		padding: clamp(1.5rem, 3vw, 2rem);
+		border-radius: 12px;
 		border: 1px solid var(--card-border);
 		box-shadow:
-			0 4px 16px rgba(0, 0, 0, 0.04),
-			inset 0 1px 0 rgba(255, 255, 255, 0.6);
+			0 2px 8px rgba(0, 0, 0, 0.03),
+			inset 0 1px 0 rgba(255, 255, 255, 0.5);
+		transition: box-shadow 0.2s ease, transform 0.2s ease;
+	}
+
+	.hobbies-card:hover {
+		box-shadow:
+			0 8px 24px rgba(0, 0, 0, 0.06),
+			inset 0 1px 0 rgba(255, 255, 255, 0.5);
+		transform: translateY(-2px);
 	}
 
 	.hobbies h2,
@@ -73,11 +78,14 @@ const hobbies = [
 	.hobbies h3 {
 		font-size: clamp(1.125rem, 1.4vw, 1.5rem);
 		line-height: 1.25;
+		color: var(--text-primary);
 	}
 
 	.hobbies p {
-		font-size: clamp(1rem, 1.05vw, 1.1rem);
-		line-height: 1.6;
+		font-size: clamp(0.95rem, 1vw, 1.05rem);
+		line-height: 1.7;
+		color: var(--text-primary);
+		opacity: 0.9;
 	}
 
 	/* auto-fit handles desktop expansion without fixed breakpoints */
