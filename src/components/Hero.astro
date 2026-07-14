@@ -103,6 +103,8 @@ import asciiArtMobile from '/images/ascii-art-mobile.txt?raw';
 
 	.hero__ascii--mobile {
 		display: block;
+    clip-path: inset(1%); /* all sides 1% — MOBILE ONLY — DO NOT CHANGE without design review */
+    zoom: 0.31; /* MOBILE ONLY — DO NOT CHANGE without design review */
 	}
 
 	@supports not (zoom: 0.185) {
