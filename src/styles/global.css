@@ -49,7 +49,7 @@ body::before {
 	content: '';
 	position: fixed;
 	inset: 0;
-	background-image: url('/portfolio-website/images/texture.png');
+	background-image: url('/admissions-portfolio/images/texture.png');
 	background-repeat: repeat;
 	background-size: 50%;
 	background-attachment: fixed;
@@ -110,7 +110,7 @@ select {
 	left: 0;
 	right: 0;
 	height: 180px;
-	background-image: url('/portfolio-website/images/texture.png');
+	background-image: url('/admissions-portfolio/images/texture.png');
 	background-repeat: repeat;
 	background-size: 50%;
 	opacity: 0.25;
