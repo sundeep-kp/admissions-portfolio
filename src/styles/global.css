@@ -4,13 +4,34 @@
 	box-sizing: border-box;
 }
 
+:root {
+	--accent: #ffb3a7;
+	--accent-soft: #ffe5dc;
+	--accent-strong: #ff8c6b;
+	--bg-white: #ffffff;
+	--bg-neutral: #d5d5d5;
+	--text-primary: #1a1a1a;
+	--text-on-dark: #ffffff;
+	--card-bg: rgba(255, 255, 255, 0.9);
+	--card-bg-dark: rgba(10, 10, 10, 0.5);
+	--card-border: rgba(0, 0, 0, 0.1);
+	--card-border-dark: rgba(255, 255, 255, 0.15);
+	--navbar-bg: rgba(255, 255, 255, 0.95);
+	--chip-bg: rgba(255, 255, 255, 0.12);
+	--chip-border: rgba(255, 255, 255, 0.1);
+	--contact-bg: #324b4c;
+	--contact-link-bg: rgba(255, 255, 255, 0.1);
+	--contact-link-border: rgba(255, 255, 255, 0.2);
+	--contact-link-hover: rgba(255, 255, 255, 0.2);
+}
+
 html,
 body {
 	margin: 0;
 }
 
 body {
-	background-color: #ffffff;
+	background-color: var(--bg-white);
 	position: relative;
 }
 
@@ -18,11 +39,11 @@ body::before {
 	content: '';
 	position: fixed;
 	inset: 0;
-	background-image: url('/images/asfalt-light.png');
+	background-image: url('/images/texture.png');
 	background-repeat: repeat;
 	background-size: auto;
 	background-attachment: scroll;
-	opacity: 0.15;
+	opacity: 0.12;
 	pointer-events: none;
 	z-index: -1;
 }
@@ -55,10 +76,10 @@ select {
 	left: 0;
 	right: 0;
 	height: 120px;
-	background-image: url('/images/asfalt-light.png');
+	background-image: url('/images/texture.png');
 	background-repeat: repeat;
 	background-size: auto;
-	opacity: 0.3;
+	opacity: 0.25;
 	pointer-events: none;
 	z-index: 0;
 }

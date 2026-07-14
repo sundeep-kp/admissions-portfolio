@@ -1,4 +1,4 @@
-<section class="contact section-fade" aria-labelledby="contact-title" id="contact" style="background: #324b4c; color: white;">
+<section class="contact section-fade" aria-labelledby="contact-title" id="contact" style="background: var(--contact-bg); color: var(--text-on-dark);">
 	<div class="contact__inner">
 		<h2 id="contact-title">Contact</h2>
 
@@ -40,20 +40,20 @@
 		line-height: 1.1;
 	}
 
-	.contact a {
+.contact a {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center
 		padding: 0.75rem 1rem;
 		text-decoration: none;
-		color: white;
-		background: rgba(255, 255, 255, 0.1);
+		color: var(--text-on-dark);
+		background: var(--contact-link-bg);
 		border-radius: 8px;
-		border: 1px solid rgba(255, 255, 255, 0.2);
+		border: 1px solid var(--contact-link-border);
 		transition: background 0.2s;
 	}
 
 	.contact a:hover {
-		background: rgba(255, 255, 255, 0.2);
+		background: var(--contact-link-hover);
 	}
 </style>
