@@ -111,6 +111,15 @@ import { timelineItems } from '../data/timeline';
     width: 100%;
     aspect-ratio: 16 / 9;
     overflow: hidden;
+    mask-image:
+      linear-gradient(to right, transparent, black 12%, black 88%, transparent),
+      linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+    mask-composite: intersect;
+    -webkit-mask-image:
+      linear-gradient(to right, transparent, black 12%, black 88%, transparent),
+      linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+    -webkit-mask-composite: source-in;
+    background: rgba(213, 213, 213, 0.12);
   }
 
   .ornithopter__video {
@@ -118,7 +127,7 @@ import { timelineItems } from '../data/timeline';
     height: 100%;
     display: block;
     object-fit: cover;
-    transform: translateX(-3px); /* mask left 3px black stripe — do not remove */
+    transform: translateX(-3px);
   }
 
   .ornithopter__timeline h2 {
