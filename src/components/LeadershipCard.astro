@@ -7,20 +7,44 @@ interface Props {
 }
 
 const { title, description, links, class: className } = Astro.props as Props;
+
+// Split description into paragraphs for better formatting
+const descriptionLines = description.split('\n').filter(line => line.trim());
 ---
 
-<article class:list={['card card--dark leadership-card', className]}>
-	<h3>{title}</h3>
-	<p>{description}</p>
+<!-- 
+  LEADERSHIP CARD — PROTECTED DESIGN
+  Do not modify layout, colors, typography, spacing, or hover effects without explicit approval.
+  This card design is finalized for the admissions portfolio.
+  Uses .card--dark from global.css card system.
+-->
 
-	{links.length > 0 && (
-		<ul class="leadership-card__links">
-			{links.map((link) => (
-				<li>
-					<a href={link.href}>{link.label}</a>
-				</li>
+<article class:list={['card card--dark leadership-card', className]}>
+	<header class="leadership-card__header">
+		<h3>{title}</h3>
+	</header>
+
+	<div class="leadership-card__body">
+		{descriptionLines.map((line, i) => (
+			<p class:list={['leadership-card__text', line.startsWith('-') ? 'leadership-card__bullet' : '']}>
+				{line.startsWith('-') ? line.slice(1).trim() : line}
+			</p>
+		))}
+	</div>
+
+	{links.length > 0 && links.some(l => l.href !== '#') && (
+		<div class="leadership-card__links">
+			{links.map((link) => link.href !== '#' && (
+				<a href={link.href} class="leadership-card__link" target="_blank" rel="noopener noreferrer">
+					{link.label}
+					<svg class="leadership-card__link-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+						<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+						<polyline points="15 3 21 3 21 9" />
+						<line x1="10" y1="14" x2="21" y2="3" />
+					</svg>
+				</a>
 			))}
-		</ul>
+		</div>
 	)}
 </article>
 
@@ -29,10 +53,10 @@ const { title, description, links, class: className } = Astro.props as Props;
 		min-width: 0;
 		display: flex;
 		flex-direction: column;
-		gap: clamp(0.75rem, 1.5vw, 1rem);
+		gap: clamp(1rem, 2vw, 1.5rem);
 		padding: clamp(1.5rem, 3vw, 2rem);
 		width: 100%;
-		border-radius: 16px;
+		border-radius: 12px;
 		border: 1px solid var(--card-border-dark);
 		box-shadow: var(--card-shadow-dark);
 		color: var(--text-on-dark);
@@ -51,6 +75,17 @@ const { title, description, links, class: className } = Astro.props as Props;
 		padding: clamp(2rem, 4vw, 3rem);
 	}
 
+	.leadership-card__header {
+		flex-shrink: 0;
+	}
+
+	.leadership-card__body {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(0.5rem, 1vw, 0.75rem);
+		flex: 1;
+	}
+
 	.leadership-card h3,
 	.leadership-card p,
 	.leadership-card__links {
@@ -61,30 +96,72 @@ const { title, description, links, class: className } = Astro.props as Props;
 		font-size: clamp(1.125rem, 1.4vw, 1.5rem);
 		line-height: 1.25;
 		color: var(--text-on-dark);
+		letter-spacing: -0.01em;
 	}
 
-	.leadership-card p {
-		font-size: clamp(0.95rem, 1vw, 1.05rem);
-		line-height: 1.7;
+	.leadership-card__text {
+		font-size: clamp(0.9rem, 1vw, 1rem);
+		line-height: 1.75;
 		color: var(--text-on-dark);
+		opacity: 0.92;
+	}
+
+	.leadership-card__bullet {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.625rem;
+		padding-left: 0.25rem;
+	}
+
+	.leadership-card__bullet::before {
+		content: '';
+		flex-shrink: 0;
+		width: 5px;
+		height: 5px;
+		border-radius: 50%;
+		background: var(--accent);
+		margin-top: 0.55rem;
 		opacity: 0.9;
-		white-space: pre-line;
 	}
 
 	.leadership-card__links {
-		padding-left: 1.25rem;
-		display: grid;
-		gap: 0.5rem;
+		display: flex;
+		flex-wrap: wrap;
+		gap: clamp(0.5rem, 1vw, 0.75rem);
+		margin-top: clamp(0.5rem, 1vw, 0.75rem);
+		padding-left: 0;
 	}
 
-	.leadership-card__links a {
-		color: var(--accent);
-		text-decoration: none;
+	.leadership-card__link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.375rem;
+		padding: clamp(0.5rem, 1vw, 0.625rem) clamp(0.875rem, 1.5vw, 1rem);
+		font-size: clamp(0.85rem, 1vw, 0.95rem);
 		font-weight: 500;
-		transition: opacity 0.2s ease;
+		color: var(--accent);
+		background: rgba(255, 179, 167, 0.12);
+		border: 1px solid rgba(255, 179, 167, 0.3);
+		border-radius: 8px;
+		text-decoration: none;
+		transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
 	}
 
-	.leadership-card__links a:hover {
+	.leadership-card__link:hover {
+		background: var(--accent);
+		border-color: var(--accent);
+		color: var(--text-on-dark);
+		transform: translateY(-1px);
+	}
+
+	.leadership-card__link-icon {
+		flex-shrink: 0;
 		opacity: 0.8;
+	}
+
+	@media (min-width: 768px) {
+		.leadership-card--feature .leadership-card__body {
+			/* Feature card can have slightly different layout if needed */
+		}
 	}
 </style>

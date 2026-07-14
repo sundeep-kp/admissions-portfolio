@@ -11,6 +11,14 @@ const descriptionLines = description.split('\n').filter(Boolean);
 const isMultiLine = descriptionLines.length > 1;
 ---
 
+<!-- 
+  AWARD CARD — PROTECTED DESIGN
+  Do not modify layout, colors, typography, spacing, or hover effects without explicit approval.
+  This card design is finalized for the admissions portfolio.
+  Uses .card--light from global.css card system.
+  Auto-detects multi-line descriptions and renders as bullet list.
+-->
+
 <article class="card card--light award-card">
 	<p class="award-card__category">{category}</p>
 	<h3 class="award-card__title">{title}</h3>
@@ -24,6 +32,7 @@ const isMultiLine = descriptionLines.length > 1;
 </article>
 
 <style>
+	/* AWARD CARD STYLES — DO NOT MODIFY WITHOUT APPROVAL */
 	.award-card {
 		display: flex;
 		flex-direction: column;

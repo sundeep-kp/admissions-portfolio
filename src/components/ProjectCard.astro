@@ -17,6 +17,13 @@ interface Props {
 const { image, title, category, description, links, status, tags } = Astro.props as Props;
 ---
 
+<!-- 
+  PROJECT CARD — PROTECTED DESIGN
+  Do not modify layout, colors, typography, spacing, or hover effects without explicit approval.
+  This card design is finalized for the admissions portfolio.
+  Uses .card--light from global.css card system.
+-->
+
 <article class="card card--light project-card">
 	{image && <img class="project-card__image" src={image} alt={title} />}
 
@@ -46,6 +53,7 @@ const { image, title, category, description, links, status, tags } = Astro.props
 </article>
 
 <style>
+	/* PROJECT CARD STYLES — DO NOT MODIFY WITHOUT APPROVAL */
 	.project-card {
 		display: flex;
 		flex-direction: column;
