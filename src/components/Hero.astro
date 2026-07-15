@@ -3,7 +3,10 @@ import asciiArt from '/images/ascii-art.txt?raw';
 import asciiArtMobile from '/images/ascii-art-mobile.txt?raw';
 ---
 
-<section class="hero section-fade" aria-labelledby="hero-title" style="background: var(--bg-white); color: var(--text-primary);">
+<section class="hero section-fade" aria-labelledby="hero-title" style="color: var(--text-primary);">
+	<div class="hero__ascii-bg" role="img" aria-label="Ornithopter ASCII art" aria-hidden="true">
+		<pre class="hero__ascii hero__ascii--desktop">{asciiArt}</pre>
+	</div>
 	<div class="hero__inner">
 		<div class="hero__ascii-mobile" aria-hidden="true">
 			<pre class="hero__ascii hero__ascii--mobile" aria-hidden="true">{asciiArtMobile}</pre>
@@ -59,10 +62,6 @@ import asciiArtMobile from '/images/ascii-art-mobile.txt?raw';
 				</a>
 			</div>
 		</div>
-
-		<div class="hero__ascii-container" role="img" aria-label="Ornithopter ASCII art">
-			<pre class="hero__ascii hero__ascii--desktop" aria-hidden="true">{asciiArt}</pre>
-		</div>
 	</div>
 </section>
 
@@ -74,6 +73,20 @@ import asciiArtMobile from '/images/ascii-art-mobile.txt?raw';
 		display: flex;
 		align-items: flex-start;
 		justify-content: center;
+		position: relative;
+		background: var(--bg-white);
+	}
+
+	/* ASCII background art — bottom-most layer */
+	.hero__ascii-bg {
+		position: absolute;
+		right: 0;
+		top: 37%;
+		transform: translateY(-50%);
+		width: fit-content;
+		aspect-ratio: 1 / 1;
+		z-index: 0;
+		pointer-events: none;
 	}
 
 	.hero__inner {
@@ -87,7 +100,6 @@ import asciiArtMobile from '/images/ascii-art-mobile.txt?raw';
 
 	.hero__content,
 	.hero__visual,
-	.hero__ascii-container,
 	.hero__ascii {
 		min-width: 0;
 	}
@@ -97,6 +109,8 @@ import asciiArtMobile from '/images/ascii-art-mobile.txt?raw';
 		flex-direction: column;
 		gap: clamp(1.5rem, 2.5vw, 2rem);
 		padding-top: clamp(0.5rem, 1vw, 1rem);
+		position: relative;
+		z-index: 1; /* above ASCII art */
 	}
 
 	/* Name */
@@ -124,19 +138,11 @@ import asciiArtMobile from '/images/ascii-art-mobile.txt?raw';
 		display: inline-flex;
 		align-items: center;
 		gap: 0.5rem;
-		padding: 0.5rem 1rem;
+		padding: 0.5rem 0;
 		font-size: clamp(0.875rem, 1.2vw, 1rem);
 		font-weight: 500;
 		color: var(--text-primary);
 		opacity: 0.85;
-		background: rgba(255, 255, 255, 0.6);
-		border: 1px solid rgba(0, 0, 0, 0.06);
-		border-radius: 999px;
-		backdrop-filter: blur(10px);
-		-webkit-backdrop-filter: blur(10px);
-		box-shadow:
-			0 2px 8px rgba(0, 0, 0, 0.04),
-			inset 0 1px 0 rgba(255, 255, 255, 0.5);
 	}
 
 	.hero__university-label {
@@ -314,7 +320,7 @@ import asciiArtMobile from '/images/ascii-art-mobile.txt?raw';
 		opacity: 0.9;
 	}
 
-	/* Mobile ASCII */
+	/* Mobile ASCII — circular profile */
 	.hero__ascii-mobile {
 		display: block;
 		width: fit-content;
@@ -339,14 +345,7 @@ import asciiArtMobile from '/images/ascii-art-mobile.txt?raw';
 		aspect-ratio: 1 / 1;
 	}
 
-	/* Desktop ASCII container */
-	.hero__ascii-container {
-		width: fit-content;
-		margin-left: auto;
-		margin-right: 0;
-		aspect-ratio: 1.2 / 1;
-	}
-
+	/* Desktop ASCII art */
 	.hero__ascii {
 		width: max-content;
 		margin: 0;
@@ -385,6 +384,10 @@ import asciiArtMobile from '/images/ascii-art-mobile.txt?raw';
 		.hero__visual {
 			display: none;
 		}
+
+		.hero__ascii-bg {
+			display: none;
+		}
 	}
 
 	@media (min-width: 768px) {
@@ -413,12 +416,8 @@ import asciiArtMobile from '/images/ascii-art-mobile.txt?raw';
 			display: none;
 		}
 
-		.hero__ascii-container {
-			aspect-ratio: 1 / 1;
-			position: absolute;
-			right: 0; /* DO NOT CHANGE — pinned to right edge of hero */
-			top: 72%; /* DO NOT CHANGE — calibrated vertical position; changing shifts art into other sections */
-			transform: translateY(-50%); /* centers container vertically on top value */
+		.hero__ascii-bg {
+			display: block;
 		}
 
 		.hero__ascii--desktop {

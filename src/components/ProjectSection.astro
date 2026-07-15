@@ -22,7 +22,7 @@ const toId = (value: string) =>
 						aria-labelledby={toId(group.title)}
 					>
 						<h3 id={toId(group.title)}>{group.title}</h3>
-						<Carousel autoplay={false} showArrows={true} showDots={true} class="projects__carousel">
+						<Carousel autoplay={false} showArrows={true} showDots={true} class="projects__carousel" slidesPerView={3}>
 							{group.projects.map((project) => (
 								<ProjectCard
 									image={project.image}

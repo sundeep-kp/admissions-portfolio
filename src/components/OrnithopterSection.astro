@@ -1,23 +1,13 @@
 ---
 import { timelineItems } from '../data/timeline';
+import { aboutCards } from '../data/about';
+import Carousel from './Carousel.astro';
 ---
 
 <section class="ornithopter" aria-labelledby="ornithopter-title" id="ornithopter">
   <div class="ornithopter__gradient-top" aria-hidden="true"></div>
 
   <div class="ornithopter__inner">
-    <div class="ornithopter__timeline">
-      <h2 id="ornithopter-title">Timeline</h2>
-      <ul>
-        {timelineItems.map((item) => (
-          <li>
-            <p>{item.year}</p>
-            <h3>{item.title}</h3>
-          </li>
-        ))}
-      </ul>
-    </div>
-
     <div class="ornithopter__video-wrap" aria-label="Ornithopter video">
       <div class="ornithopter__video-inner">
         <video
@@ -30,9 +20,35 @@ import { timelineItems } from '../data/timeline';
           aria-label="Looping ornithopter video"
         >
 <source src="/admissions-portfolio/videos/ornithopter%20-%20CROP%20-%20Videobolt.net.mp4" type="video/mp4" />
-        <source src="/admissions-portfolio/videos/ornithopter.webm" type="video/webm" />
+<source src="/admissions-portfolio/videos/ornithopter.webm" type="video/webm" />
         </video>
       </div>
+      <p class="ornithopter__video-caption" aria-hidden="true">~my ornithopter bird mechanism</p>
+
+      <div class="ornithopter__about-carousel" aria-label="About me">
+        <Carousel autoplay={false} showArrows={true} showDots={true} class="about-carousel" slidesPerView={2}>
+          {aboutCards.map((card) => (
+            <article class="about-card about-carousel__card">
+              <h3>{card.title}</h3>
+              <ul>
+                {card.items.map((item) => <li>{item}</li>)}
+              </ul>
+            </article>
+          ))}
+        </Carousel>
+      </div>
+    </div>
+
+    <div class="ornithopter__timeline">
+      <h2 id="ornithopter-title">Timeline</h2>
+      <ul>
+        {timelineItems.map((item) => (
+          <li>
+            <p>{item.year}</p>
+            <h3>{item.title}</h3>
+          </li>
+        ))}
+      </ul>
     </div>
   </div>
 
@@ -131,6 +147,90 @@ import { timelineItems } from '../data/timeline';
     transform: translateX(-4.5px);
   }
 
+  .ornithopter__video-caption {
+    margin: 0.75rem 0 0;
+    font-size: clamp(0.875rem, 1.1vw, 1rem);
+    line-height: 1.5;
+    color: var(--text-primary);
+    opacity: 0.6;
+    font-style: italic;
+    text-align: center;
+  }
+
+  .ornithopter__about-carousel {
+    display: none;
+  }
+
+  .about-carousel {
+    width: 100%;
+  }
+
+  .about-carousel .carousel__track > *,
+  .about-carousel .carousel__track > :global(*) {
+    flex: 0 0 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .about-carousel .carousel__track > *,
+    .about-carousel .carousel__track > :global(*) {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .about-carousel .carousel__track > *,
+    .about-carousel .carousel__track > :global(*) {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+
+  .about-carousel__card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    background: var(--bg-white);
+    border-radius: 18px;
+    border: 1px solid var(--card-border);
+    box-shadow:
+      0 3px 12px rgba(0, 0, 0, 0.045),
+      inset 0 1.5px 0 rgba(255, 255, 255, 0.75);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .about-carousel__card:hover {
+    box-shadow:
+      0 12px 36px rgba(0, 0, 0, 0.09),
+      inset 0 1.5px 0 rgba(255, 255, 255, 0.75);
+    transform: translateY(-3px);
+  }
+
+  .about-carousel__card h3 {
+    margin: 0;
+    font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+    line-height: 1.3;
+    color: var(--text-primary);
+  }
+
+  .about-carousel__card ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .about-carousel__card li {
+    margin: 0;
+    font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
+    line-height: 1.6;
+    color: var(--text-primary);
+    opacity: 0.85;
+  }
+
   .ornithopter__timeline h2 {
     font-size: clamp(1.75rem, 2.5vw, 3rem);
     line-height: 1.1;
@@ -155,6 +255,16 @@ import { timelineItems } from '../data/timeline';
     width: 100%;
   }
 
+  @media (max-width: 767px) {
+    .ornithopter__video-caption {
+      display: block;
+    }
+
+    .ornithopter__about-carousel {
+      display: none;
+    }
+  }
+
   @media (min-width: 768px) {
     .ornithopter__inner {
       flex-direction: row;
@@ -170,6 +280,17 @@ import { timelineItems } from '../data/timeline';
     .ornithopter__video-wrap {
       flex: 0 0 65%;
       max-width: 65%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(1.5rem, 3vw, 2rem);
+    }
+
+    .ornithopter__video-caption {
+      display: none;
+    }
+
+    .ornithopter__about-carousel {
+      display: block;
     }
   }
 </style>

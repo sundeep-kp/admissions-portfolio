@@ -6,12 +6,13 @@ interface Props {
 	showArrows?: boolean;
 	showDots?: boolean;
 	class?: string;
+	slidesPerView?: number;
 }
 
-const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, showDots = true, class: className } = Astro.props as Props;
+const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, showDots = true, class: className, slidesPerView = 1 } = Astro.props as Props;
 ---
 
-<div class="carousel" role="region" aria-label="Carousel" class:list={['carousel', className]}>
+<div class="carousel" role="region" aria-label="Carousel" class:list={['carousel', className]} data-slides-per-view={slidesPerView}>
 	<div class="carousel__track" data-carousel-track>
 		<slot />
 	</div>
@@ -51,20 +52,25 @@ const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, 
 
 		if (!track || slides.length <= 1) return;
 
+		// Get slidesPerView from data attribute or default to 1
+		const slidesPerView = parseInt(carousel.dataset.slidesPerView || '1', 10);
+		const maxIndex = Math.max(0, slides.length - slidesPerView);
+
 		let currentIndex = 0;
 		let autoplayTimer: number | null = null;
 		let isAnimating = false;
 
-		// Create dots
+		// Create dots - only for the number of "pages" not individual slides
 		if (dotsContainer) {
-			slides.forEach((_, i) => {
+			const pageCount = maxIndex + 1;
+			for (let i = 0; i < pageCount; i++) {
 				const dot = document.createElement('button');
 				dot.className = 'carousel__dot' + (i === 0 ? ' carousel__dot--active' : '');
-				dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+				dot.setAttribute('aria-label', `Go to page ${i + 1}`);
 				dot.setAttribute('data-carousel-dot', String(i));
 				dot.addEventListener('click', () => goToSlide(i));
 				dotsContainer.appendChild(dot);
-			});
+			}
 		}
 
 		const dots = dotsContainer?.querySelectorAll('[data-carousel-dot]') || [];
@@ -79,19 +85,19 @@ const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, 
 			if (isAnimating || index === currentIndex) return;
 			isAnimating = true;
 
-			currentIndex = Math.max(0, Math.min(index, slides.length - 1));
-			track.style.transform = `translateX(-${currentIndex * 100}%)`;
+			currentIndex = Math.max(0, Math.min(index, maxIndex));
+			track.style.transform = `translateX(-${currentIndex * (100 / slidesPerView)}%)`;
 			updateDots();
 
 			setTimeout(() => { isAnimating = false; }, 400);
 		}
 
 		function nextSlide() {
-			goToSlide((currentIndex + 1) % slides.length);
+			goToSlide(currentIndex + 1);
 		}
 
 		function prevSlide() {
-			goToSlide((currentIndex - 1 + slides.length) % slides.length);
+			goToSlide(currentIndex - 1);
 		}
 
 		function startAutoplay() {

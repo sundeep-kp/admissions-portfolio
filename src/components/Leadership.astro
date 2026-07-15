@@ -8,7 +8,7 @@ import Carousel from './Carousel.astro';
 	<div class="leadership__inner">
 		<h2 id="leadership-title">Leadership and Community</h2>
 
-		<Carousel autoplay={false} showArrows={true} showDots={true} class="leadership__carousel">
+		<Carousel autoplay={false} showArrows={true} showDots={true} class="leadership__carousel" slidesPerView={1}>
 			{leadershipItems.map((item) => (
 				<LeadershipCard
 					class="leadership-card--feature"
