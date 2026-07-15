@@ -30,6 +30,7 @@ import Carousel from './Carousel.astro';
       </button>
 
       <div class="ornithopter__about-carousel" aria-label="About me" id="ornithopter-about-carousel" hidden>
+        <h3 class="ornithopter__about-title">About me</h3>
         <Carousel autoplay={false} showArrows={true} showDots={true} class="about-carousel" slidesPerView={2}>
           {aboutCards.map((card) => (
             <article class="about-card about-carousel__card">
@@ -224,6 +225,14 @@ import Carousel from './Carousel.astro';
     to { opacity: 1; transform: translateY(0); }
   }
 
+  .ornithopter__about-title {
+    margin: 0 0 1rem;
+    font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: center;
+  }
+
   .about-carousel {
     width: 100%;
   }
@@ -366,6 +375,7 @@ import Carousel from './Carousel.astro';
     .ornithopter__timeline {
       flex: 0 0 35%;
       max-width: 35%;
+      transform: translateX(-20%);
     }
 
     .ornithopter__video-wrap {
@@ -377,7 +387,7 @@ import Carousel from './Carousel.astro';
     }
 
     .ornithopter__video-caption {
-      display: none;
+      display: block;
     }
 
     .ornithopter__about-toggle {
