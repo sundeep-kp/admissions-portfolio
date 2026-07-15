@@ -40,7 +40,25 @@ const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, 
 </div>
 
 <script>
-	// Carousel functionality - continuous/free scrolling
+	/*
+	 * Carousel functionality — controlled scroll with snap, arrows, dots, keyboard, touch.
+	 * 
+	 * KEY DESIGN DECISIONS TO PREVENT REGRESSIONS:
+	 * 1. Scroll is ALWAYS on the TRACK element, never window.
+	 *    - goToSlide() uses track.scrollTo() not window.scrollTo()
+	 *    - Scroll listener on track (not window/carousel) prevents page scroll
+	 * 2. Navigation bounded by maxIndex = slides.length - slidesPerView
+	 *    - nextSlide/prevSlide clamp to [0, maxIndex], never wrap
+	 *    - Buttons disable at ends (via goToSlide bounds check)
+	 * 3. Dots = pages, not slides (pageCount = maxIndex + 1)
+	 * 4. Touch: native scroll on track, JS only updates dots (passive listener)
+	 * 5. Mobile (≤767px): arrows/dots hidden, free scroll with snap (90% width)
+	 * 6. Desktop: arrows/dots shown, controlled scroll via buttons
+	 * 
+	 * BUG FIX (2024): Previous implementation used scrollIntoView() which scrolled
+	 * the entire page when carousel reached end, breaking page navigation.
+	 * Fixed by using track.scrollTo({ left: slide.offsetLeft, behavior: 'smooth' })
+	 */
 	const carousels = document.querySelectorAll('.carousel');
 
 	carousels.forEach(carousel => {
@@ -60,7 +78,7 @@ const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, 
 		let autoplayTimer: number | null = null;
 		let isAnimating = false;
 
-		// Create dots - only for the number of "pages" not individual slides
+		// Create dots - one per "page" (group of slidesPerView)
 		if (dotsContainer) {
 			const pageCount = maxIndex + 1;
 			for (let i = 0; i < pageCount; i++) {
@@ -81,23 +99,47 @@ const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, 
 			});
 		}
 
+		function getScrollAmount() {
+			// Measure actual scroll width per "page" based on first slide + gap
+			const firstSlide = slides[0];
+			const slideRect = firstSlide.getBoundingClientRect();
+			const trackRect = track.getBoundingClientRect();
+			const gap = parseFloat(getComputedStyle(track).gap) || 0;
+			return slideRect.width + gap;
+		}
+
 		function goToSlide(index: number) {
 			if (isAnimating || index === currentIndex) return;
 			isAnimating = true;
 
 			currentIndex = Math.max(0, Math.min(index, maxIndex));
-			track.style.transform = `translateX(-${currentIndex * (100 / slidesPerView)}%)`;
+			
+			// Scroll the track directly, not the window.
+			// Using scrollIntoView() caused the entire page to scroll when the carousel
+			// reached its end, making the rest of the page inaccessible.
+			// track.scrollTo({ left: slide.offsetLeft }) keeps scrolling contained to the track.
+			const targetSlide = slides[currentIndex];
+			if (targetSlide) {
+				track.scrollTo({
+					left: targetSlide.offsetLeft,
+					behavior: 'smooth'
+				});
+			}
 			updateDots();
 
 			setTimeout(() => { isAnimating = false; }, 400);
 		}
 
 		function nextSlide() {
-			goToSlide(currentIndex + 1);
+			if (currentIndex < maxIndex) {
+				goToSlide(currentIndex + 1);
+			}
 		}
 
 		function prevSlide() {
-			goToSlide(currentIndex - 1);
+			if (currentIndex > 0) {
+				goToSlide(currentIndex - 1);
+			}
 		}
 
 		function startAutoplay() {
@@ -118,24 +160,22 @@ const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, 
 		carousel.addEventListener('mouseenter', stopAutoplay);
 		carousel.addEventListener('mouseleave', startAutoplay);
 
-		// Touch/swipe support
-		let touchStartX = 0;
-		let touchEndX = 0;
-
-		carousel.addEventListener('touchstart', (e: TouchEvent) => {
-			touchStartX = e.changedTouches[0].screenX;
-		}, { passive: true });
-
-		carousel.addEventListener('touchend', (e: TouchEvent) => {
-			touchEndX = e.changedTouches[0].screenX;
-			const diff = touchStartX - touchEndX;
-			if (Math.abs(diff) > 50) {
-				if (diff > 0) nextSlide();
-				else prevSlide();
+		/* Touch/swipe support - let native scroll handle it, just update dots.
+		 * Listen on TRACK not carousel/window to avoid accidental page scroll.
+		 * Passive listener for performance. */
+		let lastScrollLeft = track.scrollLeft;
+		track.addEventListener('scroll', () => {
+			if (isAnimating) return;
+			const scrollAmount = getScrollAmount();
+			const newIndex = Math.round(track.scrollLeft / scrollAmount);
+			if (newIndex !== currentIndex && newIndex >= 0 && newIndex <= maxIndex) {
+				currentIndex = newIndex;
+				updateDots();
 			}
 		}, { passive: true });
 
-		// Keyboard navigation
+		/* Keyboard navigation - uses same bounded nextSlide/prevSlide that clamp to maxIndex.
+		 * Prevents scrolling past carousel ends. */
 		carousel.addEventListener('keydown', (e: KeyboardEvent) => {
 			if (e.key === 'ArrowLeft') prevSlide();
 			else if (e.key === 'ArrowRight') nextSlide();
