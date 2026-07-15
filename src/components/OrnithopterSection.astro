@@ -25,7 +25,11 @@ import Carousel from './Carousel.astro';
       </div>
       <p class="ornithopter__video-caption" aria-hidden="true">~my ornithopter bird mechanism</p>
 
-      <div class="ornithopter__about-carousel" aria-label="About me">
+      <button class="ornithopter__about-toggle" aria-expanded="false" aria-controls="ornithopter-about-carousel" type="button">
+        About me
+      </button>
+
+      <div class="ornithopter__about-carousel" aria-label="About me" id="ornithopter-about-carousel" hidden>
         <Carousel autoplay={false} showArrows={true} showDots={true} class="about-carousel" slidesPerView={2}>
           {aboutCards.map((card) => (
             <article class="about-card about-carousel__card">
@@ -54,6 +58,26 @@ import Carousel from './Carousel.astro';
 
   <div class="ornithopter__gradient-bottom" aria-hidden="true"></div>
 </section>
+
+<script>
+	// Mobile about carousel toggle
+	const toggle = document.querySelector('.ornithopter__about-toggle');
+	const carousel = document.getElementById('ornithopter-about-carousel');
+	if (toggle && carousel) {
+		toggle.addEventListener('click', () => {
+			const isHidden = carousel.hasAttribute('hidden');
+			if (isHidden) {
+				carousel.hidden = false;
+				toggle.setAttribute('aria-expanded', 'true');
+				toggle.textContent = 'Hide about';
+			} else {
+				carousel.hidden = true;
+				toggle.setAttribute('aria-expanded', 'false');
+				toggle.textContent = 'About me';
+			}
+		});
+	}
+</script>
 
 <style>
   .ornithopter {
@@ -157,8 +181,47 @@ import Carousel from './Carousel.astro';
     text-align: center;
   }
 
+  /* Mobile About toggle button */
+  .ornithopter__about-toggle {
+    display: none;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    font-size: clamp(0.9375rem, 1.2vw, 1.0625rem);
+    font-weight: 500;
+    color: var(--text-primary);
+    background: var(--bg-white);
+    border: 1px solid var(--card-border);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .ornithopter__about-toggle:hover {
+    background: var(--bg-white);
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+  }
+
+  .ornithopter__about-toggle:focus-visible {
+    outline: 2px solid var(--text-primary);
+    outline-offset: 2px;
+  }
+
   .ornithopter__about-carousel {
     display: none;
+  }
+
+  .ornithopter__about-carousel:not([hidden]) {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-0.5rem); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .about-carousel {
@@ -185,6 +248,29 @@ import Carousel from './Carousel.astro';
     .about-carousel .carousel__track > :global(*) {
       flex: 0 0 100%;
       max-width: 100%;
+    }
+  }
+
+  /* Mobile: hide carousel arrows/dots, free scroll with snap */
+  @media (max-width: 767px) {
+    .about-carousel .carousel__arrows,
+    .about-carousel .carousel__dots {
+      display: none;
+    }
+    .about-carousel .carousel__track {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      gap: 1rem;
+      padding-bottom: 1rem;
+    }
+    .about-carousel .carousel__track > *,
+    .about-carousel .carousel__track > :global(*) {
+      flex: 0 0 90%;
+      max-width: 90%;
+      scroll-snap-align: start;
     }
   }
 
@@ -260,8 +346,13 @@ import Carousel from './Carousel.astro';
       display: block;
     }
 
-    .ornithopter__about-carousel {
-      display: none;
+    .ornithopter__about-toggle {
+      display: block;
+    }
+
+    .ornithopter__about-carousel:not([hidden]) {
+      display: block;
+      animation: fadeIn 0.3s ease;
     }
   }
 
@@ -286,6 +377,10 @@ import Carousel from './Carousel.astro';
     }
 
     .ornithopter__video-caption {
+      display: none;
+    }
+
+    .ornithopter__about-toggle {
       display: none;
     }
 
