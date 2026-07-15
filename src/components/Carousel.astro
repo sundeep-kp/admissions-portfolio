@@ -163,11 +163,12 @@ const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, 
 		display: none;
 	}
 
-	.carousel__track > * {
-		flex: 0 0 100%;
-		min-width: 0;
-		scroll-snap-align: start;
-	}
+	.carousel__track > *,
+		.carousel__track > :global(*) {
+			flex: 0 0 100%;
+			min-width: 0;
+			scroll-snap-align: start;
+		}
 
 	.carousel__arrows {
 		position: absolute;
@@ -246,7 +247,8 @@ const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, 
 			gap: 1rem;
 		}
 
-		.carousel__track > * {
+		.carousel__track > *,
+		.carousel__track > :global(*) {
 			flex: 0 0 90%;
 			max-width: 90%;
 			scroll-snap-align: start;
@@ -277,7 +279,8 @@ const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, 
 			display: none;
 		}
 
-		.carousel__track > * {
+		.carousel__track > *,
+		.carousel__track > :global(*) {
 			flex: 0 0 calc(50% - 0.75rem);
 			max-width: calc(50% - 0.75rem);
 			scroll-snap-align: start;
@@ -290,7 +293,8 @@ const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, 
 	}
 
 	@media (min-width: 1024px) {
-		.carousel__track > * {
+		.carousel__track > *,
+		.carousel__track > :global(*) {
 			flex: 0 0 calc(33.333% - 1rem);
 			max-width: calc(33.333% - 1rem);
 		}
