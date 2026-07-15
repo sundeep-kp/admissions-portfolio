@@ -1,14 +1,14 @@
 ---
 const sections = [
-	{ id: 'about', label: 'About', short: 'AB' },
-	{ id: 'ornithopter', label: 'Timeline', short: 'TL' },
-	{ id: 'leadership', label: 'Leadership', short: 'LD' },
-	{ id: 'projects', label: 'Projects', short: 'PJ' },
-	{ id: 'awards', label: 'Awards', short: 'AW' },
-	{ id: 'skills', label: 'Skills', short: 'SK' },
-	{ id: 'learning', label: 'Learning', short: 'LN' },
-	{ id: 'hobbies', label: 'Hobbies', short: 'HB' },
-	{ id: 'contact', label: 'Contact', short: 'CT' },
+	{ id: 'about', label: 'About' },
+	{ id: 'ornithopter', label: 'Timeline' },
+	{ id: 'leadership', label: 'Leadership' },
+	{ id: 'projects', label: 'Projects' },
+	{ id: 'awards', label: 'Awards' },
+	{ id: 'skills', label: 'Skills' },
+	{ id: 'learning', label: 'Learning' },
+	{ id: 'hobbies', label: 'Hobbies' },
+	{ id: 'contact', label: 'Contact' },
 ];
 ---
 
@@ -16,10 +16,7 @@ const sections = [
 	<ul class="toc__list">
 		{sections.map((section) => (
 			<li class="toc__item">
-				<a class="toc__link" href={`#${section.id}`} data-toc-link>
-					<span class="toc__short">{section.short}</span>
-					<span class="toc__label">{section.label}</span>
-				</a>
+				<a class="toc__link" href={`#${section.id}`} data-toc-link>{section.label}</a>
 			</li>
 		))}
 	</ul>
@@ -54,18 +51,67 @@ const sections = [
 		top: calc(6% + 4rem);
 		max-height: calc(100vh - 8rem);
 		overflow-y: auto;
-		width: 60px;
+		width: 160px;
 		background: var(--bg-white);
 		border-left: 1px solid var(--card-border);
 		border-radius: 12px 0 0 12px;
 		box-shadow: -4px 0 24px rgba(0, 0, 0, 0.05);
 		z-index: 100;
 		padding: 0.75rem 0;
+		transform: translateX(100%);
+		animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+	}
+
+	@keyframes slideIn {
+		from {
+			transform: translateX(100%);
+			opacity: 0;
+		}
+		to {
+			transform: translateX(0);
+			opacity: 1;
+		}
 	}
 
 	.toc__list {
 		margin: 0;
-		padding: 0 0.5rem;
+		padding: 0 0.75rem;
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.toc__item {
+		opacity: 0;
+		transform: translateX(20px);
+		animation: fadeInItem 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+	}
+
+	@keyframes fadeInItem {
+		from {
+			opacity: 0;
+			transform: translateX(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateX(0);
+		}
+	}
+
+	.toc__item:nth-child(1) { animation-delay: 0.1s; }
+	.toc__item:nth-child(2) { animation-delay: 0.15s; }
+	.toc__item:nth-child(3) { animation-delay: 0.2s; }
+	.toc__item:nth-child(4) { animation-delay: 0.25s; }
+	.toc__item:nth-child(5) { animation-delay: 0.3s; }
+	.toc__item:nth-child(6) { animation-delay: 0.35s; }
+	.toc__item:nth-child(7) { animation-delay: 0.4s; }
+	.toc__item:nth-child(8) { animation-delay: 0.45s; }
+	.toc__item:nth-child(9) { animation-delay: 0.5s; }
+
+	.toc__list {
+		margin: 0;
+		padding: 0 0.75rem;
 		list-style: none;
 		display: flex;
 		flex-direction: column;
@@ -77,44 +123,21 @@ const sections = [
 		align-items: center;
 		justify-content: flex-start;
 		gap: 0.5rem;
-		padding: 0.5rem 0.75rem;
-		font-size: 0.75rem;
-		line-height: 1.4;
+		padding: 0.625rem 0.75rem;
+		font-size: 0.9375rem;
+		line-height: 1.5;
 		color: var(--text-primary);
 		text-decoration: none;
 		border-radius: 6px;
-		transition: color 0.2s ease, background 0.2s ease, width 0.2s ease;
-		opacity: 0.6;
-		white-space: nowrap;
-		overflow: hidden;
-	}
-
-	.toc__short {
-		font-weight: 600;
-		font-size: 0.6875rem;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		flex-shrink: 0;
-	}
-
-	.toc__label {
-		opacity: 0;
-		width: 0;
-		overflow: hidden;
-		transition: opacity 0.2s ease, width 0.2s ease;
+		transition: color 0.2s ease, background 0.2s ease, padding-right 0.2s ease;
+		opacity: 0.7;
 	}
 
 	.toc__link:hover {
 		opacity: 1;
 		background: var(--accent-soft);
 		color: var(--accent);
-		width: max-content;
 		padding-right: 1rem;
-	}
-
-	.toc__link:hover .toc__label {
-		opacity: 1;
-		width: max-content;
 	}
 
 	.toc__link--active {
@@ -124,9 +147,21 @@ const sections = [
 		font-weight: 500;
 	}
 
-	.toc__link--active .toc__label {
+	.toc__link::before {
+		content: '';
+		width: 3px;
+		height: 0;
+		background: var(--accent);
+		border-radius: 2px;
+		transition: height 0.3s ease;
+		margin-right: 0.5rem;
+		opacity: 0;
+	}
+
+	.toc__link--active::before,
+	.toc__link:hover::before {
+		height: 100%;
 		opacity: 1;
-		width: max-content;
 	}
 
 	@media (max-width: 1023px) {

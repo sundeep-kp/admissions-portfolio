@@ -38,7 +38,7 @@ const otherItems = leadershipItems.filter(item => item.title !== 'HalfwiredTV');
 
 <style>
 	.leadership {
-		padding: clamp(3rem, 8vw, 6rem) var(--section-padding-inline);
+		padding: var(--section-gap) var(--section-padding-inline);
 	}
 
 	.leadership__inner {
@@ -46,13 +46,13 @@ const otherItems = leadershipItems.filter(item => item.title !== 'HalfwiredTV');
 		margin: 0 auto;
 		display: flex;
 		flex-direction: column;
-		gap: clamp(2.25rem, 4.5vw, 4.5rem);
+		gap: var(--section-gap);
 	}
 
 	.leadership__grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(min(100%, 34ch), 1fr));
-		gap: clamp(1.5rem, 3vw, 2.25rem);
+		gap: var(--card-gap);
 		width: 100%;
 	}
 
@@ -63,7 +63,7 @@ const otherItems = leadershipItems.filter(item => item.title !== 'HalfwiredTV');
 	}
 
 	.leadership__expand {
-		margin-top: 1.5rem;
+		margin-top: var(--card-gap);
 	}
 
 	.leadership__expand summary {
@@ -112,13 +112,13 @@ const otherItems = leadershipItems.filter(item => item.title !== 'HalfwiredTV');
 	}
 
 	.leadership__expand .leadership__grid {
-		margin-top: 1.5rem;
-		padding-top: 1.5rem;
+		margin-top: var(--card-gap);
+		padding-top: var(--card-gap);
 		border-top: 1px solid var(--card-border-dark);
 		animation: fadeIn 0.3s ease;
 	}
 
-@keyframes fadeIn {
+	@keyframes fadeIn {
 		from { opacity: 0; transform: translateY(-0.5rem); }
 		to { opacity: 1; transform: translateY(0); }
 	}

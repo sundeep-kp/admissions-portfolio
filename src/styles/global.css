@@ -27,13 +27,13 @@
 
 	/* Card system — scaled 1.5x for 100% zoom parity */
 	--card-radius: 24px;
-	--card-padding: clamp(1.875rem, 3.75vw, 3rem);
-	--card-gap: clamp(1.125rem, 2.25vw, 1.5rem);
+	--card-padding: clamp(1.25rem, 2.5vw, 2rem);
+	--card-gap: clamp(0.75rem, 1.5vw, 1rem);
 	--card-shadow: 0 6px 24px rgba(0, 0, 0, 0.05), inset 0 1.5px 0 rgba(255, 255, 255, 0.5);
 	--card-shadow-dark: 0 6px 36px rgba(0, 0, 0, 0.3), inset 0 1.5px 0 rgba(255, 255, 255, 0.1);
 
-	/* Section horizontal padding - reduced for denser layout */
-	--section-padding-inline: 0;
+	/* Section gap - reduced for density */
+	--section-gap: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 html,
