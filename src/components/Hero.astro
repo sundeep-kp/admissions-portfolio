@@ -41,7 +41,7 @@ import asciiArtMobile from '/images/ascii-art-mobile.txt?raw';
 <style>
 	.hero {
 		min-height: 100vh;
-		padding-inline: clamp(1.5rem, 7.5vw, 6rem);
+		padding-inline: var(--section-padding-inline);
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -49,7 +49,6 @@ import asciiArtMobile from '/images/ascii-art-mobile.txt?raw';
 
 	.hero__inner {
 		width: 100%;
-		max-width: 1200px;
 		display: flex;
 		flex-direction: column;
 		gap: clamp(2.25rem, 4.5vw, 7.5rem);
@@ -77,12 +76,16 @@ import asciiArtMobile from '/images/ascii-art-mobile.txt?raw';
 	}
 
 .hero__ascii-container {
-  		width: fit-content;
-      margin: 0 auto;
-  	}
+		width: 320px;
+		height: 200px;
+		margin: 0 auto;
+		overflow: hidden;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 
   .hero__ascii {
-		width: max-content;
 		margin: 0;
 		padding: 1.5rem;
 		border: 1px solid rgba(0, 0, 0, 0.1);
@@ -90,39 +93,19 @@ import asciiArtMobile from '/images/ascii-art-mobile.txt?raw';
 		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 		font-size: clamp(1.6335rem, 2.178vw, 1.9965rem);
 		line-height: 1.1;
-		overflow: hidden;
 		white-space: pre;
 		background: rgba(255, 255, 255, 0.7);
-    zoom: 0.185;
-    clip-path: inset(28% 0 20% 12%); /* top 28% / right 0 / bottom 20% / left 12% — DO NOT CHANGE without design review */
+		transform-origin: center center;
 	}
 
 	.hero__ascii--desktop {
-		display: none;
+		display: block;
+		transform: scale(0.185);
 	}
 
 	.hero__ascii--mobile {
-		display: block;
-    clip-path: inset(1%); /* all sides 1% — MOBILE ONLY — DO NOT CHANGE without design review */
-    zoom: 0.31; /* MOBILE ONLY — DO NOT CHANGE without design review */
-	}
-
-	@supports not (zoom: 0.185) {
-	  .hero__ascii {
-	    zoom: 1;
-	    font-size: clamp(0.2365rem, 0.363vw, 0.363rem);
-	    line-height: 1.0;
-	  }
-	}
-
-	@media (min-width: 768px) {
-		.hero__ascii--desktop {
-			display: block;
-		}
-
-		.hero__ascii--mobile {
-			display: none;
-		}
+		display: none;
+		transform: scale(0.31);
 	}
 
 	.hero p,
@@ -151,25 +134,43 @@ import asciiArtMobile from '/images/ascii-art-mobile.txt?raw';
 	@media (min-width: 768px) {
 		.hero__inner {
 			flex-direction: row;
-			gap: clamp(0.525rem, 1.35vw, 0.975rem);
+			gap: clamp(2rem, 4vw, 4rem);
 			align-items: center;
 		}
 
 		.hero__content {
-			flex: 0 0 55%;
-			max-width: 55%;
+			flex: 1 1 50%;
+			min-width: 0;
 		}
 
 		.hero__visual {
-			flex: 1 1 auto;
-			max-width: 100%;
+			flex: 1 1 50%;
 			display: flex;
 			justify-content: center;
-			margin-left: -20%;
 		}
 
 		.hero__buttons {
 			justify-content: flex-start;
+		}
+
+		.hero__ascii--desktop {
+			display: block;
+			transform: scale(0.185);
+		}
+
+		.hero__ascii--mobile {
+			display: none;
+		}
+	}
+
+	@media (max-width: 767px) {
+		.hero__ascii--desktop {
+			display: none;
+		}
+
+		.hero__ascii--mobile {
+			display: block;
+			transform: scale(0.31);
 		}
 	}
 </style>

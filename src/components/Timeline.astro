@@ -33,7 +33,7 @@ import { timelineItems } from '../data/timeline';
 
 <style>
 	.timeline {
-		padding-inline: clamp(1rem, 5vw, 4rem);
+		padding-inline: var(--section-padding-inline);
 	}
 
 	.timeline__inner {
@@ -41,7 +41,6 @@ import { timelineItems } from '../data/timeline';
 		flex-direction: column;
 		gap: clamp(1.5rem, 3vw, 4rem);
 		width: 100%;
-		max-width: 1200px;
 		margin: 0 auto;
 	}
 

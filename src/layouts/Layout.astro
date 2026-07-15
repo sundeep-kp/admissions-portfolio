@@ -27,29 +27,30 @@ const { title = 'Admissions Portfolio', description = 'University transfer admis
 
 <style is:global>
 	.page-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 2rem;
-		max-width: 1400px;
-		margin: 0 auto;
-		padding: 0 clamp(1.5rem, 5vw, 4rem);
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		padding: 0;
+	}
+
+	.page-main {
+		min-width: 0;
 	}
 
 	@media (min-width: 1024px) {
-		.page-grid {
-			grid-template-columns: 1fr 260px;
-			align-items: start;
-		}
-
-		.page-main {
-			min-width: 0;
-		}
-
 		.page-sidebar {
-			position: sticky;
-			top: clamp(6rem, 10vh, 8rem);
-			max-height: calc(100vh - clamp(8rem, 15vh, 10rem));
+			position: fixed;
+			right: 0;
+			top: calc(6% + 4rem);
+			width: 60px;
+			max-height: calc(100vh - 8rem);
 			overflow-y: auto;
+			background: var(--bg-white);
+			border-left: 1px solid var(--card-border);
+			border-radius: 12px 0 0 12px;
+			box-shadow: -4px 0 24px rgba(0, 0, 0, 0.05);
+			z-index: 100;
+			padding: 1rem 0.5rem;
 		}
 	}
 </style>

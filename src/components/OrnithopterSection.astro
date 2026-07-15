@@ -43,7 +43,7 @@ import { timelineItems } from '../data/timeline';
   .ornithopter {
     position: relative;
     background: var(--bg-neutral);
-    padding: 0 clamp(1.5rem, 7.5vw, 6rem);
+    padding: 0 var(--section-padding-inline);
   }
 
   .ornithopter__gradient-top {
@@ -73,7 +73,6 @@ import { timelineItems } from '../data/timeline';
     flex-direction: column;
     gap: clamp(2.25rem, 4.5vw, 6rem);
     width: 100%;
-    max-width: 1200px;
     margin: 0 auto;
     padding-block: clamp(3rem, 8vw, 6rem);
   }
