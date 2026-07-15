@@ -7,6 +7,8 @@ const toId = (value: string) =>
 		.toLowerCase()
 		.replace(/[^a-z0-9]+/g, '-')
 		.replace(/^-+|-+$/g, '');
+
+const PROJECTS_PER_GROUP = 3;
 ---
 
 <section class="projects section-fade" aria-labelledby="projects-title" id="projects" style="background: var(--bg-white); color: var(--text-primary);">
@@ -14,34 +16,59 @@ const toId = (value: string) =>
 		<h2 id="projects-title">Featured Projects</h2>
 
 		<div class="projects__groups">
-			{projectGroups.map((group) => (
-				<section
-					class:list={['projects__group', { 'projects__group--compact': group.title === 'Machine Learning' }]}
-					aria-labelledby={toId(group.title)}
-				>
-					<h3 id={toId(group.title)}>{group.title}</h3>
-					<div class="projects__grid">
-						{group.projects.map((project) => (
-							<ProjectCard
-								image={project.image}
-								title={project.title}
-								category={project.category}
-								description={project.description}
-								links={project.links}
-								status={project.status}
-								tags={project.tags}
-							/>
-						))}
-					</div>
-				</section>
-			))}
+			{projectGroups.map((group) => {
+				const visibleProjects = group.projects.slice(0, PROJECTS_PER_GROUP);
+				const hiddenProjects = group.projects.slice(PROJECTS_PER_GROUP);
+				const hasHidden = hiddenProjects.length > 0;
+				return (
+					<section
+						class:list={['projects__group', { 'projects__group--compact': group.title === 'Machine Learning' }]}
+						aria-labelledby={toId(group.title)}
+					>
+						<h3 id={toId(group.title)}>{group.title}</h3>
+						<div class="projects__grid">
+							{visibleProjects.map((project) => (
+								<ProjectCard
+									image={project.image}
+									title={project.title}
+									category={project.category}
+									description={project.description}
+									links={project.links}
+									status={project.status}
+									tags={project.tags}
+								/>
+							))}
+						</div>
+						{hasHidden && (
+							<details class="projects__expand">
+								<summary class="projects__expand-summary">
+									Show all {group.projects.length} projects
+								</summary>
+								<div class="projects__grid projects__grid--expanded">
+									{hiddenProjects.map((project) => (
+										<ProjectCard
+											image={project.image}
+											title={project.title}
+											category={project.category}
+											description={project.description}
+											links={project.links}
+											status={project.status}
+											tags={project.tags}
+										/>
+									))}
+								</div>
+							</details>
+						)}
+					</section>
+				);
+			})}
 		</div>
 	</div>
 </section>
 
 <style>
 	.projects {
-		padding: clamp(4.5rem, 9vw, 9rem) clamp(1.5rem, 7.5vw, 6rem);
+		padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 7.5vw, 6rem);
 	}
 
 	.projects__inner {
@@ -85,10 +112,71 @@ const toId = (value: string) =>
 	}
 
 	.projects h2 {
-		font-size: clamp(2.625rem, 3.75vw, 4.5rem);
+		font-size: clamp(1.75rem, 2.5vw, 2.5rem);
 	}
 
 	.projects h3 {
-		font-size: clamp(1.875rem, 2.4vw, 2.625rem);
+		font-size: clamp(1.25rem, 2vw, 1.75rem);
+	}
+
+	.projects__expand {
+		margin-top: 0.75rem;
+	}
+
+	.projects__expand summary {
+		list-style: none;
+		cursor: pointer;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.25rem;
+		font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
+		font-weight: 500;
+		color: var(--accent);
+		background: var(--accent-soft);
+		border-radius: 999px;
+		border: 1px solid var(--accent-border);
+		transition: background 0.2s ease, color 0.2s ease;
+	}
+
+	.projects__expand summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.projects__expand summary::after {
+		content: '';
+		width: 0.5rem;
+		height: 0.5rem;
+		border-right: 2px solid currentColor;
+		border-bottom: 2px solid currentColor;
+		transform: rotate(45deg);
+		transition: transform 0.2s ease;
+		margin-left: 0.25rem;
+	}
+
+	.projects__expand[open] summary::after {
+		transform: rotate(-135deg);
+	}
+
+	.projects__expand summary:hover {
+		background: var(--accent);
+		color: var(--text-on-dark);
+	}
+
+	.projects__expand summary:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
+	}
+
+	.projects__grid--expanded {
+		margin-top: 1.5rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--card-border);
+		animation: fadeIn 0.3s ease;
+	}
+
+	@keyframes fadeIn {
+		from { opacity: 0; transform: translateY(-0.5rem); }
+		to { opacity: 1; transform: translateY(0); }
 	}
 </style>

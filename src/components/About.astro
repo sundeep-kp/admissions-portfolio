@@ -30,11 +30,22 @@
 			</article>
 
 			<article class="about-card">
-				<h3>Long-term goals</h3>
-				<ul>
-					<li>PhD in bio-inspired robotics</li>
-					<li>Research scientist at bionic learning network labs (e.g., Festo)</li>
-				</ul>
+				<h3>Goals</h3>
+				<div class="goals__subsections">
+					<div class="goals__subsection">
+						<h4>Long-term</h4>
+						<ul>
+							<li>PhD in bio-inspired robotics</li>
+							<li>Research scientist at bionic learning network labs (e.g., Festo)</li>
+						</ul>
+					</div>
+					<div class="goals__subsection">
+						<h4>Short-term</h4>
+						<ul>
+							<li>[short-term goals missing, add about 50 words here]</li>
+						</ul>
+					</div>
+				</div>
 			</article>
 
 			<article class="about-card">
@@ -52,7 +63,7 @@
 
 <style>
 	.about {
-		padding: clamp(4.5rem, 9vw, 9rem) clamp(1.5rem, 7.5vw, 6rem);
+		padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 7.5vw, 6rem);
 		background: var(--bg-white);
 	}
 
@@ -61,7 +72,7 @@
 		margin: 0 auto;
 		display: flex;
 		flex-direction: column;
-		gap: clamp(2.25rem, 4.5vw, 6rem);
+		gap: clamp(1.5rem, 4vw, 3rem);
 	}
 
 	.about h2,
@@ -103,19 +114,19 @@
 	}
 
 	.about h2 {
-		font-size: clamp(2.625rem, 3.75vw, 4.5rem);
+		font-size: clamp(1.75rem, 3.75vw, 3rem);
 		line-height: 1.1;
 		text-align: center;
 	}
 
 	.about h3 {
-		font-size: clamp(1.6875rem, 2.1vw, 2.25rem);
+		font-size: clamp(1.25rem, 1.8vw, 1.75rem);
 		line-height: 1.3;
 		color: var(--text-primary);
 	}
 
 	.about p {
-		font-size: clamp(1.425rem, 1.5vw, 1.575rem);
+		font-size: clamp(1rem, 1.2vw, 1.125rem);
 		line-height: 1.7;
 		color: var(--text-primary);
 		opacity: 0.9;
@@ -123,16 +134,35 @@
 
 	.about ul {
 		margin: 0;
-		padding-left: 1.875rem;
+		padding-left: 1.5rem;
 		display: grid;
-		gap: 0.75rem;
+		gap: 0.5rem;
 	}
 
 	.about li {
-		font-size: clamp(1.425rem, 1.5vw, 1.575rem);
+		font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
 		line-height: 1.6;
 		color: var(--text-primary);
 		opacity: 0.85;
+	}
+
+	.goals__subsections {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.goals__subsection h4 {
+		font-size: clamp(0.9375rem, 1.2vw, 1.125rem);
+		line-height: 1.4;
+		color: var(--accent);
+		font-weight: 600;
+		margin: 0 0 0.5rem 0;
+	}
+
+	.goals__subsection ul {
+		padding-left: 1.5rem;
+		gap: 0.5rem;
 	}
 
 	.about-intro {

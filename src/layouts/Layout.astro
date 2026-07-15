@@ -24,3 +24,32 @@ const { title = 'Admissions Portfolio', description = 'University transfer admis
 		<slot />
 	</body>
 </html>
+
+<style is:global>
+	.page-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+		max-width: 1400px;
+		margin: 0 auto;
+		padding: 0 clamp(1.5rem, 5vw, 4rem);
+	}
+
+	@media (min-width: 1024px) {
+		.page-grid {
+			grid-template-columns: 1fr 260px;
+			align-items: start;
+		}
+
+		.page-main {
+			min-width: 0;
+		}
+
+		.page-sidebar {
+			position: sticky;
+			top: clamp(6rem, 10vh, 8rem);
+			max-height: calc(100vh - clamp(8rem, 15vh, 10rem));
+			overflow-y: auto;
+		}
+	}
+</style>

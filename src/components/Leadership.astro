@@ -1,28 +1,44 @@
 ---
 import { leadershipItems } from '../data/leadership';
 import LeadershipCard from './LeadershipCard.astro';
+
+const featuredItem = leadershipItems.find(item => item.title === 'HalfwiredTV');
+const otherItems = leadershipItems.filter(item => item.title !== 'HalfwiredTV');
 ---
 
 <section class="leadership section-fade" aria-labelledby="leadership-title" id="leadership" style="background: var(--accent); color: var(--text-on-dark);">
 	<div class="leadership__inner">
 		<h2 id="leadership-title">Leadership and Community</h2>
 
-		<div class="leadership__grid">
-			{leadershipItems.map((item) => (
-				<LeadershipCard
-					class:list={{ 'leadership-card--feature': item.title === 'HalfwiredTV' }}
-					title={item.title}
-					description={item.description}
-					links={item.links}
-				/>
-			))}
-		</div>
+		{featuredItem && (
+			<LeadershipCard
+				class="leadership-card--feature"
+				title={featuredItem.title}
+				description={featuredItem.description}
+				links={featuredItem.links}
+			/>
+		)}
+
+		<details class="leadership__expand">
+			<summary class="leadership__expand-summary">
+				Show all {otherItems.length} other leadership roles
+			</summary>
+			<div class="leadership__grid">
+				{otherItems.map((item) => (
+					<LeadershipCard
+						title={item.title}
+						description={item.description}
+						links={item.links}
+					/>
+				))}
+			</div>
+		</details>
 	</div>
 </section>
 
 <style>
 	.leadership {
-		padding: clamp(4.5rem, 9vw, 9rem) clamp(1.5rem, 7.5vw, 6rem);
+		padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 7.5vw, 6rem);
 	}
 
 	.leadership__inner {
@@ -40,13 +56,70 @@ import LeadershipCard from './LeadershipCard.astro';
 		width: 100%;
 	}
 
-	.leadership__grid :global(.leadership-card--feature) {
-		grid-column: 1 / -1;
-	}
-
 	.leadership h2 {
 		margin: 0;
-		font-size: clamp(2.625rem, 3.75vw, 4.5rem);
+		font-size: clamp(1.75rem, 2.5vw, 3rem);
 		line-height: 1.1;
+	}
+
+	.leadership__expand {
+		margin-top: 1.5rem;
+	}
+
+	.leadership__expand summary {
+		list-style: none;
+		cursor: pointer;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.25rem;
+		font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
+		font-weight: 500;
+		color: var(--accent);
+		background: var(--accent-soft);
+		border-radius: 999px;
+		border: 1px solid var(--accent-border);
+		transition: background 0.2s ease, color 0.2s ease;
+	}
+
+	.leadership__expand summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.leadership__expand summary::after {
+		content: '';
+		width: 0.5rem;
+		height: 0.5rem;
+		border-right: 2px solid currentColor;
+		border-bottom: 2px solid currentColor;
+		transform: rotate(45deg);
+		transition: transform 0.2s ease;
+		margin-left: 0.25rem;
+	}
+
+	.leadership__expand[open] summary::after {
+		transform: rotate(-135deg);
+	}
+
+	.leadership__expand summary:hover {
+		background: var(--accent);
+		color: var(--text-on-dark);
+	}
+
+	.leadership__expand summary:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
+	}
+
+	.leadership__expand .leadership__grid {
+		margin-top: 1.5rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--card-border-dark);
+		animation: fadeIn 0.3s ease;
+	}
+
+@keyframes fadeIn {
+		from { opacity: 0; transform: translateY(-0.5rem); }
+		to { opacity: 1; transform: translateY(0); }
 	}
 </style>

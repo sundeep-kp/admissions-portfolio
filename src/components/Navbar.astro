@@ -1,11 +1,11 @@
 ---
 const links = [
-	{ label: 'About', href: '#about' },
-	{ label: 'Leadership', href: '#leadership' },
-	{ label: 'Projects', href: '#projects' },
-	{ label: 'Awards', href: '#awards' },
-	{ label: 'Skills', href: '#skills' },
-	{ label: 'Contact', href: '#contact' },
+	{ label: 'About', href: '#about', preview: 'Why engineering, why robotics, current focus, goals, what I\'ll contribute' },
+	{ label: 'Leadership', href: '#leadership', preview: 'HalfwiredTV (140+ members), ATL Lab, Rotary Club, Class Leader' },
+	{ label: 'Projects', href: '#projects', preview: 'Robotics (6), Machine Learning (1), Software (7) — expandable groups' },
+	{ label: 'Awards', href: '#awards', preview: 'Scholarships, Competitions, Certificates, Academic achievements' },
+	{ label: 'Skills', href: '#skills', preview: 'Programming, Robotics, CAD, Embedded, Development — chip cards' },
+	{ label: 'Contact', href: '#contact', preview: 'Resume, GitHub, LinkedIn, Email, HalfwiredTV' },
 ];
 ---
 
@@ -15,7 +15,12 @@ const links = [
 		<ul class="navbar__links">
 			{links.map((link) => (
 				<li class="navbar__item">
-					<a class="navbar__link" href={link.href}>{link.label}</a>
+					<div class="navbar__dropdown">
+						<a class="navbar__link" href={link.href}>{link.label}</a>
+						<div class="navbar__preview" aria-hidden="true">
+							<p>{link.preview}</p>
+						</div>
+					</div>
 				</li>
 			))}
 		</ul>
@@ -58,6 +63,11 @@ const links = [
 
 	.navbar__item {
 		flex: 0 0 auto;
+		position: relative;
+	}
+
+	.navbar__dropdown {
+		position: relative;
 	}
 
 	.navbar__link {
@@ -74,11 +84,72 @@ const links = [
 		opacity: 0.7;
 	}
 
+	.navbar__preview {
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		transform: translateX(-50%) translateY(0.5rem);
+		margin-top: 0.75rem;
+		padding: 1rem 1.25rem;
+		width: max-content;
+		max-width: 280px;
+		font-size: clamp(0.8125rem, 1vw, 0.9375rem);
+		line-height: 1.5;
+		color: var(--text-primary);
+		background: var(--bg-white);
+		border: 1px solid var(--card-border);
+		border-radius: 12px;
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+		z-index: 20;
+		text-align: center;
+		white-space: normal;
+	}
+
+	.navbar__preview::before {
+		content: '';
+		position: absolute;
+		bottom: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+		border: 6px solid transparent;
+		border-bottom-color: var(--card-border);
+	}
+
+	.navbar__preview::after {
+		content: '';
+		position: absolute;
+		bottom: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+		border: 5px solid transparent;
+		border-bottom-color: var(--bg-white);
+	}
+
+	.navbar__dropdown:hover .navbar__preview,
+	.navbar__dropdown:focus-within .navbar__preview {
+		opacity: 1;
+		visibility: visible;
+		transform: translateX(-50%) translateY(0);
+		pointer-events: auto;
+	}
+
+	.navbar__preview p {
+		margin: 0;
+	}
+
 	@media (max-width: 767px) {
 		.navbar__inner {
 			justify-content: flex-start;
 			padding: 1.125rem 1.5rem;
 			gap: 1.5rem;
+		}
+
+		.navbar__preview {
+			display: none;
 		}
 	}
 

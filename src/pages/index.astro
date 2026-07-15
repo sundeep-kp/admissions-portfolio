@@ -11,18 +11,26 @@ import Skills from '../components/Skills.astro';
 import Learning from '../components/Learning.astro';
 import Hobbies from '../components/Hobbies.astro';
 import Contact from '../components/Contact.astro';
+import TableOfContents from '../components/TableOfContents.astro';
 ---
 
 <Layout title="Admissions Portfolio">
 	<Navbar />
-	<Hero />
-	<About />
-	<OrnithopterSection />
-	<Leadership />
-	<ProjectSection />
-	<Awards />
-	<Skills />
-	<Learning />
-	<Hobbies />
-	<Contact />
+	<div class="page-grid">
+		<main class="page-main">
+			<Hero />
+			<About />
+			<OrnithopterSection />
+			<Leadership />
+			<ProjectSection />
+			<Awards />
+			<Skills />
+			<Learning />
+			<Hobbies />
+			<Contact />
+		</main>
+		<aside class="page-sidebar" aria-label="Table of contents">
+			<TableOfContents />
+		</aside>
+	</div>
 </Layout>

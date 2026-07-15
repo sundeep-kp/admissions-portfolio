@@ -1,0 +1,102 @@
+---
+const sections = [
+	{ id: 'about', label: 'About' },
+	{ id: 'ornithopter', label: 'Timeline' },
+	{ id: 'leadership', label: 'Leadership' },
+	{ id: 'projects', label: 'Projects' },
+	{ id: 'awards', label: 'Awards' },
+	{ id: 'skills', label: 'Skills' },
+	{ id: 'learning', label: 'Learning' },
+	{ id: 'hobbies', label: 'Hobbies' },
+	{ id: 'contact', label: 'Contact' },
+];
+---
+
+<nav class="toc" aria-label="Table of contents">
+	<h3 class="toc__title">On this page</h3>
+	<ul class="toc__list">
+		{sections.map((section) => (
+			<li class="toc__item">
+				<a class="toc__link" href={`#${section.id}`} data-toc-link>{section.label}</a>
+			</li>
+		))}
+	</ul>
+</nav>
+
+<script>
+	// IntersectionObserver to highlight active section
+	const links = document.querySelectorAll('.toc__link');
+	const sectionElements = Array.from(links).map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) {
+				const id = entry.target.id;
+				links.forEach(link => {
+					link.classList.toggle('toc__link--active', link.getAttribute('href') === `#${id}`);
+				});
+			}
+		});
+	}, {
+		rootMargin: '-20% 0px -60% 0px',
+		threshold: 0.1
+	});
+
+	sectionElements.forEach(el => observer.observe(el));
+</script>
+
+<style>
+	.toc {
+		padding: 0;
+		background: none;
+		border: none;
+		box-shadow: none;
+		position: static;
+		max-height: none;
+		overflow: visible;
+	}
+
+	.toc__title {
+		margin: 0 0 1rem;
+		font-size: clamp(0.8125rem, 1vw, 0.9375rem);
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.075em;
+		color: var(--text-primary);
+		opacity: 0.6;
+	}
+
+	.toc__list {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.toc__link {
+		display: block;
+		padding: 0.5rem 0.75rem;
+		font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
+		line-height: 1.5;
+		color: var(--text-primary);
+		text-decoration: none;
+		border-radius: 8px;
+		transition: color 0.2s ease, background 0.2s ease;
+		opacity: 0.7;
+	}
+
+	.toc__link:hover {
+		opacity: 1;
+		background: var(--accent-soft);
+		color: var(--accent);
+	}
+
+	.toc__link--active {
+		opacity: 1;
+		color: var(--accent);
+		background: var(--accent-soft);
+		font-weight: 500;
+	}
+</style>
