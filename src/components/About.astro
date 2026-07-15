@@ -5,6 +5,9 @@
 		<p class="about-intro">[Short personal introduction missing]</p>
 
 		<div class="about__cards">
+			<!-- Card order: Why engineering? → Why robotics? → Current academic focus → What I'll contribute
+			     DO NOT add a "Goals" card here - Goals are now in the Hero section (.hero__goals).
+			     The CSS for .goals__subsections below is LEGACY from a removed Goals card - keep for reference or remove if not used. -->
 			<article class="about-card">
 				<h3>Why engineering?</h3>
 				<ul>
@@ -27,25 +30,6 @@
 					<li>At my current institution, I am pursuing ECE as my major and Robotics as minor</li>
 					<li>Personal study: <em>Design of Machinery</em> (Norton), <em>Intro to Robotics</em> (Niku), <em>Modern Robotics</em> (Lynch & Park)</li>
 				</ul>
-			</article>
-
-			<article class="about-card">
-				<h3>Goals</h3>
-				<div class="goals__subsections">
-					<div class="goals__subsection">
-						<h4>Long-term</h4>
-						<ul>
-							<li>PhD in bio-inspired robotics</li>
-							<li>Research scientist at bionic learning network labs (e.g., Festo)</li>
-						</ul>
-					</div>
-					<div class="goals__subsection">
-						<h4>Short-term</h4>
-						<ul>
-							<li>[short-term goals missing, add about 50 words here]</li>
-						</ul>
-					</div>
-				</div>
 			</article>
 
 			<article class="about-card">
@@ -144,25 +128,6 @@
 		line-height: 1.6;
 		color: var(--text-primary);
 		opacity: 0.85;
-	}
-
-	.goals__subsections {
-		display: flex;
-		flex-direction: column;
-		gap: var(--card-gap);
-	}
-
-	.goals__subsection h4 {
-		font-size: clamp(0.9375rem, 1.2vw, 1.125rem);
-		line-height: 1.4;
-		color: var(--accent);
-		font-weight: 600;
-		margin: 0 0 0.5rem 0;
-	}
-
-	.goals__subsection ul {
-		padding-left: 1.5rem;
-		gap: 0.5rem;
 	}
 
 	.about-intro {

@@ -10,6 +10,8 @@ const links = [
 ---
 
 <nav class="navbar" aria-label="Primary" style="background: var(--navbar-bg);">
+	<!-- MOBILE-ONLY NAVBAR (hidden on desktop ≥768px)
+	     Sticky positioning works on mobile only. Hidden on desktop via @media (min-width: 768px) { display: none } -->
 	<div class="navbar__inner">
 		<a class="navbar__brand" href="#top">Sundeep</a>
 		<ul class="navbar__links">
@@ -28,6 +30,11 @@ const links = [
 </nav>
 
 <style>
+	/* MOBILE-ONLY STICKY NAVBAR
+	 * - Hidden on desktop (≥768px) via @media (min-width: 768px) { display: none }
+	 * - Sticky on mobile (<768px) with position: sticky; top: 0
+	 * - Shows section preview tooltips on hover/focus (desktop only)
+	 * - Preview tooltips hidden on mobile via @media (max-width: 767px) */
 	.navbar {
 		position: sticky;
 		top: 0;
@@ -154,8 +161,9 @@ const links = [
 	}
 
 	@media (min-width: 768px) {
-		.navbar__inner {
-			justify-content: center;
+		/* Navbar completely hidden on desktop — navigation via hero sidebar TOC */
+		.navbar {
+			display: none;
 		}
 	}
 </style>

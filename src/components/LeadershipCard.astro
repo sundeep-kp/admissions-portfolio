@@ -10,6 +10,11 @@ const { title, description, links, class: className } = Astro.props as Props;
 
 // Split description into paragraphs for better formatting
 const descriptionLines = description.split('\n').filter(line => line.trim());
+
+// Create preview (first 45 chars)
+const fullDescription = descriptionLines.join(' ');
+const preview = fullDescription.length > 45 ? fullDescription.slice(0, 45) + '…' : fullDescription;
+const isExpandable = fullDescription.length > 45;
 ---
 
 <!-- 
@@ -17,6 +22,7 @@ const descriptionLines = description.split('\n').filter(line => line.trim());
   Do not modify layout, colors, typography, spacing, or hover effects without explicit approval.
   This card design is finalized for the admissions portfolio.
   Uses .card--dark from global.css card system.
+  Now with collapsible description (45 char preview) and consistent dimensions.
 -->
 
 <article class:list={['card card--dark leadership-card', className]}>
@@ -25,11 +31,28 @@ const descriptionLines = description.split('\n').filter(line => line.trim());
 	</header>
 
 	<div class="leadership-card__body">
-		{descriptionLines.map((line, i) => (
-			<p class:list={['leadership-card__text', line.startsWith('-') ? 'leadership-card__bullet' : '']}>
-				{line.startsWith('-') ? line.slice(1).trim() : line}
-			</p>
-		))}
+		{isExpandable ? (
+			<details class="leadership-card__details">
+				<summary class="leadership-card__summary">
+					{preview}
+				</summary>
+				<div class="leadership-card__full">
+					{descriptionLines.map((line) => (
+						<p class={line.startsWith('-') ? 'leadership-card__text leadership-card__bullet' : 'leadership-card__text'}>
+							{line.startsWith('-') ? line.slice(1).trim() : line}
+						</p>
+					))}
+				</div>
+			</details>
+		) : (
+			<>
+				{descriptionLines.map((line) => (
+					<p class={line.startsWith('-') ? 'leadership-card__text leadership-card__bullet' : 'leadership-card__text'}>
+						{line.startsWith('-') ? line.slice(1).trim() : line}
+					</p>
+				))}
+			</>
+		)}
 	</div>
 
 	{links.length > 0 && links.some(l => l.href !== '#') && (
@@ -93,7 +116,7 @@ const descriptionLines = description.split('\n').filter(line => line.trim());
 		margin: 0;
 	}
 
-.leadership-card h3 {
+	.leadership-card h3 {
 		font-size: clamp(1.25rem, 2.1vw, 1.5rem);
 		line-height: 1.25;
 		color: var(--text-on-dark);
@@ -165,6 +188,120 @@ const descriptionLines = description.split('\n').filter(line => line.trim());
 	@media (min-width: 768px) {
 		.leadership-card--feature .leadership-card__body {
 			/* Feature card can have slightly different layout if needed */
+		}
+	}
+
+	/* Collapsible card details/summary styles */
+	.leadership-card__details {
+		margin-top: 0.5rem;
+	}
+
+	.leadership-card__summary {
+		list-style: none;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem;
+		padding: 0.5rem 0.75rem;
+		font-size: clamp(0.875rem, 1.1vw, 1rem);
+		font-weight: 500;
+		color: var(--accent);
+		background: rgba(255, 179, 167, 0.1);
+		border: 1px solid rgba(255, 179, 167, 0.3);
+		border-radius: 999px;
+		transition: background 0.2s ease, color 0.2s ease;
+		cursor: pointer;
+	}
+
+	.leadership-card__summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.leadership-card__summary::after {
+		content: '';
+		width: 0.5rem;
+		height: 0.5rem;
+		border-right: 2px solid currentColor;
+		border-bottom: 2px solid currentColor;
+		transform: rotate(45deg);
+		transition: transform 0.2s ease;
+		margin-left: 0.5rem;
+		flex-shrink: 0;
+	}
+
+	.leadership-card__details[open] .leadership-card__summary::after {
+		transform: rotate(-135deg);
+	}
+
+	.leadership-card__summary:hover {
+		background: var(--accent);
+		color: var(--text-on-dark);
+	}
+
+	.leadership-card__summary:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
+	}
+
+	.leadership-card__preview {
+		opacity: 0.8;
+	}
+
+	.leadership-card__full {
+		animation: fadeIn 0.3s ease;
+		margin-top: 0.75rem;
+		padding-top: 0.75rem;
+		border-top: 1px solid var(--card-border-dark);
+	}
+
+	.leadership-card__expand-icon {
+		flex-shrink: 0;
+		transition: transform 0.2s ease;
+	}
+
+	.leadership-card__details[open] .leadership-card__expand-icon {
+		transform: rotate(180deg);
+	}
+
+	@keyframes fadeIn {
+		from { opacity: 0; transform: translateY(-0.5rem); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	/* Mobile: wider cards, shorter height */
+	@media (max-width: 767px) {
+		.leadership-card {
+			width: calc(100vw - 1.5rem);
+			padding: clamp(1rem, 3vw, 1.5rem);
+			gap: clamp(0.75rem, 2vw, 1rem);
+			border-radius: 12px;
+		}
+
+		.leadership-card--feature {
+			padding: clamp(1.5rem, 4vw, 2rem);
+		}
+
+		.leadership-card__body {
+			gap: clamp(0.5rem, 1.5vw, 0.75rem);
+		}
+
+		.leadership-card h3 {
+			font-size: clamp(1.1rem, 3vw, 1.25rem);
+		}
+
+		.leadership-card__text {
+			font-size: clamp(0.875rem, 2vw, 1rem);
+		}
+
+		.leadership-card__links {
+			gap: clamp(0.5rem, 1.5vw, 0.75rem);
+			margin-top: clamp(0.5rem, 1.5vw, 0.75rem);
+		}
+
+		.leadership-card__link {
+			padding: clamp(0.625rem, 1.25vw, 0.75rem) clamp(1rem, 2vw, 1.125rem);
+			font-size: clamp(1.125rem, 2.5vw, 1.25rem);
 		}
 	}
 </style>
