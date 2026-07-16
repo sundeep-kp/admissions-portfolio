@@ -1,23 +1,24 @@
 ---
 import { leadershipItems } from '../data/leadership';
 import LeadershipCard from './LeadershipCard.astro';
-import Carousel from './Carousel.astro';
 ---
 
 <section class="leadership section-fade" aria-labelledby="leadership-title" id="leadership" style="background: var(--accent); color: var(--text-on-dark);">
 	<div class="leadership__inner">
 		<h2 id="leadership-title">Leadership and Community</h2>
 
-		<Carousel autoplay={false} showArrows={true} showDots={true} class="leadership__carousel" slidesPerView={1}>
-			{leadershipItems.map((item) => (
-				<LeadershipCard
-					class="leadership-card--feature"
-					title={item.title}
-					description={item.description}
-					links={item.links}
-				/>
-			))}
-		</Carousel>
+		<div class="leadership__carousel" aria-label="Leadership roles">
+			<div class="leadership__track" data-carousel-track>
+				{leadershipItems.map((item) => (
+					<LeadershipCard
+						class="leadership-card--feature"
+						title={item.title}
+						description={item.description}
+						links={item.links}
+					/>
+				))}
+			</div>
+		</div>
 	</div>
 </section>
 
@@ -30,12 +31,74 @@ import Carousel from './Carousel.astro';
 		width: 100%;
 		margin: 0 auto;
 		display: flex;
-		flex-direction: column;
-		gap: var(--section-gap);
+		flex-direction: row;
+		align-items: center;
+
 	}
 
 	.leadership__carousel {
 		max-width: 100%;
+	}
+
+	.leadership__track {
+		display: flex;
+		align-items: center;
+		gap: var(--card-gap, 1.5rem);
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+		-ms-overflow-style: none;
+		padding: 0 0 1rem;
+	}
+
+	.leadership__track::-webkit-scrollbar {
+		display: none;
+	}
+
+	.leadership__track > :global(*) {
+		flex: 0 0 100%;
+		min-width: 0;
+		scroll-snap-align: start;
+	}
+
+/* Desktop: wider cards (120%) */
+@media (min-width: 768px) {
+	.leadership__track > :global(*) {
+		flex: 0 0 120% !important;
+		max-width: 120% !important;
+	}
+
+
+		/* Make LeadershipCard 40% shorter - force with high specificity */
+		.leadership__track :global(.leadership-card) {
+			padding: clamp(0.1rem, 1vw, 1rem) !important;
+			gap: clamp(0.1rem, 0.1vw, 0.1rem) !important;
+			max-width: 30% !important;
+		}
+
+		.leadership__track :global(.leadership-card__body) {
+			gap: clamp(0.5rem, 1vw, 0.75rem) !important;
+		}
+
+		.leadership__track :global(.leadership-card__text) {
+			line-height: 1.5 !important;
+			font-size: clamp(0.875rem, 1.2vw, 1rem) !important;
+		}
+	}
+
+	/* Mobile: column layout */
+	@media (max-width: 767px) {
+		.leadership__inner {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+		/* Ensure cards take full width on mobile */
+		.leadership-card--feature {
+			max-width: 90% !important;
+			padding: clamp(0.5rem, 2vw, 1rem);
+			gap: clamp(0.5rem, 1vw, 1rem);
+		}
 	}
 
 	@keyframes fadeIn {

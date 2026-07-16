@@ -16,10 +16,10 @@ interface Props {
 
 const { image, title, category, description, links, status, tags } = Astro.props as Props;
 
-// Create preview (first 45 chars)
+// Create preview (first 20 chars)
 const fullDescription = description;
-const preview = fullDescription.length > 45 ? fullDescription.slice(0, 45) + '…' : fullDescription;
-const isExpandable = fullDescription.length > 45;
+const preview = fullDescription.length > 20 ? fullDescription.slice(0, 20) + '…' : fullDescription;
+const isExpandable = fullDescription.length > 20;
 ---
 
 <!-- 
@@ -30,49 +30,37 @@ const isExpandable = fullDescription.length > 45;
   Now with collapsible description (45 char preview) and smaller image (30% smaller).
 -->
 
-<article class="card card--light project-card">
-	{image && (
-		<img 
-			class="project-card__image" 
-			src={image} 
-			alt={title} 
-			style="max-width: 70%; height: auto; margin: 0 auto;"
-		/>
-	)}
+<article class:list={['card card--light project-card', image && 'project-card--bg']} style={image ? `background-image: url(${image}); background-size: cover; background-position: center;` : ''}>
+
+	<h3 class="project-card__title">{title}</h3>
+
 
 	<div class="project-card__content">
-		<p class="project-card__category">{category}</p>
-		<h3 class="project-card__title">{title}</h3>
-		
-		{isExpandable ? (
+
+
+		{(description || tags.length > 0 || status || (links && links.length > 0)) && (
 			<details class="project-card__details">
-				<summary class="project-card__summary">
-					{preview}
-				</summary>
+				<summary class="project-card__summary">{preview}</summary>
 				<div class="project-card__full">
-					<p class="project-card__description">{description}</p>
+					{category && <p class="project-card__category">{category}</p>}
+					{description && <p class="project-card__description">{description}</p>}
+					{tags.length > 0 && (
+						<ul class="project-card__tags" aria-label={`${title} tags`}>
+							{tags.map((tag) => (
+								<li>{tag}</li>
+							))}
+						</ul>
+					)}
+					{status && <p class="project-card__status">{status}</p>}
+					{links.length > 0 && (
+						<div class="project-card__links" aria-label={`${title} buttons`}>
+							{links.map((link) => (
+								<a href={link.href}>{link.label}</a>
+							))}
+						</div>
+					)}
 				</div>
 			</details>
-		) : (
-			<p class="project-card__description">{description}</p>
-		)}
-
-		{tags.length > 0 && (
-			<ul class="project-card__tags" aria-label={`${title} tags`}>
-				{tags.map((tag) => (
-					<li>{tag}</li>
-				))}
-			</ul>
-		)}
-
-		<p class="project-card__status">{status}</p>
-
-		{links.length > 0 && (
-			<div class="project-card__links" aria-label={`${title} buttons`}>
-				{links.map((link) => (
-					<a href={link.href}>{link.label}</a>
-				))}
-			</div>
 		)}
 	</div>
 </article>
@@ -95,6 +83,30 @@ const isExpandable = fullDescription.length > 45;
 			0 12px 36px rgba(0, 0, 0, 0.09),
 			inset 0 1.5px 0 rgba(255, 255, 255, 0.75);
 		transform: translateY(-3px);
+	}
+
+	.project-card--bg {
+		position: relative;
+		background-color: transparent;
+		color: var(--text-on-dark);
+	}
+	.project-card--bg::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: rgba(0,0,0,0.5);
+		border-radius: inherit;
+		z-index: 0;
+	}
+	.project-card--bg > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	.project-card--bg .project-card__title,
+	.project-card--bg .project-card__description,
+	.project-card--bg .project-card__status {
+		color: var(--text-on-dark);
 	}
 
 	.project-card__image {
@@ -186,7 +198,7 @@ const isExpandable = fullDescription.length > 45;
 		font-weight: 500;
 		color: var(--text-on-dark);
 		background: var(--accent);
-		border-radius: 12px;
+		border-radius: 0;
 		text-decoration: none;
 		transition: background 0.2s ease, transform 0.15s ease;
 	}
@@ -263,14 +275,18 @@ const isExpandable = fullDescription.length > 45;
 
 	/* Mobile: smaller images, smaller text, smaller padding */
 	@media (max-width: 767px) {
+		.project-card {
+			max-width: 25%;
+			margin: 0 auto;
+		}
 		.project-card__image {
-			max-width: 55%;
+			max-width: 100%;
 			border-radius: 12px 12px 0 0;
 		}
 
 		.project-card__content {
-			padding: clamp(1.5rem, 3vw, 2rem);
-			gap: clamp(0.75rem, 1.5vw, 1rem);
+			padding: clamp(0.5rem, 2vw, 1rem);
+			gap: clamp(0.5rem, 1vw, 0.75rem);
 		}
 
 		.project-card__category {

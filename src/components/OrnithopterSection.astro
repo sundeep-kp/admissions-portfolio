@@ -31,7 +31,27 @@ import Carousel from './Carousel.astro';
 
       <div class="ornithopter__about-carousel" aria-label="About me" id="ornithopter-about-carousel" hidden>
         <h3 class="ornithopter__about-title">About me</h3>
-        <Carousel autoplay={false} showArrows={true} showDots={true} class="about-carousel" slidesPerView={2}>
+        <Carousel
+			id="about-carousel"
+			autoplay={false}
+			showArrows={true}
+			showDots={false}
+			class="about-carousel"
+			/*
+			 * ABOUT ME CAROUSEL — REFERENCE IMPLEMENTATION
+			 * This is the canonical carousel design for this portfolio.
+			 * All other carousels (Projects, Leadership) should follow this pattern.
+			 * 
+			 * KEY DECISIONS:
+			 * - Single card per view on all breakpoints (100% width)
+			 * - Mobile (≤767px): free scroll + snap (90% width), arrows/dots hidden
+			 * - Desktop (≥768px): controlled scroll via arrows/dots, 100% width
+			 * - Card styling: mirrors .card--light from global.css
+			 * - Title: .ornithopter__about-title centered, scales clamp(1.75rem, 2.5vw, 2.25rem)
+			 * - Toggle button: .ornithopter__about-toggle shows on mobile only
+			 * - Desktop (≥768px): carousel always visible below video, single column
+			 */
+		>
           {aboutCards.map((card) => (
             <article class="about-card about-carousel__card">
               <h3>{card.title}</h3>
@@ -233,76 +253,11 @@ import Carousel from './Carousel.astro';
     text-align: center;
   }
 
-  .about-carousel {
-    width: 100%;
-  }
-
-  .about-carousel .carousel__track > *,
-  .about-carousel .carousel__track > :global(*) {
-    flex: 0 0 100%;
-    min-width: 0;
-    max-width: 100%;
-  }
-
-  @media (min-width: 768px) {
-    .about-carousel .carousel__track > *,
-    .about-carousel .carousel__track > :global(*) {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .about-carousel .carousel__track > *,
-    .about-carousel .carousel__track > :global(*) {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-  }
-
-  /* Mobile: hide carousel arrows/dots, free scroll with snap */
-  @media (max-width: 767px) {
-    .about-carousel .carousel__arrows,
-    .about-carousel .carousel__dots {
-      display: none;
-    }
-    .about-carousel .carousel__track {
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      gap: 1rem;
-      padding-bottom: 1rem;
-    }
-    .about-carousel .carousel__track > *,
-    .about-carousel .carousel__track > :global(*) {
-      flex: 0 0 90%;
-      max-width: 90%;
-      scroll-snap-align: start;
-    }
-  }
-
-  .about-carousel__card {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: clamp(1.5rem, 3vw, 2rem);
-    background: var(--bg-white);
-    border-radius: 18px;
-    border: 1px solid var(--card-border);
-    box-shadow:
-      0 3px 12px rgba(0, 0, 0, 0.045),
-      inset 0 1.5px 0 rgba(255, 255, 255, 0.75);
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
-  }
-
-  .about-carousel__card:hover {
-    box-shadow:
-      0 12px 36px rgba(0, 0, 0, 0.09),
-      inset 0 1.5px 0 rgba(255, 255, 255, 0.75);
-    transform: translateY(-3px);
-  }
+  /* About carousel styles now handled by base Carousel.astro component.
+   * Kept only: .ornithopter__about-toggle (mobile toggle button)
+   * and .ornithopter__about-title (section title).
+   * Card styling (.about-carousel__card) moved to base Carousel for consistency.
+   */
 
   .about-carousel__card h3 {
     margin: 0;

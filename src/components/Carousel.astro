@@ -6,16 +6,18 @@ interface Props {
 	showArrows?: boolean;
 	showDots?: boolean;
 	class?: string;
-	slidesPerView?: number;
+	customScroll?: boolean;
+	id?: string;
 }
 
-const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, showDots = true, class: className, slidesPerView = 1 } = Astro.props as Props;
+const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, showDots = true, class: className, customScroll = false, id } = Astro.props as Props;
 ---
 
-<div class="carousel" role="region" aria-label="Carousel" class:list={['carousel', className]} data-slides-per-view={slidesPerView}>
+<div class:list={['carousel', className, customScroll && 'carousel--custom-scroll']} role="region" aria-label="Carousel" id={id} data-custom-scroll={customScroll ? 'true' : 'false'} data-autoplay={autoplay ? 'true' : 'false'} data-autoplay-interval={String(autoplayInterval)}>
 	<div class="carousel__track" data-carousel-track>
 		<slot />
 	</div>
+</div>
 
 	{showArrows && (
 		<div class="carousel__arrows" aria-hidden="true">
@@ -39,154 +41,7 @@ const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, 
 	)}
 </div>
 
-<script>
-	/*
-	 * Carousel functionality — controlled scroll with snap, arrows, dots, keyboard, touch.
-	 * 
-	 * KEY DESIGN DECISIONS TO PREVENT REGRESSIONS:
-	 * 1. Scroll is ALWAYS on the TRACK element, never window.
-	 *    - goToSlide() uses track.scrollTo() not window.scrollTo()
-	 *    - Scroll listener on track (not window/carousel) prevents page scroll
-	 * 2. Navigation bounded by maxIndex = slides.length - slidesPerView
-	 *    - nextSlide/prevSlide clamp to [0, maxIndex], never wrap
-	 *    - Buttons disable at ends (via goToSlide bounds check)
-	 * 3. Dots = pages, not slides (pageCount = maxIndex + 1)
-	 * 4. Touch: native scroll on track, JS only updates dots (passive listener)
-	 * 5. Mobile (≤767px): arrows/dots hidden, free scroll with snap (90% width)
-	 * 6. Desktop: arrows/dots shown, controlled scroll via buttons
-	 * 
-	 * BUG FIX (2024): Previous implementation used scrollIntoView() which scrolled
-	 * the entire page when carousel reached end, breaking page navigation.
-	 * Fixed by using track.scrollTo({ left: slide.offsetLeft, behavior: 'smooth' })
-	 */
-	const carousels = document.querySelectorAll('.carousel');
-
-	carousels.forEach(carousel => {
-		const track = carousel.querySelector('[data-carousel-track]');
-		const prevBtn = carousel.querySelector('[data-carousel-prev]');
-		const nextBtn = carousel.querySelector('[data-carousel-next]');
-		const dotsContainer = carousel.querySelector('[data-carousel-dots]');
-		const slides = Array.from(track?.children || []);
-
-		if (!track || slides.length <= 1) return;
-
-		// Get slidesPerView from data attribute or default to 1
-		const slidesPerView = parseInt(carousel.dataset.slidesPerView || '1', 10);
-		const maxIndex = Math.max(0, slides.length - slidesPerView);
-
-		let currentIndex = 0;
-		let autoplayTimer: number | null = null;
-		let isAnimating = false;
-
-		// Create dots - one per "page" (group of slidesPerView)
-		if (dotsContainer) {
-			const pageCount = maxIndex + 1;
-			for (let i = 0; i < pageCount; i++) {
-				const dot = document.createElement('button');
-				dot.className = 'carousel__dot' + (i === 0 ? ' carousel__dot--active' : '');
-				dot.setAttribute('aria-label', `Go to page ${i + 1}`);
-				dot.setAttribute('data-carousel-dot', String(i));
-				dot.addEventListener('click', () => goToSlide(i));
-				dotsContainer.appendChild(dot);
-			}
-		}
-
-		const dots = dotsContainer?.querySelectorAll('[data-carousel-dot]') || [];
-
-		function updateDots() {
-			dots.forEach((dot, i) => {
-				dot.classList.toggle('carousel__dot--active', i === currentIndex);
-			});
-		}
-
-		function getScrollAmount() {
-			// Measure actual scroll width per "page" based on first slide + gap
-			const firstSlide = slides[0];
-			const slideRect = firstSlide.getBoundingClientRect();
-			const trackRect = track.getBoundingClientRect();
-			const gap = parseFloat(getComputedStyle(track).gap) || 0;
-			return slideRect.width + gap;
-		}
-
-		function goToSlide(index: number) {
-			if (isAnimating || index === currentIndex) return;
-			isAnimating = true;
-
-			currentIndex = Math.max(0, Math.min(index, maxIndex));
-			
-			// Scroll the track directly, not the window.
-			// Using scrollIntoView() caused the entire page to scroll when the carousel
-			// reached its end, making the rest of the page inaccessible.
-			// track.scrollTo({ left: slide.offsetLeft }) keeps scrolling contained to the track.
-			const targetSlide = slides[currentIndex];
-			if (targetSlide) {
-				track.scrollTo({
-					left: targetSlide.offsetLeft,
-					behavior: 'smooth'
-				});
-			}
-			updateDots();
-
-			setTimeout(() => { isAnimating = false; }, 400);
-		}
-
-		function nextSlide() {
-			if (currentIndex < maxIndex) {
-				goToSlide(currentIndex + 1);
-			}
-		}
-
-		function prevSlide() {
-			if (currentIndex > 0) {
-				goToSlide(currentIndex - 1);
-			}
-		}
-
-		function startAutoplay() {
-			if (autoplayTimer) clearInterval(autoplayTimer);
-			autoplayTimer = window.setInterval(nextSlide, autoplayInterval);
-		}
-
-		function stopAutoplay() {
-			if (autoplayTimer) clearInterval(autoplayTimer);
-			autoplayTimer = null;
-		}
-
-		// Event listeners
-		prevBtn?.addEventListener('click', prevSlide);
-		nextBtn?.addEventListener('click', nextSlide);
-
-		// Pause autoplay on hover
-		carousel.addEventListener('mouseenter', stopAutoplay);
-		carousel.addEventListener('mouseleave', startAutoplay);
-
-		/* Touch/swipe support - let native scroll handle it, just update dots.
-		 * Listen on TRACK not carousel/window to avoid accidental page scroll.
-		 * Passive listener for performance. */
-		let lastScrollLeft = track.scrollLeft;
-		track.addEventListener('scroll', () => {
-			if (isAnimating) return;
-			const scrollAmount = getScrollAmount();
-			const newIndex = Math.round(track.scrollLeft / scrollAmount);
-			if (newIndex !== currentIndex && newIndex >= 0 && newIndex <= maxIndex) {
-				currentIndex = newIndex;
-				updateDots();
-			}
-		}, { passive: true });
-
-		/* Keyboard navigation - uses same bounded nextSlide/prevSlide that clamp to maxIndex.
-		 * Prevents scrolling past carousel ends. */
-		carousel.addEventListener('keydown', (e: KeyboardEvent) => {
-			if (e.key === 'ArrowLeft') prevSlide();
-			else if (e.key === 'ArrowRight') nextSlide();
-		});
-
-		// Initialize
-		if (autoplay) startAutoplay();
-	});
-</script>
-
-<style>
+<style is:global>
 	.carousel {
 		position: relative;
 		width: 100%;
@@ -203,6 +58,11 @@ const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, 
 		-ms-overflow-style: none;
 		gap: var(--card-gap, 1.5rem);
 		padding: 0 0 1rem;
+	}
+
+	/* Disable scroll-snap for custom scroll carousel (Robotics - 25% width cards) */
+	.carousel--custom-scroll .carousel__track {
+		scroll-snap-type: none;
 	}
 
 	.carousel__track::-webkit-scrollbar {
@@ -282,7 +142,7 @@ const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, 
 		background: var(--accent);
 	}
 
-	/* Mobile: free scroll, cards ~90% width */
+	/* Mobile: free scroll, cards ~25% width */
 	@media (max-width: 767px) {
 		.carousel__track {
 			scroll-snap-type: x mandatory;
@@ -293,10 +153,15 @@ const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, 
 			gap: 1rem;
 		}
 
+		/* Disable snap for custom scroll carousel on mobile too */
+		.carousel--custom-scroll .carousel__track {
+			scroll-snap-type: none;
+		}
+
 		.carousel__track > *,
 		.carousel__track > :global(*) {
-			flex: 0 0 90%;
-			max-width: 90%;
+			flex: 0 0 25%;
+			max-width: 25%;
 			scroll-snap-align: start;
 		}
 
@@ -306,10 +171,9 @@ const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, 
 		}
 	}
 
-	/* Desktop: controlled carousel with arrows/dots + free scroll */
+	/* Desktop: controlled carousel with arrows/dots, 1 card per view (100% width) */
 	@media (min-width: 768px) {
 		.carousel__track {
-			display: flex;
 			overflow-x: auto;
 			scroll-snap-type: x mandatory;
 			-webkit-overflow-scrolling: touch;
@@ -317,8 +181,6 @@ const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, 
 			-ms-overflow-style: none;
 			gap: var(--card-gap, 1.5rem);
 			padding-bottom: 1rem;
-			scrollbar-width: none;
-			-ms-overflow-style: none;
 		}
 
 		.carousel__track::-webkit-scrollbar {
@@ -327,8 +189,8 @@ const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, 
 
 		.carousel__track > *,
 		.carousel__track > :global(*) {
-			flex: 0 0 calc(50% - 0.75rem);
-			max-width: calc(50% - 0.75rem);
+			flex: 0 0 100%;
+			max-width: 100%;
 			scroll-snap-align: start;
 		}
 
@@ -346,76 +208,4 @@ const { children, autoplay = false, autoplayInterval = 5000, showArrows = true, 
 		}
 	}
 
-	.carousel__arrows {
-		position: absolute;
-		top: 50%;
-		left: 0;
-		right: 0;
-		transform: translateY(-50%);
-		display: flex;
-		justify-content: space-between;
-		padding: 0 1rem;
-		pointer-events: none;
-		z-index: 10;
-	}
-
-	.carousel__arrow {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 40px;
-		height: 40px;
-		border: none;
-		background: rgba(255, 255, 255, 0.9);
-		border-radius: 50%;
-		cursor: pointer;
-		pointer-events: auto;
-		transition: background 0.2s ease, transform 0.2s ease;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-		color: var(--text-primary);
-	}
-
-	.carousel__arrow:hover {
-		background: var(--accent);
-		color: var(--text-on-dark);
-		transform: scale(1.1);
-	}
-
-	.carousel__arrow:focus-visible {
-		outline: 2px solid var(--accent);
-		outline-offset: 2px;
-	}
-
-	.carousel__dots {
-		display: flex;
-		justify-content: center;
-		gap: 0.5rem;
-		padding: 1rem 0;
-	}
-
-	.carousel__dot {
-		width: 8px;
-		height: 8px;
-		border-radius: 50%;
-		border: none;
-		background: var(--card-border);
-		cursor: pointer;
-		transition: background 0.2s ease, transform 0.2s ease;
-	}
-
-	.carousel__dot:hover {
-		background: var(--accent);
-		transform: scale(1.2);
-	}
-
-	.carousel__dot--active {
-		background: var(--accent);
-	}
-
-	/* Reduce motion */
-	@media (prefers-reduced-motion: reduce) {
-		.carousel__track {
-			scroll-behavior: auto;
-		}
-	}
-</style>
+	</style>

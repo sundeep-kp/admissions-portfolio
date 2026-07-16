@@ -20,16 +20,20 @@ export const leadershipItems: LeadershipItem[] = [
 	},
 	{
 		title: 'reddit moderator of r/iiitnayaraipur',
-		description: '[description missing, add about 50 words here]',
+		description: [
+			' - Brought the dead server up to 50 to 100 contributions each week',
+			' - Added helpful information for upcoming juniors',
+			' - Started the culture of showcasing college fests, programs and projects online'
+		].join('\n'),
 		links: [{ label: '[link missing]', href: '#' }],
 	},
 	{
 		title: 'ATL Lab Lead',
 		description: [
-			'Served as ATL Lab Lead in 10th grade',
-			'Mentored 30+ 9th-grade juniors in electronics & prototyping',
-			'Built mini projects: posture-detection chair, robotic hand, sensor-based circuits',
-			'Earned teacher\'s trust — "my fingerprint became the teacher\'s phone password"',
+			'- Served as ATL Lab Lead in 10th grade',
+			'- Mentored 30+ 9th-grade juniors in electronics & prototyping',
+			'- Built mini projects: posture-detection chair, robotic hand, sensor-based circuits',
+			'- Earned teacher\'s trust — "my fingerprint became the teacher\'s phone password"',
 		].join('\n'),
 		links: [{ label: '[link missing]', href: '#' }],
 	},
@@ -40,7 +44,7 @@ export const leadershipItems: LeadershipItem[] = [
 	},
 	{
 		title: 'Class leader in 5 + non consecutive years.',
-		description: '[description missing, add about 50 words here]',
+		description: '',
 		links: [{ label: '[link missing]', href: '#' }],
 	},
 ];

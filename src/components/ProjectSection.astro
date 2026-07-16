@@ -8,6 +8,20 @@ const toId = (value: string) =>
 		.toLowerCase()
 		.replace(/[^a-z0-9]+/g, '-')
 		.replace(/^-+|-+$/g, '');
+
+/*
+ * PROJECTS CAROUSEL — DESIGN NOTES (aligned with About Me carousel philosophy)
+ * - Single card per view (100% width) on all breakpoints — matches About Me carousel
+ * - Carousel internal responsive logic mirrors About Me carousel:
+ *   mobile: free scroll + snap (90% width), arrows/dots hidden
+ *   desktop: controlled scroll via arrows/dots
+ * - Arrow/dot colors themed for light background (projects section is white)
+ * - ProjectCard has PROTECTED styles (see ProjectCard.astro) — do NOT override
+ *   .project-card width/flex/padding in this component's <style>
+ * - Arrow/dot theming via .projects__carousel in <style> below is INTENTIONAL
+ *   for light background; do not remove without design review
+ * - Expandable "Show all N projects" uses <details> + grid, NOT carousel
+ */
 ---
 
 <section class="projects section-fade" aria-labelledby="projects-title" id="projects" style="background: var(--bg-white); color: var(--text-primary);">
@@ -22,7 +36,23 @@ const toId = (value: string) =>
 						aria-labelledby={toId(group.title)}
 					>
 						<h3 id={toId(group.title)}>{group.title}</h3>
-						<Carousel autoplay={false} showArrows={true} showDots={true} class="projects__carousel" slidesPerView={3}>
+						<Carousel
+							id={toId(group.title)}
+							autoplay={false}
+							showArrows={true}
+							showDots={true}
+							class="projects__carousel"
+							customScroll={group.title === 'Robotics'}
+							/*
+							 * CAROUSEL USAGE NOTES (aligned with About Me carousel):
+							 * - Single card per view on all breakpoints (100% width)
+							 *   Carousel.astro handles: mobile free scroll (90%), desktop controlled
+							 * - ProjectCard has PROTECTED styles — do NOT override width/flex/padding
+							 * - Arrow/dot theming via .projects__carousel in <style> is INTENTIONAL
+							 *   for light background; matches About Me carousel's light-theme approach
+							 * - Expandable "Show all N projects" uses <details> + grid, NOT carousel
+							 */
+						>
 							{group.projects.map((project) => (
 								<ProjectCard
 									image={project.image}
@@ -84,12 +114,12 @@ const toId = (value: string) =>
 		font-size: clamp(1.25rem, 2vw, 1.75rem);
 	}
 
-	/* Carousel-specific styles for projects */
+	/* Carousel-specific styles for projects — theming only, not layout */
 	.projects__carousel {
 		width: 100%;
 	}
 
-	/* Carousel arrow styling for projects */
+	/* Carousel arrow styling for projects (light theme) */
 	.projects__carousel .carousel__arrow {
 		background: rgba(255, 255, 255, 0.95);
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);

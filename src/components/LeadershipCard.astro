@@ -42,6 +42,20 @@ const isExpandable = fullDescription.length > 45;
 							{line.startsWith('-') ? line.slice(1).trim() : line}
 						</p>
 					))}
+					{links.length > 0 && links.some(l => l.href !== '#') && (
+						<div class="leadership-card__links">
+							{links.map((link) => link.href !== '#' && (
+								<a href={link.href} class="leadership-card__link" target="_blank" rel="noopener noreferrer">
+									{link.label}
+									<svg class="leadership-card__link-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+										<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+										<polyline points="15 3 21 3 21 9" />
+										<line x1="10" y1="14" x2="21" y2="3" />
+									</svg>
+								</a>
+							))}
+						</div>
+					)}
 				</div>
 			</details>
 		) : (
@@ -54,21 +68,6 @@ const isExpandable = fullDescription.length > 45;
 			</>
 		)}
 	</div>
-
-	{links.length > 0 && links.some(l => l.href !== '#') && (
-		<div class="leadership-card__links">
-			{links.map((link) => link.href !== '#' && (
-				<a href={link.href} class="leadership-card__link" target="_blank" rel="noopener noreferrer">
-					{link.label}
-					<svg class="leadership-card__link-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-						<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-						<polyline points="15 3 21 3 21 9" />
-						<line x1="10" y1="14" x2="21" y2="3" />
-					</svg>
-				</a>
-			))}
-		</div>
-	)}
 </article>
 
 <style>
@@ -96,7 +95,15 @@ const isExpandable = fullDescription.length > 45;
 	}
 
 	.leadership-card--feature {
-		padding: clamp(3rem, 6vw, 4.5rem);
+		padding: clamp(0.1rem, 1vw, 1rem);
+		gap: clamp(0.1rem, 0.1vw, 0.1rem);
+		max-width: 30%;
+	}
+
+	.card.card--dark.leadership-card.leadership-card--feature {
+		padding: clamp(0.1rem, 1vw, 1rem);
+		gap: clamp(0.1rem, 0.1vw, 0.1rem);
+		max-width: 30%;
 	}
 
 	.leadership-card__header {
@@ -278,9 +285,13 @@ const isExpandable = fullDescription.length > 45;
 			border-radius: 12px;
 		}
 
-		.leadership-card--feature {
-			padding: clamp(1.5rem, 4vw, 2rem);
-		}
+        .leadership-card--feature {
+            padding: clamp(1.5rem, 4vw, 2rem);
+            max-width: 90% !important;
+        }
+        .card.card--dark.leadership-card.leadership-card--feature {
+            max-width: 90% !important;
+        }
 
 		.leadership-card__body {
 			gap: clamp(0.5rem, 1.5vw, 0.75rem);

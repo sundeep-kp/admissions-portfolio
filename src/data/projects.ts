@@ -33,9 +33,9 @@ export const projectGroups: ProjectGroup[] = [
 				title: 'Robotic prosthetic hand',
 				category: 'Robotics',
 				description: [
-					'10th standard project — Arduino + servos + PVC, springs for fingers',
-					'Flex sensors & EMG for muscle actuation sensing',
-					'Uses rarely-used muscles to replace amputated limb function',
+'- Uses rarely-used muscles to replace amputated limb function',
+			'- 10th standard project — Arduino + servos + PVC, springs for fingers',
+			'- Flex sensors & EMG for muscle actuation sensing'
 				].join('\n'),
 				links: [{ label: '[project report attach]', href: '#' }],
 				status: 'Completed',
@@ -46,15 +46,14 @@ export const projectGroups: ProjectGroup[] = [
 				title: 'Ornithopter based bird flying simulation',
 				category: 'Robotics',
 				description: [
-					'Inspired by Festo\'s flying bird',
-					'Studied main mechanism, extended with custom additions',
+'Studied main mechanism, extended with custom additions like double frame, motor, gear power transmission.'
 				].join('\n'),
 				links: [
-					{ label: '[project overview attach]', href: '#' },
-					{ label: '[simulation video, linkedin post attach]', href: '#' },
+					{ label: '[linkedin post]', href: '#' },
+					{ label: '[project overview placeholder]', href: '#' },
 				],
 				status: 'Completed',
-				tags: ['Simulation', 'Ornithopter', 'Bio-inspired'],
+				tags: ['Simulation', 'SOLIDWORKS', 'Bio-inspired'],
 			},
 			{
 				image: placeholderImage,
@@ -100,25 +99,7 @@ export const projectGroups: ProjectGroup[] = [
 		],
 	},
 	{
-		title: 'Machine Learning',
-		projects: [
-			{
-				image: placeholderImage,
-				title: '3D reconstruction of teeth from intra-oral images',
-				category: 'Machine Learning',
-				description: [
-					'Optimised TeethDreamer (ShanghaiTech-IMPACT) for local commercial hardware',
-					'Motivation: sister is a dentist — real clinical need',
-					'[attach project report, GitHub, reconstruction image]',
-				].join('\n'),
-				links: [{ label: '[attach project report, github, reconstruction image]', href: '#' }],
-				status: 'Completed',
-				tags: ['3D reconstruction', 'Healthcare', 'Research'],
-			},
-		],
-	},
-	{
-		title: 'Software',
+		title: 'Software/Others',
 		projects: [
 			{
 				image: placeholderImage,
@@ -203,6 +184,19 @@ export const projectGroups: ProjectGroup[] = [
 				links: [{ label: '[linkedin post attach]', href: '#' }],
 				status: 'Hackathon project',
 				tags: ['NASA API', '3D', 'Telegram bot'],
+			},
+			{
+				image: placeholderImage,
+				title: '3D reconstruction of teeth from intra-oral images',
+				category: 'Software',
+				description: [
+					'Optimised TeethDreamer (ShanghaiTech-IMPACT) for local commercial hardware',
+					'Motivation: sister is a dentist — real clinical need',
+					'[attach project report, GitHub, reconstruction image]',
+				].join('\n'),
+				links: [{ label: '[attach project report, github, reconstruction image]', href: '#' }],
+				status: 'Completed',
+				tags: ['3D reconstruction', 'Healthcare', 'Research'],
 			},
 		],
 	},
