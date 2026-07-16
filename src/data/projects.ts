@@ -30,19 +30,6 @@ export const projectGroups: ProjectGroup[] = [
 		projects: [
 			{
 				image: placeholderImage,
-				title: 'Robotic prosthetic hand',
-				category: 'Robotics',
-				description: [
-'- Uses rarely-used muscles to replace amputated limb function',
-			'- 10th standard project — Arduino + servos + PVC, springs for fingers',
-			'- Flex sensors & EMG for muscle actuation sensing'
-				].join('\n'),
-				links: [{ label: '[project report attach]', href: '#' }],
-				status: 'Completed',
-				tags: ['Arduino', 'Servos', 'EMG', 'Flex sensors'],
-			},
-			{
-				image: placeholderImage,
 				title: 'Ornithopter based bird flying simulation',
 				category: 'Robotics',
 				description: [
@@ -66,6 +53,19 @@ export const projectGroups: ProjectGroup[] = [
 				links: [{ label: '[project links missing]', href: '#' }],
 				status: 'Completed',
 				tags: ['OpenManipulatorX', 'Industrial arm', 'Planning'],
+			},
+			{
+				image: placeholderImage,
+				title: 'Robotic prosthetic hand',
+				category: 'Robotics',
+				description: [
+'- Uses rarely-used muscles to replace amputated limb function',
+			'- 10th standard project — Arduino + servos + PVC, springs for fingers',
+			'- Flex sensors & EMG for muscle actuation sensing'
+				].join('\n'),
+				links: [{ label: '[project report attach]', href: '#' }],
+				status: 'Completed',
+				tags: ['Arduino', 'Servos', 'EMG', 'Flex sensors'],
 			},
 			{
 				image: placeholderImage,
@@ -103,19 +103,18 @@ export const projectGroups: ProjectGroup[] = [
 		projects: [
 			{
 				image: placeholderImage,
-				title: 'Tldraw-search Plugin',
+				title: 'Neuro-link (hackathon at IIITNR)',
 				category: 'Software',
 				description: [
-					'Infinite canvas plugin for Obsidian — for detectives & researchers',
-					'Search across handwritten text in canvas',
-					'Interconnect multiple canvases, reference sections via wiki links',
-					'Embed webpages & YouTube playlists as native canvas entities',
-					'Pressure-sensitive pencil, standard canvas features',
-					'[attach GitHub link]',
+					'Web app for dementia care — central STT/TTS chatbot',
+					'Calms users, shares stories, creates dynamic tasks/reminders via RAG',
+					'Face recognition for family member identification & context',
+					'Geotracking to prevent wandering',
+					'[attach LinkedIn post]',
 				].join('\n'),
-				links: [{ label: '[attach github link]', href: '#' }],
-				status: 'Ongoing',
-				tags: ['Obsidian', 'Plugin', 'Search', 'Canvas'],
+				links: [{ label: '[attach linkedin post]', href: '#' }],
+				status: 'Hackathon project',
+				tags: ['STT/TTS', 'RAG', 'Face recognition', 'Geotracking'],
 			},
 			{
 				image: placeholderImage,
@@ -132,21 +131,6 @@ export const projectGroups: ProjectGroup[] = [
 			},
 			{
 				image: placeholderImage,
-				title: 'Neuro-link (hackathon at IIITNR)',
-				category: 'Software',
-				description: [
-					'Web app for dementia care — central STT/TTS chatbot',
-					'Calms users, shares stories, creates dynamic tasks/reminders via RAG',
-					'Face recognition for family member identification & context',
-					'Geotracking to prevent wandering',
-					'[attach LinkedIn post]',
-				].join('\n'),
-				links: [{ label: '[attach linkedin post]', href: '#' }],
-				status: 'Hackathon project',
-				tags: ['STT/TTS', 'RAG', 'Face recognition', 'Geotracking'],
-			},
-			{
-				image: placeholderImage,
 				title: 'Invisible-Insight',
 				category: 'Software',
 				description: [
@@ -157,6 +141,22 @@ export const projectGroups: ProjectGroup[] = [
 				links: [{ label: '[attach github + apk]', href: '#' }],
 				status: 'Completed',
 				tags: ['Accessibility', 'Game', 'Audio'],
+			},
+			{
+				image: placeholderImage,
+				title: 'Tldraw-search Plugin',
+				category: 'Software',
+				description: [
+					'Infinite canvas plugin for Obsidian — for detectives & researchers',
+					'Search across handwritten text in canvas',
+					'Interconnect multiple canvases, reference sections via wiki links',
+					'Embed webpages & YouTube playlists as native canvas entities',
+					'Pressure-sensitive pencil, standard canvas features',
+					'[attach GitHub link]',
+				].join('\n'),
+				links: [{ label: '[attach github link]', href: '#' }],
+				status: 'Ongoing',
+				tags: ['Obsidian', 'Plugin', 'Search', 'Canvas'],
 			},
 			{
 				image: placeholderImage,
