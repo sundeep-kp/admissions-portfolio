@@ -208,7 +208,7 @@ select {
 /* Mobile: free scroll, cards ~25% width */
 @media (max-width: 767px) {
 	.carousel__track {
-		scroll-snap-type: x mandatory;
+		scroll-snap-type: x proximity;
 		-webkit-overflow-scrolling: touch;
 		scrollbar-width: none;
 		-ms-overflow-style: none;
@@ -220,11 +220,11 @@ select {
 		scroll-snap-type: none;
 	}
 
-.carousel__track > * {
-	flex: 0 0 25%;
-	max-width: 25%;
-	scroll-snap-align: start;
-}
+	.carousel__track > * {
+		flex: 0 0 25%;
+		max-width: 25%;
+		scroll-snap-align: center;
+	}
 
 	.carousel__arrows,
 	.carousel__dots {
