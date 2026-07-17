@@ -1,0 +1,10 @@
+---
+interface Props {
+  children: any;
+}
+const { children } = Astro.props as Props;
+---
+
+<li class="splide__slide">
+  <slot />
+</li>

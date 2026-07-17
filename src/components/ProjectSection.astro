@@ -2,6 +2,7 @@
 import { projectGroups } from '../data/projects';
 import ProjectCard from './ProjectCard.astro';
 import Carousel from './Carousel.astro';
+import CarouselSlide from './CarouselSlide.astro';
 
 const toId = (value: string) =>
 	value
@@ -36,33 +37,25 @@ const toId = (value: string) =>
 						aria-labelledby={toId(group.title)}
 					>
 						<h3 id={toId(group.title)}>{group.title}</h3>
-						<Carousel
-							id={toId(group.title)}
-							autoplay={false}
-							showArrows={true}
-							showDots={true}
-							class="projects__carousel"
-							customScroll={group.title === 'Robotics'}
-							/*
-							 * CAROUSEL USAGE NOTES (aligned with About Me carousel):
-							 * - Single card per view on all breakpoints (100% width)
-							 *   Carousel.astro handles: mobile free scroll (90%), desktop controlled
-							 * - ProjectCard has PROTECTED styles — do NOT override width/flex/padding
-							 * - Arrow/dot theming via .projects__carousel in <style> is INTENTIONAL
-							 *   for light background; matches About Me carousel's light-theme approach
-							 * - Expandable "Show all N projects" uses <details> + grid, NOT carousel
-							 */
-						>
+<Carousel
+  id={toId(group.title) + '-carousel'}
+  autoplay={false}
+  showArrows={true}
+  showDots={true}
+  class="projects__carousel"
+>
 							{group.projects.map((project) => (
-								<ProjectCard
-									image={project.image}
-									title={project.title}
-									category={project.category}
-									description={project.description}
-									links={project.links}
-									status={project.status}
-									tags={project.tags}
-								/>
+								<CarouselSlide>
+									<ProjectCard
+										image={project.image}
+										title={project.title}
+										category={project.category}
+										description={project.description}
+										links={project.links}
+										status={project.status}
+										tags={project.tags}
+									/>
+								</CarouselSlide>
 							))}
 					</Carousel>
 					</section>
@@ -87,13 +80,17 @@ const toId = (value: string) =>
 
 	.projects__groups {
 		display: grid;
+		grid-template-columns: 1fr;
 		gap: var(--section-gap);
+		width: 100%;
 	}
 
 	.projects__group {
 		display: flex;
 		flex-direction: column;
 		gap: var(--card-gap);
+		width: 100%;
+		min-width: 0;
 	}
 
 	.projects__group--compact {
@@ -114,35 +111,35 @@ const toId = (value: string) =>
 		font-size: clamp(1.25rem, 2vw, 1.75rem);
 	}
 
-	/* Carousel-specific styles for projects — theming only, not layout */
+/* Carousel-specific styles for projects — theming only, not layout */
 	.projects__carousel {
 		width: 100%;
+		position: relative;
 	}
 
-	/* Carousel arrow styling for projects (light theme) */
-	.projects__carousel .carousel__arrow {
-		background: rgba(255, 255, 255, 0.95);
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-	}
-
-	.projects__carousel .carousel__arrow:hover {
-		background: var(--accent);
+	.projects__carousel .splide__arrow {
+		background: rgba(0, 0, 0, 0.75);
 		color: var(--text-on-dark);
 	}
 
-	.projects__carousel .carousel__dots {
-		padding: 1rem 0 0.5rem;
-	}
-
-	.projects__carousel .carousel__dot {
-		background: var(--card-border);
-	}
-
-	.projects__carousel .carousel__dot:hover {
+	.projects__carousel .splide__arrow:hover:not(.is-disabled) {
 		background: var(--accent);
 	}
 
-	.projects__carousel .carousel__dot--active {
+	.projects__carousel .splide__arrow svg {
+		fill: var(--text-on-dark);
+	}
+
+	.projects__carousel .splide__pagination {
+		padding: 1rem 0 0.5rem;
+	}
+
+	.projects__carousel .splide__pagination__page {
+		background: var(--card-border);
+	}
+
+	.projects__carousel .splide__pagination__page:hover,
+	.projects__carousel .splide__pagination__page.is-active {
 		background: var(--accent);
 	}
 </style>

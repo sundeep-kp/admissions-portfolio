@@ -1,24 +1,32 @@
 ---
 import { leadershipItems } from '../data/leadership';
 import LeadershipCard from './LeadershipCard.astro';
+import Carousel from './Carousel.astro';
+import CarouselSlide from './CarouselSlide.astro';
 ---
 
 <section class="leadership section-fade" aria-labelledby="leadership-title" id="leadership" style="background: var(--accent); color: var(--text-on-dark);">
 	<div class="leadership__inner">
 		<h2 id="leadership-title">Leadership and Community</h2>
 
-		<div class="leadership__carousel" aria-label="Leadership roles">
-			<div class="leadership__track" data-carousel-track>
-				{leadershipItems.map((item) => (
+<Carousel
+			id="leadership-carousel"
+			autoplay={false}
+			showArrows={true}
+			showDots={false}
+			type="slide"
+			class="leadership__carousel"
+		>
+			{leadershipItems.map((item) => (
+				<CarouselSlide>
 					<LeadershipCard
-						class="leadership-card--feature"
 						title={item.title}
 						description={item.description}
 						links={item.links}
 					/>
-				))}
-			</div>
-		</div>
+				</CarouselSlide>
+			))}
+		</Carousel>
 	</div>
 </section>
 
@@ -30,58 +38,56 @@ import LeadershipCard from './LeadershipCard.astro';
 	.leadership__inner {
 		width: 100%;
 		margin: 0 auto;
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-
 	}
 
-	.leadership__carousel {
-		max-width: 100%;
+	/* Leadership carousel theming */
+	.leadership__carousel .splide__arrow {
+		background: rgba(255, 255, 255, 0.9);
+		width: 40px;
+		height: 40px;
 	}
 
-	.leadership__track {
-		display: flex;
-		align-items: center;
-		gap: var(--card-gap, 1.5rem);
-		overflow-x: auto;
-		scroll-snap-type: x mandatory;
-		-webkit-overflow-scrolling: touch;
-		scrollbar-width: none;
-		-ms-overflow-style: none;
-		padding: 0 0 1rem;
+	.leadership__carousel .splide__arrow:hover:not(.is-disabled) {
+		background: var(--accent);
+		color: var(--text-on-dark);
 	}
 
-	.leadership__track::-webkit-scrollbar {
-		display: none;
+	.leadership__carousel .splide__arrow svg {
+		fill: var(--text-primary);
 	}
 
-	.leadership__track > :global(*) {
-		flex: 0 0 100%;
-		min-width: 0;
-		scroll-snap-align: start;
+	.leadership__carousel .splide__arrow:hover:not(.is-disabled) svg {
+		fill: var(--text-on-dark);
 	}
 
-/* Desktop: wider cards (120%) */
-@media (min-width: 768px) {
-	.leadership__track > :global(*) {
-		flex: 0 0 120% !important;
-		max-width: 120% !important;
+	.leadership__carousel .splide__pagination__page {
+		background: var(--card-border);
 	}
 
+	.leadership__carousel .splide__pagination__page.is-active {
+		background: var(--accent);
+	}
 
-		/* Make LeadershipCard 40% shorter - force with high specificity */
-		.leadership__track :global(.leadership-card) {
+	/* Mobile: hide arrows and pagination */
+	@media (max-width: 767px) {
+		.leadership__carousel .splide__arrows,
+		.leadership__carousel .splide__pagination {
+			display: none !important;
+		}
+	}
+
+	/* Desktop: let Splide control slide widths via perPage/breakpoints */
+	@media (min-width: 768px) {
+		.leadership__carousel :global(.leadership-card) {
 			padding: clamp(0.1rem, 1vw, 1rem) !important;
 			gap: clamp(0.1rem, 0.1vw, 0.1rem) !important;
-			max-width: 30% !important;
 		}
 
-		.leadership__track :global(.leadership-card__body) {
+		.leadership__carousel :global(.leadership-card__body) {
 			gap: clamp(0.5rem, 1vw, 0.75rem) !important;
 		}
 
-		.leadership__track :global(.leadership-card__text) {
+		.leadership__carousel :global(.leadership-card__text) {
 			line-height: 1.5 !important;
 			font-size: clamp(0.875rem, 1.2vw, 1rem) !important;
 		}
@@ -93,8 +99,7 @@ import LeadershipCard from './LeadershipCard.astro';
 			flex-direction: column;
 			align-items: flex-start;
 		}
-		/* Ensure cards take full width on mobile */
-		.leadership-card--feature {
+		.leadership__carousel :global(.leadership-card) {
 			max-width: 90% !important;
 			padding: clamp(0.5rem, 2vw, 1rem);
 			gap: clamp(0.5rem, 1vw, 1rem);

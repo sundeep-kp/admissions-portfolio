@@ -279,19 +279,10 @@ const isExpandable = fullDescription.length > 45;
 	/* Mobile: wider cards, shorter height */
 	@media (max-width: 767px) {
 		.leadership-card {
-			width: calc(100vw - 1.5rem);
 			padding: clamp(1rem, 3vw, 1.5rem);
 			gap: clamp(0.75rem, 2vw, 1rem);
 			border-radius: 12px;
 		}
-
-        .leadership-card--feature {
-            padding: clamp(1.5rem, 4vw, 2rem);
-            max-width: 90% !important;
-        }
-        .card.card--dark.leadership-card.leadership-card--feature {
-            max-width: 90% !important;
-        }
 
 		.leadership-card__body {
 			gap: clamp(0.5rem, 1.5vw, 0.75rem);

@@ -2,6 +2,7 @@
 import { timelineItems } from '../data/timeline';
 import { aboutCards } from '../data/about';
 import Carousel from './Carousel.astro';
+import CarouselSlide from './CarouselSlide.astro';
 ---
 
 <section class="ornithopter" aria-labelledby="ornithopter-title" id="ornithopter">
@@ -31,34 +32,22 @@ import Carousel from './Carousel.astro';
 
       <div class="ornithopter__about-carousel" aria-label="About me" id="ornithopter-about-carousel" hidden>
         <h3 class="ornithopter__about-title">About me</h3>
-        <Carousel
+<Carousel
 			id="about-carousel"
 			autoplay={false}
 			showArrows={true}
 			showDots={false}
 			class="about-carousel"
-			/*
-			 * ABOUT ME CAROUSEL — REFERENCE IMPLEMENTATION
-			 * This is the canonical carousel design for this portfolio.
-			 * All other carousels (Projects, Leadership) should follow this pattern.
-			 * 
-			 * KEY DECISIONS:
-			 * - Single card per view on all breakpoints (100% width)
-			 * - Mobile (≤767px): free scroll + snap (90% width), arrows/dots hidden
-			 * - Desktop (≥768px): controlled scroll via arrows/dots, 100% width
-			 * - Card styling: mirrors .card--light from global.css
-			 * - Title: .ornithopter__about-title centered, scales clamp(1.75rem, 2.5vw, 2.25rem)
-			 * - Toggle button: .ornithopter__about-toggle shows on mobile only
-			 * - Desktop (≥768px): carousel always visible below video, single column
-			 */
 		>
           {aboutCards.map((card) => (
-            <article class="about-card about-carousel__card">
-              <h3>{card.title}</h3>
-              <ul>
-                {card.items.map((item) => <li>{item}</li>)}
-              </ul>
-            </article>
+            <CarouselSlide>
+              <article class="about-card about-carousel__card">
+                <h3>{card.title}</h3>
+                <ul>
+                  {card.items.map((item) => <li>{item}</li>)}
+                </ul>
+              </article>
+            </CarouselSlide>
           ))}
         </Carousel>
       </div>
@@ -91,6 +80,12 @@ import Carousel from './Carousel.astro';
 				carousel.hidden = false;
 				toggle.setAttribute('aria-expanded', 'true');
 				toggle.textContent = 'Hide about';
+				
+				// Refresh splide when shown (slides were 0 width when hidden)
+				const splideEl = carousel.querySelector('.splide');
+				if (splideEl?.splide) {
+					splideEl.splide.refresh();
+				}
 			} else {
 				carousel.hidden = true;
 				toggle.setAttribute('aria-expanded', 'false');
