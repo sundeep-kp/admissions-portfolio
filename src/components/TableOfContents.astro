@@ -11,12 +11,12 @@ const sections = [
 ];
 ---
 
+<button class="toc__toggle" aria-label="Toggle sidebar" data-toc-toggle>
+	<svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+		<path d="M8 2L4 6L8 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+	</svg>
+</button>
 <nav class="toc" aria-label="Table of contents">
-	<button class="toc__toggle" aria-label="Toggle sidebar" data-toc-toggle>
-		<svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-			<path d="M8 2L4 6L8 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-		</svg>
-	</button>
 	<ul class="toc__list">
 		{sections.map((section) => (
 			<li class="toc__item">
@@ -54,10 +54,12 @@ const sections = [
 
 	if (savedState === 'true') {
 		toc?.classList.add('toc--hidden');
+		toggleBtn?.classList.add('toc__toggle--shifted');
 	}
 
 	toggleBtn?.addEventListener('click', () => {
 		toc?.classList.toggle('toc--hidden');
+		toggleBtn.classList.toggle('toc__toggle--shifted');
 		localStorage.setItem('toc-hidden', toc?.classList.contains('toc--hidden') ? 'true' : 'false');
 	});
 </script>
@@ -188,12 +190,11 @@ const sections = [
 		}
 	}
 
-	/* Toggle button — sits outside the sidebar on the left edge */
+	/* Toggle button — fixed position, outside sidebar overflow context */
 	.toc__toggle {
-		position: absolute;
-		left: -28px;
-		top: 50%;
-		transform: translateY(-50%);
+		position: fixed;
+		right: 160px;
+		top: calc(6% + 4rem + 160px);
 		width: 24px;
 		height: 48px;
 		background: rgba(255, 255, 255, 0.4);
@@ -207,6 +208,7 @@ const sections = [
 		color: var(--text-primary);
 		transition: background 0.2s ease;
 		opacity: 0.6;
+		z-index: 101;
 	}
 
 	.toc__toggle:hover {
@@ -219,7 +221,10 @@ const sections = [
 		transform: translateX(100%);
 	}
 
-	.toc--hidden .toc__toggle {
-		rotate: 180deg;
+	.toc__toggle--shifted {
+		right: 0;
+		border-radius: 0 8px 8px 0;
+		border-left: 1px solid rgba(0, 0, 0, 0.06);
+		border-right: none;
 	}
 </style>
