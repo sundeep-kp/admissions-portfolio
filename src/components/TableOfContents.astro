@@ -66,15 +66,15 @@ const sections = [
 		localStorage.setItem('toc-hidden', toc?.classList.contains('toc--hidden') ? 'true' : 'false');
 	});
 
-	// Hint tooltip — show once, dismiss on first toggle click
+	// Hint tooltip — show on each session, dismiss on first toggle click
 	const hint = document.querySelector('[data-toc-hint]');
-	const hintDismissed = localStorage.getItem('toc-hint-dismissed');
+	const hintDismissed = sessionStorage.getItem('toc-hint-dismissed');
 
 	if (!hintDismissed && savedState !== 'true') {
 		hint?.removeAttribute('hidden');
 		toggleBtn?.addEventListener('click', () => {
 			hint?.classList.add('toc__hint--hidden');
-			localStorage.setItem('toc-hint-dismissed', 'true');
+			sessionStorage.setItem('toc-hint-dismissed', 'true');
 			setTimeout(() => hint?.remove(), 400);
 		}, { once: true });
 	} else {
@@ -269,7 +269,7 @@ const sections = [
 	}
 
 	.toc__hint-img {
-		width: 120px;
+		width: 240px;
 		height: auto;
 		display: block;
 		animation: hintBounce 2s ease-in-out infinite;
