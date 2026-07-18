@@ -196,6 +196,14 @@ const breakpointsJSON = JSON.stringify(breakpoints);
         splide.mount();
         el.dataset.splideInit = 'true';
         el.splide = splide;
+
+        // Trackpad horizontal scroll → carousel navigation
+        el.addEventListener('wheel', (e) => {
+          if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+            if (e.deltaX > 0) splide.go('>');
+            else splide.go('<');
+          }
+        }, { passive: true });
       } catch (err) {
         console.error('[Carousel] Splide mount failed:', err);
         try { splide.destroy(); } catch {}
