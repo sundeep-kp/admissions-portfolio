@@ -93,7 +93,9 @@ import CarouselSlide from './CarouselSlide.astro';
 		}
 	}
 
-	/* Mobile: column layout */
+	/* Mobile: column layout — DO NOT add max-width on .leadership-card here.
+   * Card width is controlled by the carousel's perPage (set in Carousel.astro).
+   * A previous max-width: 90% !important caused layout shifts and was removed. */
 	@media (max-width: 767px) {
 		.leadership__inner {
 			flex-direction: column;

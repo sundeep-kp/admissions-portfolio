@@ -41,7 +41,7 @@ const toId = (value: string) =>
   id={toId(group.title) + '-carousel'}
   autoplay={false}
   showArrows={true}
-  showDots={true}
+  showDots={false}
   class="projects__carousel"
 >
 							{group.projects.map((project) => (
@@ -111,7 +111,10 @@ const toId = (value: string) =>
 		font-size: clamp(1.25rem, 2vw, 1.75rem);
 	}
 
-/* Carousel-specific styles for projects — theming only, not layout */
+/* Carousel-specific styles for projects — theming only, not layout.
+   * DO NOT add max-width or width rules on .project-card here.
+   * Card width is controlled by the carousel's perPage (set in Carousel.astro).
+   * Adding fixed widths causes layout shifts when Splide initializes. */
 	.projects__carousel {
 		width: 100%;
 		position: relative;

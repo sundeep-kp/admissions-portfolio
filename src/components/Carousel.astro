@@ -1,4 +1,30 @@
 ---
+/*
+ * CAROUSEL COMPONENT — CRITICAL SHARED INFRASTRUCTURE
+ * =====================================================
+ * This component is used by ALL carousels: Leadership, Projects (Robotics, Software),
+ * and About Me. Any change here affects ALL sections globally.
+ *
+ * DO NOT:
+ * - Change perPage default (2.86) — desktop cards rely on ~35% width from this value
+ * - Change global breakpoints (767, 1024) — all sections share these responsive rules
+ * - Add `mediaQuery: 'min'` to Splide config — it breaks breakpoint matching order
+ * - Set `overflow: hidden` on .splide — it clips navigation arrows
+ * - Remove `position: relative` from .splide — arrows position absolutely inside it
+ * - Set `width: 100%` on .splide__list — it overrides Splide's perPage width calculations
+ * - Add `max-width` on card components (.leadership-card, .project-card) — the carousel
+ *   controls card width via perPage; fixed max-width values conflict and cause layout shifts
+ *
+ * WHY perPage = 2.86:
+ *   Splide uses max-width breakpoints (applied largest-first). At desktop (≥1024px),
+ *   no max-width breakpoint matches, so the base perPage applies. 100/2.86 ≈ 35% width.
+ *   The 767 breakpoint overrides to perPage: 1.18 (~85%) on mobile.
+ *
+ * WHY no `mediaQuery: 'min'`:
+ *   Splide's default is max-width matching (smallest breakpoint first). Adding
+ *   mediaQuery: 'min' reverses the order, causing mobile breakpoints to not match
+ *   on small screens, resulting in cards stuck at 100% width.
+ */
 interface Props {
   children: any;
   autoplay?: boolean;
@@ -24,11 +50,11 @@ const {
   class: className,
   id,
   customScroll = false,
-  perPage = 2.86,
+  perPage = 2.86,   /* DO NOT CHANGE — desktop ~35% width. Mobile overridden by 767 breakpoint to 1.18 (~85%) */
   perMove = 1,
   gap = '1.5rem',
   breakpoints = {},
-  type = 'loop',
+  type = 'loop',     /* Auto-switches to 'slide' if any breakpoint has fractional perPage */
 } = Astro.props as Props;
 
 const breakpointsJSON = JSON.stringify(breakpoints);
@@ -72,7 +98,22 @@ const breakpointsJSON = JSON.stringify(breakpoints);
 </div>
 
 <script>
-  // Initialize Splide carousel - dynamically import to avoid SSR issues
+  /*
+   * CAROUSEL INITIALIZATION — DO NOT MODIFY without understanding the full impact.
+   *
+   * CRITICAL RULES:
+   * 1. Do NOT add `mediaQuery: 'min'` — it reverses Splide's breakpoint matching order,
+   *    causing mobile breakpoints to not fire on small screens (cards stuck at 100%).
+   * 2. Do NOT remove the fractional perPage auto-detection (lines 127-135) — loop mode
+   *    crashes when any perPage value is fractional (e.g., 1.18 or 2.86).
+   * 3. Do NOT set `dataset.splideInit` before `splide.mount()` — if mount throws,
+   *    the carousel is permanently stuck uninitialized.
+   * 4. Do NOT change globalBreakpoints values — all carousels (Leadership, Projects,
+   *    About Me) share these. Mobile: 1.18 perPage (~85%), Desktop: 2.86 (~35%).
+   * 5. Do NOT add `overflow: hidden` to .splide CSS — it clips the navigation arrows.
+   * 6. Do NOT add `width: 100%` to .splide__list — it overrides Splide's perPage width
+   *    calculations and forces all slides to fit within the container.
+   */
   async function initSplide() {
     const { Splide } = await import('@splidejs/splide');
 
@@ -85,7 +126,7 @@ const breakpointsJSON = JSON.stringify(breakpoints);
       const arrows = el.dataset.arrows === 'true';
       const dots = el.dataset.dots === 'true';
       const customScroll = el.dataset.customScroll === 'true';
-      const perPage = parseFloat(el.dataset.perPage) || 1;
+      const perPage = parseFloat(el.dataset.perPage) || 2.86;
       const perMove = parseInt(el.dataset.perMove) || 1;
       const gap = el.dataset.gap || '1.5rem';
       const type = el.dataset.type || 'loop';
@@ -94,20 +135,37 @@ const breakpointsJSON = JSON.stringify(breakpoints);
         rawCustomBreakpoints = JSON.parse(el.dataset.breakpoints || '{}');
       } catch {}
 
-      // Global default breakpoints - all carousels use these unless overridden
+      /*
+       * GLOBAL BREAKPOINTS — shared by ALL carousels.
+       *
+       * Splide uses max-width matching (smallest breakpoint first):
+       *   - At ≤767px: 767 breakpoint fires → perPage: 1.18 (~85% width), free scroll, no arrows
+       *   - At 768-1023px: no breakpoint matches → base perPage: 2.86 (~35% width) applies
+       *   - At ≥1024px: no breakpoint matches → base perPage: 2.86 (~35% width) applies
+       *
+       * Sections may override via the `breakpoints` prop (e.g., Leadership adds 768: { perPage: 1.2 }
+       * for a tablet peek effect). Custom breakpoints are merged AFTER globals via spread.
+       */
       const globalBreakpoints: Record<number, Record<string, unknown>> = {
         767: { perPage: 1.18, gap: '1rem', arrows: true, pagination: false, drag: 'free', snap: false, focus: 'center' },
         1024: { perPage: 2.86, gap: '1.5rem' },
       };
 
-      // Merge: custom breakpoints override globals, keys converted to numbers
       const customBreakpoints: Record<number, Record<string, unknown>> = {};
       Object.entries(rawCustomBreakpoints).forEach(([key, val]) => {
         customBreakpoints[parseInt(key)] = val;
       });
       const allBreakpoints = { ...globalBreakpoints, ...customBreakpoints };
 
-      // Check if any breakpoint has fractional perPage - loop mode doesn't support it
+      /*
+       * FRACTIONAL perPage AUTO-DETECTION:
+       * Splide's `type: 'loop'` mode requires integer perPage values for clone math.
+       * If any perPage (base or breakpoint) is fractional (e.g., 1.18, 2.86), we
+       * automatically switch to `type: 'slide'` to prevent mount failures.
+       *
+       * DO NOT remove this check — it prevents cascading initialization failures
+       * across all carousels on the page.
+       */
       let effectiveType = type;
       if (type === 'loop') {
         const allPerPageValues = [perPage, ...Object.values(allBreakpoints).map(b => b.perPage).filter(Boolean)];
@@ -129,20 +187,18 @@ const breakpointsJSON = JSON.stringify(breakpoints);
         pauseOnHover: true,
         pauseOnFocus: true,
         drag: true,
-        snap: true,
+        snap: false,  /* Disabled globally to prevent end-glitch with fractional perPage */
+        trimSpace: true,
+        omitEnd: true,
         breakpoints: allBreakpoints,
       });
 
       try {
         splide.mount();
-        // Only mark as initialized AFTER successful mount
         el.dataset.splideInit = 'true';
-        // Store instance on element for debugging/access
         el.splide = splide;
       } catch (err) {
         console.error('[Carousel] Splide mount failed:', err);
-        // Do NOT set splideInit - allow retry on next initSplide() call
-        // Clean up any partial state
         try { splide.destroy(); } catch {}
       }
     });
@@ -152,18 +208,32 @@ const breakpointsJSON = JSON.stringify(breakpoints);
 </script>
 
 <style>
-  /* Splide carousel container */
+  /*
+   * CAROUSEL BASE STYLES — DO NOT MODIFY without testing ALL sections.
+   *
+   * These styles control the fundamental carousel layout. Changes here affect
+   * Leadership, Projects (Robotics, Software), and About Me carousels.
+   *
+   * DO NOT:
+   * - Add `overflow: hidden` to .splide — clips navigation arrows
+   * - Remove `position: relative` from .splide — arrows need it for absolute positioning
+   * - Add `width: 100%` to .splide__list — overrides Splide's perPage width calculations
+   */
+
+  /* Splide carousel container — DO NOT add overflow:hidden here */
   .splide {
     width: 100%;
-    overflow: visible;
-    position: relative;
+    overflow: visible;  /* DO NOT change to hidden — clips navigation arrows */
+    position: relative; /* DO NOT remove — arrows position absolutely inside this */
   }
 
+  /* Slide track — this clips the slides (overflow:hidden is correct here) */
   .splide__track {
     overflow: hidden;
     width: 100%;
   }
 
+  /* Slide list — DO NOT add width:100% here — breaks Splide's perPage calculations */
   .splide__list {
     display: flex;
     margin: 0;
@@ -171,6 +241,7 @@ const breakpointsJSON = JSON.stringify(breakpoints);
     list-style: none;
   }
 
+  /* Individual slides — controlled by Splide's perPage */
   :global(.splide__slide) {
     flex-shrink: 0;
     min-width: 0;
@@ -249,7 +320,9 @@ const breakpointsJSON = JSON.stringify(breakpoints);
     background: var(--accent);
   }
 
-  /* Card styling for carousel slides */
+  /* Card styling — shared base for all carousel card types.
+   * Section-specific theming (colors, backgrounds) is in each section's .astro file.
+   * DO NOT add width/max-width here — the carousel controls card width via perPage. */
   :global(.splide__slide > .about-carousel__card),
   :global(.splide__slide > .about-card),
   :global(.splide__slide > .project-card),
@@ -283,7 +356,9 @@ const breakpointsJSON = JSON.stringify(breakpoints);
     }
   }
 
-  /* Mobile adjustments */
+  /* Mobile adjustments — hides arrows and pagination on small screens.
+   * The 767 breakpoint in globalBreakpoints enables free-scroll instead.
+   * DO NOT remove this — mobile UX relies on swipe, not buttons. */
   @media (max-width: 767px) {
     .splide__arrows,
     .splide__pagination {

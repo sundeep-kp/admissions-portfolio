@@ -24,12 +24,24 @@ const placeholderImage =
 		'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Image Missing"><rect width="1200" height="675" fill="#f2f2f2"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#888888" font-family="Arial, sans-serif" font-size="56">[Image Missing]</text></svg>'
 	);
 
+const ornithopterImage = '/admissions-portfolio/images/ornithopter.png';
+const openManipulatorImage = '/admissions-portfolio/images/OpenManipulatorX.png';
+const prostheticHandImage = '/admissions-portfolio/images/prosthetic-hand.png';
+const ros2RoadmapImage = '/admissions-portfolio/images/ros2-roadmap-ultralab.png';
+const neurolinkImage = '/admissions-portfolio/images/neurolink.jpg';
+const securityAssessmentImage = '/admissions-portfolio/images/security-assessment.png';
+const invisibleInsightImage = '/admissions-portfolio/images/Invisible-insight.jpg';
+const tldrawImage = '/admissions-portfolio/images/Tldraw.png';
+const autologinImage = '/admissions-portfolio/images/autologin.jpg';
+const coswatchImage = '/admissions-portfolio/images/coswatch.png';
+const threeDReconstructionImage = '/admissions-portfolio/images/3d-reconstruction.png';
+
 export const projectGroups: ProjectGroup[] = [
 	{
 		title: 'Robotics',
 		projects: [
 			{
-				image: placeholderImage,
+				image: ornithopterImage,
 				title: 'Ornithopter based bird flying simulation',
 				category: 'Robotics',
 				description: [
@@ -43,7 +55,7 @@ export const projectGroups: ProjectGroup[] = [
 				tags: ['Simulation', 'SOLIDWORKS', 'Bio-inspired'],
 			},
 			{
-				image: placeholderImage,
+				image: openManipulatorImage,
 				title: 'OpenManipulatorX based industrial pick and place robotic arm',
 				category: 'Robotics',
 				description: [
@@ -55,7 +67,7 @@ export const projectGroups: ProjectGroup[] = [
 				tags: ['OpenManipulatorX', 'Industrial arm', 'Planning'],
 			},
 			{
-				image: placeholderImage,
+				image: prostheticHandImage,
 				title: 'Robotic prosthetic hand',
 				category: 'Robotics',
 				description: [
@@ -83,7 +95,7 @@ export const projectGroups: ProjectGroup[] = [
 				tags: ['RL', 'Pick and place', 'CAD', 'Planetary exploration'],
 			},
 			{
-				image: placeholderImage,
+				image: ros2RoadmapImage,
 				title: 'ROS2-roadmap-ultralab',
 				category: 'Robotics',
 				description: [
@@ -102,7 +114,7 @@ export const projectGroups: ProjectGroup[] = [
 		title: 'Software/Others',
 		projects: [
 			{
-				image: placeholderImage,
+				image: neurolinkImage,
 				title: 'Neuro-link (hackathon at IIITNR)',
 				category: 'Software',
 				description: [
@@ -117,7 +129,7 @@ export const projectGroups: ProjectGroup[] = [
 				tags: ['STT/TTS', 'RAG', 'Face recognition', 'Geotracking'],
 			},
 			{
-				image: placeholderImage,
+				image: securityAssessmentImage,
 				title: 'Security Assessment of College Payment Portal',
 				category: 'Software',
 				description: [
@@ -130,7 +142,7 @@ export const projectGroups: ProjectGroup[] = [
 				tags: ['Security', 'Web', 'Assessment'],
 			},
 			{
-				image: placeholderImage,
+				image: invisibleInsightImage,
 				title: 'Invisible-Insight',
 				category: 'Software',
 				description: [
@@ -143,7 +155,7 @@ export const projectGroups: ProjectGroup[] = [
 				tags: ['Accessibility', 'Game', 'Audio'],
 			},
 			{
-				image: placeholderImage,
+				image: tldrawImage,
 				title: 'Tldraw-search Plugin',
 				category: 'Software',
 				description: [
@@ -159,7 +171,7 @@ export const projectGroups: ProjectGroup[] = [
 				tags: ['Obsidian', 'Plugin', 'Search', 'Canvas'],
 			},
 			{
-				image: placeholderImage,
+				image: autologinImage,
 				title: 'Autologin-framework',
 				category: 'Software',
 				description: [
@@ -172,7 +184,7 @@ export const projectGroups: ProjectGroup[] = [
 				tags: ['Automation', 'Networking', 'Client'],
 			},
 			{
-				image: placeholderImage,
+				image: coswatchImage,
 				title: 'Coswatch',
 				category: 'Software',
 				description: [
@@ -186,7 +198,7 @@ export const projectGroups: ProjectGroup[] = [
 				tags: ['NASA API', '3D', 'Telegram bot'],
 			},
 			{
-				image: placeholderImage,
+				image: threeDReconstructionImage,
 				title: '3D reconstruction of teeth from intra-oral images',
 				category: 'Software',
 				description: [
