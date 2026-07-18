@@ -23,7 +23,7 @@ import CarouselSlide from './CarouselSlide.astro';
 <source src="/admissions-portfolio/videos/Ornithopter.mp4" type="video/mp4" />
         </video>
       </div>
-      <p class="ornithopter__video-caption" aria-hidden="true">~my ornithopter bird mechanism</p>
+      <img class="ornithopter__video-caption" src="/admissions-portfolio/images/my-ornithopter-based-bird-mechanism.png" alt="my ornithopter bird mechanism" />
 
       <button class="ornithopter__about-toggle" aria-expanded="false" aria-controls="ornithopter-about-carousel" type="button">
         About me
@@ -187,13 +187,11 @@ import CarouselSlide from './CarouselSlide.astro';
   }
 
   .ornithopter__video-caption {
-    margin: 0.75rem 0 0;
-    font-size: clamp(0.875rem, 1.1vw, 1rem);
-    line-height: 1.5;
-    color: var(--text-primary);
-    opacity: 0.6;
-    font-style: italic;
-    text-align: center;
+    margin: 0.75rem auto 0;
+    display: block;
+    max-width: 200px;
+    height: auto;
+    opacity: 0.7;
   }
 
   /* Mobile About toggle button */
