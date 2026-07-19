@@ -66,20 +66,20 @@ const instagramUrls = [
 <script>
 	function initEmbedZones() {
 		document.querySelectorAll('.hobbies__embed-zone').forEach((zone) => {
-			zone.addEventListener('pointerdown', () => {
-				zone.dataset.activeDrag = 'true';
+			const iframe = zone.querySelector('iframe');
+			if (!iframe) return;
+
+			zone.addEventListener('click', () => {
+				const isActive = zone.dataset.embedActive === 'true';
+				zone.dataset.embedActive = isActive ? 'false' : 'true';
+				iframe.style.pointerEvents = isActive ? 'none' : 'auto';
 			});
-			zone.addEventListener('pointermove', (e) => {
-				if (zone.dataset.activeDrag === 'true') {
+
+			zone.addEventListener('pointerdown', (e) => {
+				if (zone.dataset.embedActive !== 'true') {
 					e.stopPropagation();
 				}
-			});
-			zone.addEventListener('pointerup', () => {
-				zone.dataset.activeDrag = 'false';
-			});
-			zone.addEventListener('pointerleave', () => {
-				zone.dataset.activeDrag = 'false';
-			});
+			}, true);
 		});
 	}
 
@@ -181,7 +181,7 @@ const instagramUrls = [
 		background: rgba(0, 0, 0, 0.25);
 	}
 
-	/* Embed zone — rest of card, touches pass to Instagram */
+	/* Embed zone — rest of card, touches pass to Splide by default */
 	.hobbies__embed-zone {
 		flex: 1;
 		min-height: 0;
@@ -194,6 +194,19 @@ const instagramUrls = [
 	.hobbies__embed-zone :global(.instagram-media) {
 		border-radius: 12px;
 		overflow: hidden;
+		pointer-events: none;
+	}
+
+	.hobbies__embed-zone :global(.instagram-media iframe) {
+		pointer-events: none;
+	}
+
+	.hobbies__embed-zone[data-embed-active="true"] :global(.instagram-media) {
+		pointer-events: auto;
+	}
+
+	.hobbies__embed-zone[data-embed-active="true"] :global(.instagram-media iframe) {
+		pointer-events: auto;
 	}
 
 	/* Carousel theming — accent background with dark text */
