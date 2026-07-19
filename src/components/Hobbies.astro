@@ -3,17 +3,17 @@ import Carousel from './Carousel.astro';
 import CarouselSlide from './CarouselSlide.astro';
 
 const instagramUrls = [
-	'https://www.instagram.com/sundeep110807/reel/DY3ifXjRKwg/',
-	'https://www.instagram.com/sundeep110807/reel/Dah7W3AONxW/',
-	'https://www.instagram.com/sundeep110807/reel/DXRVekfDtls/',
-	'https://www.instagram.com/sundeep110807/p/DVOm-y6E5YX/',
-	'https://www.instagram.com/sundeep110807/p/DT2v2GXDVs1/',
-	'https://www.instagram.com/sundeep110807/p/CyoZVOEhWVo/',
-	'https://www.instagram.com/sundeep110807/p/CyoZk2ihJtT/',
-	'https://www.instagram.com/sundeep110807/p/Cyvpk1ELhX0/',
-	'https://www.instagram.com/sundeep110807/p/C18YbzFiMCj/',
-	'https://www.instagram.com/sundeep110807/p/C4S1fCIxXp3/',
-	'https://www.instagram.com/sundeep110807/p/DCepytZzQ8S/',
+	'https://www.instagram.com/reel/DY3ifXjRKwg/',
+	'https://www.instagram.com/reel/Dah7W3AONxW/',
+	'https://www.instagram.com/reel/DXRVekfDtls/',
+	'https://www.instagram.com/p/DVOm-y6E5YX/',
+	'https://www.instagram.com/p/DT2v2GXDVs1/',
+	'https://www.instagram.com/p/CyoZVOEhWVo/',
+	'https://www.instagram.com/p/CyoZk2ihJtT/',
+	'https://www.instagram.com/p/Cyvpk1ELhX0/',
+	'https://www.instagram.com/p/C18YbzFiMCj/',
+	'https://www.instagram.com/p/C4S1fCIxXp3/',
+	'https://www.instagram.com/p/DCepytZzQ8S/',
 ];
 ---
 
@@ -27,6 +27,12 @@ const instagramUrls = [
 			showArrows={true}
 			showDots={false}
 			type="slide"
+			perMove={1}
+			breakpoints={{
+				767: { perPage: 1, snap: true, drag: true, gap: '1rem', arrows: true, pagination: false, focus: 'center' },
+				1024: { perPage: 1, snap: true, drag: true, gap: '1.5rem' },
+				9999: { snap: true, drag: true },
+			}}
 			class="hobbies__carousel"
 		>
 			<CarouselSlide>
