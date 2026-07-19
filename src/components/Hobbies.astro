@@ -20,6 +20,11 @@ const instagramUrls = [
 <section class="hobbies section-fade" aria-labelledby="hobbies-title" id="hobbies" style="background: var(--accent); color: var(--text-primary);">
 	<div class="hobbies__inner">
 		<h2 id="hobbies-title">Hobbies</h2>
+		<div class="hobbies__swipe-hint" aria-hidden="true">
+			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M5 12h14M12 5l7 7-7 7"/>
+			</svg>
+		</div>
 
 		<Carousel
 			id="hobbies-carousel"
@@ -60,11 +65,6 @@ const instagramUrls = [
 			</CarouselSlide>
 		))}
 		</Carousel>
-		<div class="hobbies__swipe-hint" aria-hidden="true">
-			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-				<path d="M5 12h14M12 5l7 7-7 7"/>
-			</svg>
-		</div>
 	</div>
 </section>
 
@@ -281,8 +281,8 @@ const instagramUrls = [
 		.hobbies__swipe-hint {
 			display: flex;
 			align-items: center;
-			justify-content: center;
-			margin-top: clamp(0.75rem, 1.5vw, 1rem);
+			justify-content: flex-start;
+			margin-top: clamp(0.25rem, 0.5vw, 0.5rem);
 			color: var(--text-primary);
 			opacity: 0.4;
 			animation: swipeHintBob 1.5s ease-in-out infinite;
