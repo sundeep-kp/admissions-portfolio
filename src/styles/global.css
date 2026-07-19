@@ -34,6 +34,8 @@
 
 	/* Section gap - reduced for density */
 	--section-gap: clamp(1.5rem, 3vw, 2.5rem);
+	--section-padding-inline: 0.5vw;
+	--section-padding-block: 0;
 }
 
 html,

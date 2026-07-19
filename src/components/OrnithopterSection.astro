@@ -194,6 +194,14 @@ import CarouselSlide from './CarouselSlide.astro';
     height: auto;
     opacity: 0.7;
     transform: translateY(-20vh) translateX(20vw);
+    animation: captionBounce 2.5s ease-in-out infinite;
+  }
+
+  @keyframes captionBounce {
+    0%, 100% { transform: translateY(-20vh) translateX(20vw) rotate(0deg); }
+    25% { transform: translateY(-20.5vh) translateX(20.3vw) rotate(2deg); }
+    50% { transform: translateY(-21vh) translateX(19.8vw) rotate(-1deg); }
+    75% { transform: translateY(-20.3vh) translateX(20.2vw) rotate(2.5deg); }
   }
 
   /* Mobile About toggle button */
@@ -324,7 +332,7 @@ import CarouselSlide from './CarouselSlide.astro';
     .ornithopter__timeline {
       flex: 0 0 35%;
       max-width: 35%;
-      transform: translateX(-20%);
+      transform: translateX(-12%);
     }
 
     .ornithopter__video-wrap {
