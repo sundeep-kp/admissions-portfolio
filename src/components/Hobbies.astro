@@ -47,18 +47,18 @@ const instagramUrls = [
 					<p>Behavioural psychology, psychology of communication.</p>
 				</article>
 			</CarouselSlide>
-			{instagramUrls.map((url) => (
-				<CarouselSlide>
-					<div class="hobbies__slide">
-						<div class="hobbies__drag-handle" aria-hidden="true">
-							<span class="hobbies__drag-pill"></span>
-						</div>
-						<div class="hobbies__embed-zone">
-							<blockquote class="instagram-media" data-instgrm-permalink={url} data-instgrm-version="14" style="max-width:540px; width:100%;"></blockquote>
-						</div>
+		{instagramUrls.map((url) => (
+			<CarouselSlide>
+				<a class="hobbies__slide" href={url} target="_blank" rel="noopener noreferrer">
+					<div class="hobbies__drag-handle" aria-hidden="true">
+						<span class="hobbies__drag-pill"></span>
 					</div>
-				</CarouselSlide>
-			))}
+					<div class="hobbies__embed-zone">
+						<blockquote class="instagram-media" data-instgrm-permalink={url} data-instgrm-version="14" style="max-width:540px; width:100%;"></blockquote>
+					</div>
+				</a>
+			</CarouselSlide>
+		))}
 		</Carousel>
 	</div>
 </section>
@@ -66,19 +66,8 @@ const instagramUrls = [
 <script>
 	function initEmbedZones() {
 		document.querySelectorAll('.hobbies__embed-zone').forEach((zone) => {
-			const iframe = zone.querySelector('iframe');
-			if (!iframe) return;
-
-			zone.addEventListener('click', () => {
-				const isActive = zone.dataset.embedActive === 'true';
-				zone.dataset.embedActive = isActive ? 'false' : 'true';
-				iframe.style.pointerEvents = isActive ? 'none' : 'auto';
-			});
-
 			zone.addEventListener('pointerdown', (e) => {
-				if (zone.dataset.embedActive !== 'true') {
-					e.stopPropagation();
-				}
+				e.stopPropagation();
 			}, true);
 		});
 	}
@@ -152,6 +141,16 @@ const instagramUrls = [
 		box-shadow:
 			0 3px 12px rgba(0, 0, 0, 0.045),
 			inset 0 1.5px 0 rgba(255, 255, 255, 0.75);
+		text-decoration: none;
+		color: inherit;
+		transition: box-shadow 0.2s ease, transform 0.2s ease;
+	}
+
+	.hobbies__slide:hover {
+		box-shadow:
+			0 12px 36px rgba(0, 0, 0, 0.09),
+			inset 0 1.5px 0 rgba(255, 255, 255, 0.75);
+		transform: translateY(-3px);
 	}
 
 	/* Drag handle — top 48px, touch zone for Splide */
@@ -199,14 +198,6 @@ const instagramUrls = [
 
 	.hobbies__embed-zone :global(.instagram-media iframe) {
 		pointer-events: none;
-	}
-
-	.hobbies__embed-zone[data-embed-active="true"] :global(.instagram-media) {
-		pointer-events: auto;
-	}
-
-	.hobbies__embed-zone[data-embed-active="true"] :global(.instagram-media iframe) {
-		pointer-events: auto;
 	}
 
 	/* Carousel theming — accent background with dark text */
