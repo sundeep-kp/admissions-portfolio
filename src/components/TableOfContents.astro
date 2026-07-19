@@ -66,20 +66,13 @@ const sections = [
 		localStorage.setItem('toc-hidden', toc?.classList.contains('toc--hidden') ? 'true' : 'false');
 	});
 
-	// Hint tooltip — show on each session, dismiss on first toggle click
+	// Hint tooltip — show on every page load, dismiss on first toggle click
 	const hint = document.querySelector('[data-toc-hint]');
-	const hintDismissed = sessionStorage.getItem('toc-hint-dismissed');
-
-	if (!hintDismissed && savedState !== 'true') {
-		hint?.removeAttribute('hidden');
-		toggleBtn?.addEventListener('click', () => {
-			hint?.classList.add('toc__hint--hidden');
-			sessionStorage.setItem('toc-hint-dismissed', 'true');
-			setTimeout(() => hint?.remove(), 400);
-		}, { once: true });
-	} else {
-		hint?.remove();
-	}
+	hint?.removeAttribute('hidden');
+	toggleBtn?.addEventListener('click', () => {
+		hint?.classList.add('toc__hint--hidden');
+		setTimeout(() => hint?.remove(), 400);
+	}, { once: true });
 </script>
 
 <style>
@@ -203,7 +196,9 @@ const sections = [
 	}
 
 	@media (max-width: 1023px) {
-		.toc {
+		.toc,
+		.toc__toggle,
+		.toc__hint {
 			display: none;
 		}
 	}
@@ -280,11 +275,5 @@ const sections = [
 		25% { transform: translate(2px, -3px) rotate(2deg); }
 		50% { transform: translate(-1px, -5px) rotate(-1deg); }
 		75% { transform: translate(3px, -2px) rotate(3deg); }
-	}
-
-	@media (max-width: 1023px) {
-		.toc__hint {
-			display: none;
-		}
 	}
 </style>

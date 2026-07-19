@@ -159,7 +159,7 @@ import CarouselSlide from './CarouselSlide.astro';
     width: 100%;
     max-width: 900px;
     margin: 0 auto;
-    overflow: hidden; /* mask left 3px black stripe — do not remove */
+    position: relative;
     min-height: 0;
   }
 
@@ -187,12 +187,13 @@ import CarouselSlide from './CarouselSlide.astro';
   }
 
   .ornithopter__video-caption {
-    margin: 0.75rem auto 0;
-    display: block;
-    max-width: 40vh;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    max-width: 31.5vw;
     height: auto;
     opacity: 0.7;
-    transform: translateY(-10vh);
+    transform: translateY(-20vh) translateX(20vw);
   }
 
   /* Mobile About toggle button */
