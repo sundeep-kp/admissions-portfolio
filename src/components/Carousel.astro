@@ -198,8 +198,12 @@ const breakpointsJSON = JSON.stringify(breakpoints);
         el.splide = splide;
 
         // Trackpad horizontal scroll → carousel navigation
+        let lastWheelTime = 0;
         el.addEventListener('wheel', (e) => {
           if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+            const now = Date.now();
+            if (now - lastWheelTime < 350) return;
+            lastWheelTime = now;
             if (e.deltaX > 0) splide.go('>');
             else splide.go('<');
           }
