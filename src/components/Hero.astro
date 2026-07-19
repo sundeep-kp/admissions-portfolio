@@ -57,9 +57,22 @@ import asciiArtMobile from '/images/ascii-art-mobile.txt?raw';
 			</div>
 
 			<div class="hero__essay" aria-label="Personal essay">
-				<a class="hero__btn hero__btn--essay" href="https://docs.google.com/document/d/16rFKkcL5JnGTjFElnYYbEhNawBqrLeqjsWjKo8gT5zc/edit?tab=t.0#heading=h.5xgg81bihh9p" target="_blank" rel="noopener noreferrer">
-					Personal essay: Tiny Robots Big Dreams
-				</a>
+				<button class="hero__btn hero__btn--essay" id="essay-toggle" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="essay-popup">
+					Personal Essay
+				</button>
+				<div class="essay-popup" id="essay-popup" role="dialog" aria-modal="true" aria-label="Choose a personal essay" hidden>
+					<button class="essay-popup__backdrop" type="button" aria-label="Close menu" tabindex="-1"></button>
+					<div class="essay-popup__card">
+						<button class="essay-popup__close" type="button" aria-label="Close menu">&times;</button>
+						<p class="essay-popup__title">Personal Essays</p>
+						<a class="essay-popup__link" href="https://docs.google.com/document/d/1wZBQ0YcKrGHTGD6Mi6aIgIC3AYStBb1c7h5OecGGStA/edit?usp=sharing" target="_blank" rel="noopener noreferrer">
+							I am not gonna take no for an answer
+						</a>
+						<a class="essay-popup__link" href="https://docs.google.com/document/d/16rFKkcL5JnGTjFElnYYbEhNawBqrLeqjsWjKo8gT5zc/edit?tab=t.0#heading=h.5xgg81bihh9p" target="_blank" rel="noopener noreferrer">
+							Tiny Robots Big Dreams
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -300,6 +313,117 @@ import asciiArtMobile from '/images/ascii-art-mobile.txt?raw';
 		outline-offset: 2px;
 	}
 
+	/* Essay popup */
+	.hero__essay {
+		position: relative;
+	}
+
+	.essay-popup {
+		position: fixed;
+		inset: 0;
+		z-index: 1000;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 1rem;
+	}
+
+	.essay-popup[hidden] {
+		display: none;
+	}
+
+	.essay-popup__backdrop {
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.3);
+		backdrop-filter: blur(4px);
+		-webkit-backdrop-filter: blur(4px);
+		border: none;
+		cursor: default;
+	}
+
+	.essay-popup__card {
+		position: relative;
+		background: rgba(255, 255, 255, 0.85);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		border: 1px solid rgba(0, 0, 0, 0.06);
+		border-radius: 16px;
+		box-shadow:
+			0 4px 24px rgba(0, 0, 0, 0.08),
+			inset 0 1px 0 rgba(255, 255, 255, 0.6);
+		padding: 2rem 1.75rem 1.75rem;
+		width: 100%;
+		max-width: 22rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		animation: essayPopupIn 0.15s ease;
+	}
+
+	@keyframes essayPopupIn {
+		from {
+			opacity: 0;
+			transform: scale(0.95);
+		}
+		to {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+
+	.essay-popup__close {
+		position: absolute;
+		top: 0.5rem;
+		right: 0.75rem;
+		background: none;
+		border: none;
+		font-size: 1.5rem;
+		line-height: 1;
+		color: var(--text-primary);
+		opacity: 0.4;
+		cursor: pointer;
+		padding: 0.25rem;
+		transition: opacity 0.15s ease;
+	}
+
+	.essay-popup__close:hover {
+		opacity: 0.8;
+	}
+
+	.essay-popup__title {
+		margin: 0 0 0.25rem;
+		font-size: clamp(0.8rem, 1.1vw, 0.9rem);
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.075em;
+		color: var(--text-primary);
+		opacity: 0.5;
+	}
+
+	.essay-popup__link {
+		display: block;
+		padding: 0.875rem 1.25rem;
+		font-size: clamp(0.9375rem, 1.2vw, 1.0625rem);
+		font-weight: 500;
+		color: var(--text-primary);
+		text-decoration: none;
+		background: var(--accent);
+		color: var(--text-on-dark);
+		border-radius: 12px;
+		transition: background 0.15s ease, transform 0.15s ease;
+	}
+
+	.essay-popup__link:hover {
+		background: var(--accent-strong);
+		transform: translateY(-1px);
+	}
+
+	.essay-popup__link:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
+	}
+
 	/* Emails */
 	.hero__emails {
 		display: flex;
@@ -429,3 +553,58 @@ import asciiArtMobile from '/images/ascii-art-mobile.txt?raw';
 		}
 	}
 </style>
+
+<script>
+	function initEssayPopup() {
+		const toggle = document.getElementById('essay-toggle');
+		const popup = document.getElementById('essay-popup');
+		if (!toggle || !popup) return;
+
+		const backdrop = popup.querySelector('.essay-popup__backdrop');
+		const closeBtn = popup.querySelector('.essay-popup__close');
+		const links = popup.querySelectorAll('.essay-popup__link');
+
+		function openPopup() {
+			popup.hidden = false;
+			toggle.setAttribute('aria-expanded', 'true');
+			closeBtn.focus();
+			document.addEventListener('keydown', onKeydown);
+		}
+
+		function closePopup() {
+			popup.hidden = true;
+			toggle.setAttribute('aria-expanded', 'false');
+			toggle.focus();
+			document.removeEventListener('keydown', onKeydown);
+		}
+
+		function onKeydown(e) {
+			if (e.key === 'Escape') {
+				closePopup();
+				return;
+			}
+			if (e.key === 'Tab') {
+				const focusable = [closeBtn, ...links];
+				const first = focusable[0];
+				const last = focusable[focusable.length - 1];
+				if (e.shiftKey && document.activeElement === first) {
+					e.preventDefault();
+					last.focus();
+				} else if (!e.shiftKey && document.activeElement === last) {
+					e.preventDefault();
+					first.focus();
+				}
+			}
+		}
+
+		toggle.addEventListener('click', openPopup);
+		backdrop.addEventListener('click', closePopup);
+		closeBtn.addEventListener('click', closePopup);
+		links.forEach((link) => {
+			link.addEventListener('click', closePopup);
+		});
+	}
+
+	initEssayPopup();
+	document.addEventListener('astro:after-swap', initEssayPopup);
+</script>
