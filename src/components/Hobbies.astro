@@ -1,9 +1,19 @@
 ---
-const hobbies = [
-	{ title: 'Music', detail: 'Guitar, tabla, singing, a bit of bass, drums, flute, and beatbox.' },
-	{ title: 'Film', detail: 'Photography, film production, storytelling, and stop-motion animation.' },
-	{ title: 'Art', detail: 'Digital art and painting, origami, recreating outfits.' },
-	{ title: 'Psychology', detail: 'Behavioural psychology, psychology of communication.' },
+import Carousel from './Carousel.astro';
+import CarouselSlide from './CarouselSlide.astro';
+
+const instagramUrls = [
+	'https://www.instagram.com/sundeep110807/reel/DY3ifXjRKwg/',
+	'https://www.instagram.com/sundeep110807/reel/Dah7W3AONxW/',
+	'https://www.instagram.com/sundeep110807/reel/DXRVekfDtls/',
+	'https://www.instagram.com/sundeep110807/p/DVOm-y6E5YX/',
+	'https://www.instagram.com/sundeep110807/p/DT2v2GXDVs1/',
+	'https://www.instagram.com/sundeep110807/p/CyoZVOEhWVo/',
+	'https://www.instagram.com/sundeep110807/p/CyoZk2ihJtT/',
+	'https://www.instagram.com/sundeep110807/p/Cyvpk1ELhX0/',
+	'https://www.instagram.com/sundeep110807/p/C18YbzFiMCj/',
+	'https://www.instagram.com/sundeep110807/p/C4S1fCIxXp3/',
+	'https://www.instagram.com/sundeep110807/p/DCepytZzQ8S/',
 ];
 ---
 
@@ -11,14 +21,34 @@ const hobbies = [
 	<div class="hobbies__inner">
 		<h2 id="hobbies-title">Hobbies</h2>
 
-		<div class="hobbies__grid">
-			{hobbies.map((hobby) => (
+		<Carousel
+			id="hobbies-carousel"
+			autoplay={false}
+			showArrows={true}
+			showDots={false}
+			type="slide"
+			class="hobbies__carousel"
+		>
+			<CarouselSlide>
 				<article class="card card--light hobbies-card">
-					<h3>{hobby.title}</h3>
-					<p>{hobby.detail}</p>
+					<h3>Music, Film & Art</h3>
+					<p>Guitar, tabla, singing, bass, drums, flute, beatbox. Photography, film production, storytelling, stop-motion animation. Digital art, painting, origami, recreating outfits.</p>
 				</article>
+			</CarouselSlide>
+			<CarouselSlide>
+				<article class="card card--light hobbies-card">
+					<h3>Psychology</h3>
+					<p>Behavioural psychology, psychology of communication.</p>
+				</article>
+			</CarouselSlide>
+			{instagramUrls.map((url) => (
+				<CarouselSlide>
+					<div class="hobbies__instagram">
+						<blockquote class="instagram-media" data-instgrm-permalink={url} data-instgrm-version="14" style="max-width:540px; width:100%;"></blockquote>
+					</div>
+				</CarouselSlide>
 			))}
-		</div>
+		</Carousel>
 	</div>
 </section>
 
@@ -30,16 +60,12 @@ const hobbies = [
 	.hobbies__inner {
 		width: 100%;
 		margin: 0 auto;
-		display: flex;
-		flex-direction: column;
-		gap: clamp(2.25rem, 4.5vw, 4.5rem);
 	}
 
-	.hobbies__grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(min(100%, 34ch), 1fr));
-		gap: clamp(1.5rem, 3vw, 2.25rem);
-		width: 100%;
+	.hobbies h2 {
+		margin: 0 0 clamp(1.5rem, 3vw, 2.5rem);
+		font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+		line-height: 1.1;
 	}
 
 	.hobbies-card {
@@ -64,29 +90,97 @@ const hobbies = [
 		transform: translateY(-3px);
 	}
 
-	.hobbies h2,
-	.hobbies h3,
-	.hobbies p {
-		margin: 0;
-	}
-
-	.hobbies h2 {
-		font-size: clamp(1.5rem, 2.5vw, 2.25rem);
-		line-height: 1.1;
-	}
-
 	.hobbies h3 {
+		margin: 0;
 		font-size: clamp(1.125rem, 1.5vw, 1.375rem);
 		line-height: 1.25;
 		color: var(--text-primary);
 	}
 
 	.hobbies p {
+		margin: 0;
 		font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
 		line-height: 1.7;
 		color: var(--text-primary);
 		opacity: 0.9;
 	}
 
-	/* auto-fit handles desktop expansion without fixed breakpoints */
+	.hobbies__instagram {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: clamp(1rem, 2vw, 1.5rem);
+		min-height: 20rem;
+	}
+
+	.hobbies__instagram :global(.instagram-media) {
+		border-radius: 12px;
+		overflow: hidden;
+	}
+
+	/* Carousel theming — accent background with dark text */
+	.hobbies__carousel :global(.splide__arrow) {
+		background: rgba(255, 255, 255, 0.9);
+		width: 40px;
+		height: 40px;
+	}
+
+	.hobbies__carousel :global(.splide__arrow:hover:not(.is-disabled)) {
+		background: var(--accent-strong);
+		color: var(--text-on-dark);
+	}
+
+	.hobbies__carousel :global(.splide__arrow svg) {
+		fill: var(--text-primary);
+	}
+
+	.hobbies__carousel :global(.splide__arrow:hover:not(.is-disabled) svg) {
+		fill: var(--text-on-dark);
+	}
+
+	.hobbies__carousel :global(.splide__pagination__page) {
+		background: var(--card-border);
+	}
+
+	.hobbies__carousel :global(.splide__pagination__page.is-active) {
+		background: var(--accent);
+	}
+
+	/* Mobile: hide arrows and pagination */
+	@media (max-width: 767px) {
+		.hobbies__carousel :global(.splide__arrows),
+		.hobbies__carousel :global(.splide__pagination) {
+			display: none !important;
+		}
+	}
+
+	/* Desktop: tighter card padding in carousel */
+	@media (min-width: 768px) {
+		.hobbies__carousel :global(.hobbies-card) {
+			padding: clamp(0.1rem, 1vw, 1rem) !important;
+			gap: clamp(0.1rem, 0.1vw, 0.1rem) !important;
+		}
+
+		.hobbies__carousel :global(.hobbies-card h3) {
+			font-size: clamp(1rem, 1.3vw, 1.2rem) !important;
+		}
+
+		.hobbies__carousel :global(.hobbies-card p) {
+			font-size: clamp(0.875rem, 1.1vw, 1rem) !important;
+			line-height: 1.5 !important;
+		}
+	}
+
+	/* Mobile: smaller card padding */
+	@media (max-width: 767px) {
+		.hobbies__carousel :global(.hobbies-card) {
+			padding: clamp(0.5rem, 2vw, 1rem);
+			gap: clamp(0.5rem, 1vw, 1rem);
+		}
+
+		.hobbies__instagram {
+			min-height: 16rem;
+			padding: clamp(0.5rem, 1vw, 1rem);
+		}
+	}
 </style>
